@@ -1,0 +1,70 @@
+0000.007 () Opened log file at time: Sat, 11 Nov 2017 03:50:54 +0000 on http://futifmg.serveblog.net:8080
+0000.008 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.8.3 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 27.8M | 2M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.008 () Free space on disk containing Updraft's temporary directory: 22917.2 MB
+0000.010 () Restore job started. Entities to restore: plugins, themes, uploads, others, db. Restore options: {"updraft_restorer_replacesiteurl":false,"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false}
+0000.090 () Entity: db
+0000.091 () restore_backup(backup_file=backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-db.gz, type=db, info=a:0:{}, last_one=)
+0000.092 () Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-db.gz, 0.3 Mb)
+0000.104 () Database successfully unpacked
+0000.106 () Restaurando o banco de dados (em um site grande isso pode levar um longo tempo - se o tempo se esgotar (o que pode ocorrer se a empresa de hospedagem web configurou a sua hospedagem com limitação de recursos) então você deveria utilizar um método diferente, como o phpMyAdmin)...
+0000.106 () Using direct MySQL access; value of use_mysqli is: 1
+0000.172 () Max packet size: 32 MB
+0000.172 () Entering maintenance mode
+0000.172 () Ativando modo de manutenção&#8230;
+0000.182 () Backup of: https://portalifmg.000webhostapp.com
+0000.211 () Content URL: https://portalifmg.000webhostapp.com/wp-content
+0000.212 () Uploads URL: https://portalifmg.000webhostapp.com/wp-content/uploads
+0000.212 () Old table prefix: wp_
+0000.212 () Site information: multisite=0
+0000.213 () New table prefix: wp_
+0000.232 () Processing table (InnoDB): wp_options
+0002.486 () Restoring prior UD configuration (table: wp_options; keys: 90)
+0008.559 () Processing table (InnoDB): wp_users
+0009.003 () Processing table (InnoDB): wp_usermeta
+0009.609 () Processing table (InnoDB): wp_commentmeta
+0009.913 () Processing table (InnoDB): wp_comments
+0010.395 () Processing table (InnoDB): wp_links
+0010.627 () Processing table (InnoDB): wp_postmeta
+0011.024 () Processing table (InnoDB): wp_posts
+0011.819 () Processing table (InnoDB): wp_term_relationships
+0012.291 () Processing table (InnoDB): wp_term_taxonomy
+0012.655 () Processing table (InnoDB): wp_termmeta
+0013.021 () Processing table (InnoDB): wp_terms
+0015.702 () Unlocking database and leaving maintenance mode
+0015.702 () Desativando modo de manutenção&#8230;
+0015.703 () Finished: lines processed: 43 in 15.59 seconds
+0015.704 () Limpando a sujeira...
+0015.991 () Entity: plugins
+0015.992 () restore_backup(backup_file=backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-plugins.zip, type=plugins, info=a:2:{s:4:"path";s:32:"C:\wamp64\www/wp-content/plugins";s:11:"description";s:7:"Plugins";}, last_one=)
+0015.992 () Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-plugins.zip, 13 Mb)
+0080.835 () Moving old data: filesystem method / updraft_dir is potentially possible
+0080.836 () Moving old data: can potentially use wp_filesystem method / -old
+0080.836 () Movendo dados antigos para fora do caminho...
+0081.151 () Top-level entities being moved: akismet, hello.php, index.php, updraftplus
+0081.161 () Movendo backup desempacotado para o local...
+0081.757 () Top-level entities being moved: akismet, all-in-one-wp-migration, easy-google-fonts, elementor, hello.php, index.php, php-everywhere, pirate-forms, soccer-info, themeisle-companion, updraftplus, wp-product-review
+0081.783 () Limpando a sujeira...
+0081.879 () Entity: themes
+0081.879 () restore_backup(backup_file=backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-themes.zip, type=themes, info=a:2:{s:4:"path";s:31:"C:\wamp64\www/wp-content/themes";s:11:"description";s:5:"Temas";}, last_one=)
+0081.880 () Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-themes.zip, 10.1 Mb)
+0099.248 () Moving old data: filesystem method / updraft_dir is potentially possible
+0099.249 () Moving old data: can potentially use wp_filesystem method / -old
+0099.249 () Movendo dados antigos para fora do caminho...
+0099.283 () Top-level entities being moved: index.php, twentyfifteen, twentyseventeen, twentysixteen
+0099.289 () Movendo backup desempacotado para o local...
+0099.438 () Top-level entities being moved: fooding, hestia, index.php, oria, sporty, twentyfifteen, twentyseventeen, twentysixteen
+0099.452 () Limpando a sujeira...
+0099.570 () Entity: uploads
+0099.570 () restore_backup(backup_file=backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-uploads.zip, type=uploads, info=a:2:{s:4:"path";s:32:"C:\wamp64\www/wp-content/uploads";s:11:"description";s:7:"Uploads";}, last_one=)
+0099.571 () Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-uploads.zip, 4.9 Mb)
+0100.507 () Moving old data: filesystem method / updraft_dir is potentially possible
+0100.508 () Moving old data: can potentially use wp_filesystem method / -old
+0100.508 () Movendo dados antigos para fora do caminho...
+0100.514 () Movendo backup desempacotado para o local...
+0100.539 () Limpando a sujeira...
+0100.599 () Entity: others
+0100.599 () restore_backup(backup_file=backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-others.zip, type=others, info=a:2:{s:4:"path";s:24:"C:\wamp64\www/wp-content";s:11:"description";s:6:"Outros";}, last_one=1)
+0100.599 () Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-others.zip, 1.2 Mb)
+0101.639 () Limpando a sujeira...
+0101.835 () Restore successful!
+0101.835 () Restore successful

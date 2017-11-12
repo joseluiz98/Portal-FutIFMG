@@ -1,0 +1,49 @@
+0000.045 (R) [notice] Procurando pelo arquivo db: nome do arquivo: backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-db.gz
+0000.045 (R) [notice] Espera-se que o arquivo tenha o tamanho: 328.2 KB: OK
+0000.062 (R) [notice] Procurando pelo arquivo plugins: nome do arquivo: backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-plugins.zip
+0000.063 (R) [notice] Espera-se que o arquivo tenha o tamanho: 13359.1 KB: OK
+0000.068 (R) [notice] Procurando pelo arquivo themes: nome do arquivo: backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-themes.zip
+0000.069 (R) [notice] Espera-se que o arquivo tenha o tamanho: 10307.8 KB: OK
+0000.075 (R) [notice] Procurando pelo arquivo uploads: nome do arquivo: backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-uploads.zip
+0000.076 (R) [notice] Espera-se que o arquivo tenha o tamanho: 5027.8 KB: OK
+0000.080 (R) [notice] Procurando pelo arquivo others: nome do arquivo: backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-others.zip
+0000.081 (R) [notice] Espera-se que o arquivo tenha o tamanho: 1185 KB: OK
+0000.092 (R) [notice] Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-db.gz, 0.3 Mb)
+0000.106 (R) [notice] Restaurando o banco de dados (em um site grande isso pode levar um longo tempo - se o tempo se esgotar (o que pode ocorrer se a empresa de hospedagem web configurou a sua hospedagem com limitação de recursos) então você deveria utilizar um método diferente, como o phpMyAdmin)...
+0000.172 (R) [notice] Ativando modo de manutenção&#8230;
+0000.182 (R) [notice] Backup de: https://portalifmg.000webhostapp.com
+0000.211 (R) [notice] URL do conteúdo: https://portalifmg.000webhostapp.com/wp-content
+0000.212 (R) [notice] URLs para upload: https://portalifmg.000webhostapp.com/wp-content/uploads
+0000.212 (R) [notice] Prefixo antigo da tabela: wp_
+0000.212 (R) [notice] Informações do site: multisite = 0
+0000.213 (R) [notice] New table prefix: wp_
+0000.232 (R) [notice] Tabela de processamento (InnoDB):  wp_options
+0008.559 (R) [notice] Tabela de processamento (InnoDB):  wp_users
+0009.003 (R) [notice] Tabela de processamento (InnoDB):  wp_usermeta
+0009.609 (R) [notice] Tabela de processamento (InnoDB):  wp_commentmeta
+0009.914 (R) [notice] Tabela de processamento (InnoDB):  wp_comments
+0010.395 (R) [notice] Tabela de processamento (InnoDB):  wp_links
+0010.627 (R) [notice] Tabela de processamento (InnoDB):  wp_postmeta
+0011.024 (R) [notice] Tabela de processamento (InnoDB):  wp_posts
+0011.819 (R) [notice] Tabela de processamento (InnoDB):  wp_term_relationships
+0012.291 (R) [notice] Tabela de processamento (InnoDB):  wp_term_taxonomy
+0012.655 (R) [notice] Tabela de processamento (InnoDB):  wp_termmeta
+0013.021 (R) [notice] Tabela de processamento (InnoDB):  wp_terms
+0015.702 (R) [notice] Desativando modo de manutenção&#8230;
+0015.703 (R) [notice] Finished: lines processed: 43 in 15.59 seconds
+0015.704 (R) [notice] Limpando a sujeira...
+0015.992 (R) [notice] Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-plugins.zip, 13 Mb)
+0080.836 (R) [notice] Movendo dados antigos para fora do caminho...
+0081.161 (R) [notice] Movendo backup desempacotado para o local...
+0081.783 (R) [notice] Limpando a sujeira...
+0081.880 (R) [notice] Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-themes.zip, 10.1 Mb)
+0099.249 (R) [notice] Movendo dados antigos para fora do caminho...
+0099.289 (R) [notice] Movendo backup desempacotado para o local...
+0099.452 (R) [notice] Limpando a sujeira...
+0099.571 (R) [notice] Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-uploads.zip, 4.9 Mb)
+0100.508 (R) [notice] Movendo dados antigos para fora do caminho...
+0100.514 (R) [notice] Movendo backup desempacotado para o local...
+0100.539 (R) [notice] Limpando a sujeira...
+0100.599 (R) [notice] Desempacotando o backup... (backup_2017-11-11-0020_Portal_do_Torneio_de_Futsal_1944cd72e4cc-others.zip, 1.2 Mb)
+0101.639 (R) [notice] Limpando a sujeira...
+0101.835 (R) [notice] Restore successful!

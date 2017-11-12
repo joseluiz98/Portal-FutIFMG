@@ -1,0 +1,1 @@
+SELECT * FROM if_Time ORDER BY pts_Time DESC, n_Vitorias DESC, saldo_Gols DESC, gols_Feitos DESC, cartoes_Vermelhos ASC, cartoes_Amarelos ASC
