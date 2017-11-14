@@ -18,4 +18,4 @@ RewriteRule . /index.php [L]
 # END WordPress
 
 # Desabilita a navegação pelos diretórios
-# Options -Indexes
+Options -Indexes
