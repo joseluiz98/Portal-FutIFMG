@@ -1,6 +1,0 @@
-0000.156 (R) [notice] Procurando pelo arquivo plugins: nome do arquivo: backup_2017-11-13-2127_Portal_do_Torneio_de_Futsal_cf0c4f202b3c-plugins.zip
-0000.156 (R) [notice] Arquivo não está presente no local - é necessário recuperá-lo do armazenamento remoto (Google Drive)
-0001.503 (R) [notice] OK
-0001.503 (R) [notice] Espera-se que o arquivo tenha o tamanho: 14265.8 KB: OK
-0001.548 (R) [warning] Erro: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/wamp64/www/wp-content/plugins-old
-0001.549 (R) [notice] Restore failed...

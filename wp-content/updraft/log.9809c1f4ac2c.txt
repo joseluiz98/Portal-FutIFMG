@@ -1,5 +1,0 @@
-0145.548 (1) Opened log file at time: Wed, 15 Nov 2017 03:55:26 +0000 on http://futifmg.serveblog.net:8080
-0145.565 (1) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.8.3 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) OpenSSL/1.1.0f PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 32.9M | 2M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
-0145.581 (1) Free space on disk containing Updraft's temporary directory: 19438.9 MB
-0145.631 (1) Backup run: resumption=1, nonce=9809c1f4ac2c, begun at=1510717981 (146s ago), job type=backup, previous check-in=6.4s
-0145.648 (1) Terminate: This backup job is already finished (1).

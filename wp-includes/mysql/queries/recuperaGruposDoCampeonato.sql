@@ -1,0 +1,1 @@
+SELECT DISTINCT grupo AS idGrupo FROM time_tem_campeonato;
