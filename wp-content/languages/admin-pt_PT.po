@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-13 23:48:52+0000\n"
+"PO-Revision-Date: 2017-10-13 11:55:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -438,7 +438,7 @@ msgstr "Não se esqueça de clicar no botão Adicionar novo utilizador, quando t
 
 #: wp-admin/user-new.php:187
 msgid "By default, new users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain a password reset link. Uncheck the box if you don&#8217;t want to send the new user a welcome email."
-msgstr "Por omissão, os novos utilizadores vão receber um email informando-os que foram adicionados como utilizador do seu site. Este email integrará uma ligação para redefinir a senha. Desmarque esta caixa se não quiser enviar um email de boas-vindas aos novos utilizadores."
+msgstr "Por omissão, os novos utilizadores vão receber um email informando-os que foram adicionados como utilizador do seu site. Este email integrará uma ligação para alterar a senha. Desmarque esta caixa se não quiser enviar um email de boas-vindas aos novos utilizadores."
 
 #: wp-admin/user-new.php:185
 msgid "New users are automatically assigned a password, which they can change after logging in. You can view or edit the assigned password by clicking the Show Password button. The username cannot be changed once the user has been added."
@@ -790,7 +790,7 @@ msgstr "Navegação da lista de ficheiros multimédia"
 
 #: wp-admin/upload.php:217
 msgid "Filter media items list"
-msgstr "Filtrar lista de itens multimédia"
+msgstr "Filtrar lista de itens de media"
 
 #: wp-admin/upload.php:207
 msgid "If a media file has not been attached to any content, you will see that in the Uploaded To column, and can click on Attach to launch a small popup that will allow you to search for existing content and attach the file."
@@ -827,19 +827,19 @@ msgstr "Também pode remover itens individuais e aceder ao ecrã alargado de edi
 
 #: wp-admin/upload.php:60
 msgid "Use the arrow buttons at the top of the dialog, or the left and right arrow keys on your keyboard, to navigate between media items quickly."
-msgstr "Use os botões de setas de direcção no topo ou então as teclas de direcção no seu teclado, para navegar rapidamente nos itens multimédia."
+msgstr "Use os botões de setas de direcção no topo ou então as teclas de direcção no seu teclado, para navegar rápidamente nos objectos de media."
 
 #: wp-admin/upload.php:59
 msgid "Clicking an item will display an Attachment Details dialog, which allows you to preview media and make quick edits. Any changes you make to the attachment details will be automatically saved."
-msgstr "Clicar num item mostrará uma caixa de diálogo Detalhes de Anexo, que lhe permitirá visualizar o ficheiro multimédia e efectuar alterações rápidas. Quaisquer alterações que fizer aos detalhes do anexo serão automaticamente guardadas."
+msgstr "Clicar num item mostrará uma caixa de diálogo Detalhes de Anexo, que lhe permitirá visualizar o ficheiro de media e efectuar alterações rápidas. Quaisquer alterações que fizer aos detalhes do anexo serão automaticamente guardadas."
 
 #: wp-admin/upload.php:52
 msgid "To delete media items, click the Bulk Select button at the top of the screen. Select any items you wish to delete, then click the Delete Selected button. Clicking the Cancel Selection button takes you back to viewing your media."
-msgstr "Para eliminar itens multimédia, clique no botão 'Selecção em massa' no topo do ecrã. Seleccione quaisquer itens que deseje eliminar e depois clique no botão 'Eliminar seleccionados'. Clique no botão 'Cancelar selecção' para voltar a visualizar os seus objectos multimédia."
+msgstr "Para apagar objectos de media, clique no botão Seleccionar por lotes no topo do ecrã. Seleccione quaisquer objectos que deseje eliminar e depois clique no botão 'Apagar seleccionados'. Clicar no botão 'Cancelar selecção' volta para a visualização dos seus objectos de media."
 
 #: wp-admin/upload.php:51 wp-admin/upload.php:195
 msgid "You can view your media in a simple visual grid or a list with columns. Switch between these views using the icons to the left above the media."
-msgstr "Pode ver os seus ficheiros multimédia numa grelha simples ou numa lista com colunas. Pode alternar entre as duas vistas, através dos ícones à esquerda, acima dos ficheiros."
+msgstr "Pode ver os seus ficheiros de media numa grelha simples ou numa lista com colunas. Use os ícones à esquerda, acima dos ficheiros, para alternar entre as duas formas."
 
 #: wp-admin/upload.php:50
 msgid "All the files you&#8217;ve uploaded are listed in the Media Library, with the most recent uploads listed first."
@@ -952,7 +952,7 @@ msgstr "<strong>Traduções</strong> &mdash; Os ficheiros de tradução do WordP
 
 #: wp-admin/update-core.php:561
 msgid "<strong>Themes and Plugins</strong> &mdash; To update individual themes or plugins from this screen, use the checkboxes to make your selection, then <strong>click on the appropriate &#8220;Update&#8221; button</strong>. To update all of your themes or plugins at once, you can check the box at the top of the section to select all before clicking the update button."
-msgstr "<strong>Temas e Plugins</strong> &mdash; Para actualizar temas e plugins a partir desta página, use as caixas para fazer a sua selecção e <strong>clique no botão &#8220;Actualizar&#8221;</strong>. Seleccione a caixa na parte superior da secção de Temas ou Plugins para seleccionar e actualizar todos de uma só vez."
+msgstr "<strong>Temas e Plugins</strong> &mdash; Para actualizar temas e plugins a partir desta página, use as caixas para fazer a sua selecção e <strong>clique no &#8220;botão Actualizar&#8221; adequado</strong>. Marque a caixa na parte superior da secção de Temas ou Plugins para os seleccionar todos e actualizar todos de uma só vez."
 
 #: wp-admin/update-core.php:560
 msgid "In most cases, WordPress will automatically apply maintenance and security updates in the background for you."
@@ -2365,7 +2365,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Settings_Permalinks_Screen\">Docum
 
 #: wp-admin/options-permalink.php:38
 msgid "The Optional fields let you customize the &#8220;category&#8221; and &#8220;tag&#8221; base names that will appear in archive URLs. For example, the page listing all posts in the &#8220;Uncategorized&#8221; category could be <code>/topics/uncategorized</code> instead of <code>/category/uncategorized</code>."
-msgstr "Os campos opcionais permitem personalizar os nomes base da &#8220;categoria&#8221; e &#8220;etiqueta&#8221; que irão aparecer nos URL de arquivo. Por exemplo, a página que lista todos os artigos da categoria &#8220;geral&#8221; pode ser <code>/topicos/geral</code> em vez de <code>/categoria/geral</code>."
+msgstr "Os campos opcionais permitem personalizar os nomes base da &#8220;categoria&#8221; e &#8220;etiqueta&#8221; que irão aparecer nos URLs de arquivo. Por exemplo, a página que lista todos os artigos da categoria &#8220;geral&#8221; pode ser <code>/topicos/geral</code> em vez de <code>/categoria/geral</code>."
 
 #: wp-admin/options-permalink.php:37
 msgid "Custom Structures"
@@ -2385,11 +2385,11 @@ msgstr "As ligações permanentes podem contar informações úteis, como data d
 
 #: wp-admin/options-permalink.php:22
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
-msgstr "Esta página permite-lhe escolher a sua estrutura de ligações permanente. Pode escolher de entre as configurações mais comuns ou criar estruturas de URL personalizadas."
+msgstr "Esta página permite-lhe escolher a sua estrutura de ligações permanente. Pode escolher de entre as configurações mais comuns ou criar estruturas de URLs personalizadas."
 
 #: wp-admin/options-permalink.php:21
 msgid "Permalinks are the permanent URLs to your individual pages and blog posts, as well as your category and tag archives. A permalink is the web address used to link to your content. The URL to each post should be permanent, and never change &#8212; hence the name permalink."
-msgstr "As ligações permanentes são os URL das suas páginas e artigos do blog, assim como das páginas de arquivo de categorias e etiquetas. Uma ligação permanente é o endereço usado para ligar ao seu conteúdo. O URL de um artigo deverá ser permanente, daí o nome ligação permanente."
+msgstr "As ligações permanentes são os URLs das suas páginas e artigos individuais, assim como das páginas de arquivo de categorias e etiquetas. Uma ligação permanente é o endereço usado para ligar ao seu conteúdo. O URL de um artigo deveria ser permanente, daí o nome ligação permanente."
 
 #: wp-admin/options-permalink.php:15 wp-admin/options-permalink.php:28
 msgid "Permalink Settings"
@@ -2839,7 +2839,7 @@ msgstr "(De momento definido como: %s)"
 
 #: wp-admin/nav-menus.php:814
 msgid "Display location"
-msgstr "Onde mostrar"
+msgstr "Mostrar localização"
 
 #: wp-admin/nav-menus.php:805
 msgid "Auto add pages"
@@ -2905,7 +2905,7 @@ msgstr "Área do tema"
 
 #: wp-admin/nav-menus.php:599
 msgid "Manage Locations"
-msgstr "Gerir localizações"
+msgstr "Gerir áreas"
 
 #: wp-admin/nav-menus.php:597
 msgid "Edit Menus"
@@ -2921,19 +2921,19 @@ msgstr "<a href=\"https://codex.wordpress.org/Appearance_Menus_Screen\">Document
 
 #: wp-admin/nav-menus.php:560
 msgid "To add a new menu instead of assigning an existing one, <strong>click the &#8217;Use new menu&#8217; link</strong>. Your new menu will be automatically assigned to that theme location"
-msgstr "Para adicionar um novo menu em vez de atribuir um já existente, <strong>clique na ligação &#8217;Usar novo menu&#8217;</strong>. O seu novo menu será automaticamente atribuído a essa localização do tema."
+msgstr "Para adicionar um menu novo em vez de atribuir um que já exista, <strong>clique na ligação &#8217;Usar novo menu&#8217;</strong>. "
 
 #: wp-admin/nav-menus.php:559
 msgid "To edit a menu currently assigned to a theme location, <strong>click the adjacent &#8217;Edit&#8217; link</strong>"
-msgstr "Para editar um menu atribuído a uma localização do tema, <strong>clique na ligação &#8217;Editar&#8217;</strong>."
+msgstr "Para editar um menu atribuído à área de um tema, <strong>clique na ligação &#8217;Editar&#8217; adjacente</strong>"
 
 #: wp-admin/nav-menus.php:558
 msgid "To assign menus to one or more theme locations, <strong>select a menu from each location&#8217;s drop down.</strong> When you&#8217;re finished, <strong>click Save Changes</strong>"
-msgstr "Para atribuir menus a uma ou mais localizações do tema, <strong>escolha um menu em cada selector de área.</strong> Quando terminar <strong>clique em \"Guardar alterações\"</strong>."
+msgstr "Para atribuir menus a uma ou mais áreas do tema, <strong>escolha um menu em cada selector de área.</strong> Quando terminar <strong>clique em \"Guardar alterações\"</strong>."
 
 #: wp-admin/nav-menus.php:557
 msgid "This screen is used for globally assigning menus to locations defined by your theme."
-msgstr "Esta página é utilizada para atribuir globalmente menus a localizações definidas pelo seu tema."
+msgstr "Esta página é utilizada para atribuir globalmente menus a áreas definidas pelo seu tema."
 
 #: wp-admin/nav-menus.php:553
 msgid "Editing Menus"
@@ -2961,7 +2961,7 @@ msgstr "<strong>Clicar na seta à direita de qualquer item de menu</strong> no e
 
 #: wp-admin/nav-menus.php:544
 msgid "Each custom menu may contain a mix of links to pages, categories, custom URLs or other content types. Menu links are added by selecting items from the expanding boxes in the left-hand column below."
-msgstr "Cada menu personalizado pode conter uma mistura de ligações para páginas, categorias, URL personalizados ou outros tipos de conteúdos. As ligações dos menus são adicionadas seleccionando nas caixas expansíveis na coluna da esquerda em baixo."
+msgstr "Cada menu personalizado pode conter uma mistura de ligações para páginas, categorias, URLs personalizados ou outros tipos de conteúdos. As ligações dos menus são adicionadas seleccionando nas caixas expansíveis na coluna da esquerda em baixo."
 
 #: wp-admin/nav-menus.php:540
 msgid "Menu Management"
@@ -2969,7 +2969,7 @@ msgstr "Gestão de menus"
 
 #: wp-admin/nav-menus.php:536
 msgid "You can assign theme locations to individual menus by <strong>selecting the desired settings</strong> at the bottom of the menu editor. To assign menus to all theme locations at once, <strong>visit the Manage Locations tab</strong> at the top of the screen."
-msgstr "Pode atribuir localizações do tema a menus <strong>seleccionando as opções pretendidas</strong> na parte inferior do editor de menus. Para atribuir menus a todos as localizações ao mesmo tempo, <strong>visite o separador Gerir localizações</strong> no topo da página."
+msgstr "Pode atribuir áreas do tema a menus individuais <strong>seleccionando as opções pretendidas</strong> no parte de baixo do editor de menus. Para atribuir menus a todos as áreas ao mesmo tempo, <strong>visite o separador Gerir áreas</strong> no topo da página."
 
 #: wp-admin/nav-menus.php:535
 msgid "If you haven&#8217;t yet created any menus, <strong>click the &#8217;create a new menu&#8217; link</strong> to get started"
@@ -2985,7 +2985,7 @@ msgstr "A caixa de gestão de menus no cimo da página é utilizada para control
 
 #: wp-admin/nav-menus.php:525
 msgid "Add, organize, and modify individual menu items"
-msgstr "Adicionar, organizar e modificar itens dos menus"
+msgstr "Adicionar, organizar e modificar itens individuais dos menus"
 
 #: wp-admin/nav-menus.php:524
 msgid "Create, edit, and delete menus"
@@ -2999,7 +2999,7 @@ msgstr "Nesta página pode:"
 #. themes
 #: wp-admin/nav-menus.php:522
 msgid "Menus can be displayed in locations defined by your theme, even used in sidebars by adding a &#8220;Custom Menu&#8221; widget on the <a href=\"%1$s\">Widgets</a> screen. If your theme does not support the custom menus feature (the default themes, %2$s and %3$s, do), you can learn about adding this support by following the Documentation link to the side."
-msgstr "Os menus podem ser mostrados nas localizações definidas pelo seu tema, ou utilizados em barras laterais adicionando um widget &#8220;Menu personalizado&#8221; na página de <a href=\"%1$s\">widgets</a>. Se o seu tema não tiver suporte para a funcionalidade de menus personalizados (os temas por omissão, %2$s and %3$s, têm), pode aprender como adicionar esta funcionalidade na ligação lateral para a Documentação."
+msgstr "Os menus podem ser mostrados nos sítios definidos pelo seu tema, ou utilizados em barras laterais adicionando um widget de &#8220;Menu Personalizado&#8221; na página de <a href=\"%1$s\">Widgets</a>. Se o seu tema não tiver suporte para a funcionalidade de menus personalizados (os temas por omissão, %2$s and %3$s, têm), pode aprender como adicionar esse suporte seguindo a ligação para a Documentação (ao lado)."
 
 #: wp-admin/nav-menus.php:520
 msgid "This screen is used for managing your custom navigation menus."
@@ -3011,7 +3011,7 @@ msgstr "O seu tema não tem suporte nativo para menus, mas pode utilizá-los nas
 
 #: wp-admin/nav-menus.php:394
 msgid "Menu locations updated."
-msgstr "Localizações dos menus actualizadas."
+msgstr "Áreas de menus actualizadas."
 
 #: wp-admin/nav-menus.php:341 wp-admin/nav-menus.php:351
 msgid "Please enter a valid menu name."
@@ -5503,7 +5503,7 @@ msgstr "Os trackbacks são uma forma de notificar sistemas mais antigos de que p
 
 #: wp-admin/includes/meta-boxes.php:623
 msgid "Separate multiple URLs with spaces"
-msgstr "Separe múltiplos URL com espaços"
+msgstr "Separe vários URLs por espaços"
 
 #: wp-admin/includes/meta-boxes.php:620
 msgid "Send trackbacks to:"
@@ -5885,7 +5885,7 @@ msgstr "Importar artigos, páginas, comentários, campos personalizados, categor
 
 #: wp-admin/includes/import.php:201
 msgid "Import posts &amp; media from Tumblr using their API."
-msgstr "Importar artigos e multimédia do Tumblr através da sua API."
+msgstr "Importar artigos e media do Tumblr através da sua API."
 
 #: wp-admin/includes/import.php:200
 msgid "Tumblr"
@@ -9230,7 +9230,7 @@ msgstr "Uma vez gerado, o seu ficheiro WXR pode ser importado por outro site Wor
 
 #: wp-admin/export.php:48
 msgid "You can export a file of your site&#8217;s content in order to import it into another installation or platform. The export file will be an XML file format called WXR. Posts, pages, comments, custom fields, categories, and tags can be included. You can choose for the WXR file to include only certain posts or pages by setting the dropdown filters to limit the export by category, author, date range by month, or publishing status."
-msgstr "Pode exportar um ficheiro com o conteúdo do seu site para o importar para outra instalação ou plataforma. O ficheiro de exportação tem um formato XML, chamado WXR. Podem ser exportados artigos, páginas, comentários, campos personalizados, categorias e etiquetas. Pode escolher incluir apenas determinados artigos ou páginas, definindo no selector os filtros para limitar as exportações por categoria, autor, período por mês ou o estado de publicação."
+msgstr "Pode exportar um ficheiro com o conteúdo do seu site para o importar para outra instalação ou plataforma. O arquivo de exportação tem um formato XML, chamado WXR. Artigos, páginas, comentários, campos personalizados, categorias e etiquetas podem ser exportados. Pode escolher incluir apenas determinados artigos ou páginas, definindo no dropdown os filtros para limitar as exportações por categoria, autor, período por mês ou o estado de publicação."
 
 #: wp-admin/export.php:17 wp-admin/menu.php:243
 msgid "Export"
@@ -9334,7 +9334,7 @@ msgstr "Ao usar acções por lotes, pode mudar os dados (categorias, autor, etc.
 
 #: wp-admin/edit.php:222
 msgid "You can also edit or move multiple posts to the trash at once. Select the posts you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
-msgstr "Pode também editar ou mover vários artigos para o lixo, de uma só vez. Escolha os artigos sobre os quais pretende agir usando as caixas de selecção, e depois escolha a acção pretendida no selector de acções por lotes e clique em aplicar."
+msgstr "Pode também editar ou mover vários artigos para o lixo, de uma só vez. Escolha os artigos sobre os quais pretende agir usando as caixas de selecção, e depois escolha a acção pretendida no drop down de acções por lotes e clique em aplicar. "
 
 #: wp-admin/edit.php:220 wp-admin/includes/class-wp-list-table.php:463
 msgid "Bulk Actions"
@@ -10638,7 +10638,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Administration_Screens#Comments\">
 #: wp-admin/upload.php:65 wp-admin/upload.php:211 wp-admin/user-edit.php:60
 #: wp-admin/user-new.php:212 wp-admin/users.php:66 wp-admin/widgets.php:75
 msgid "For more information:"
-msgstr "Para mais informações:"
+msgstr "Para mais informação:"
 
 #: wp-admin/comment.php:46
 msgid "You can also moderate the comment from this screen using the Status box, where you can also change the timestamp of the comment."
@@ -10722,193 +10722,192 @@ msgstr "Obrigado por criar com o <a href=\"%s\">WordPress</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:266
+#: wp-admin/about.php:263
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e %2$s bug."
 msgstr[1] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e %2$s bugs."
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:259
+#: wp-admin/about.php:256
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "A <strong>versão %s</strong> corrigiu um problema de segurança."
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:48 wp-admin/about.php:257
+#: wp-admin/about.php:254
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "A <strong>versão %s</strong> corrigiu um problema de segurança."
 
-#: wp-admin/about.php:253
+#: wp-admin/about.php:250
 msgid "Maintenance and Security Release"
 msgstr "Actualização de manutenção e segurança"
 
-#: wp-admin/about.php:251
+#: wp-admin/about.php:248
 msgid "Security Releases"
 msgstr "Actualizações de segurança"
 
-#: wp-admin/about.php:250
+#: wp-admin/about.php:247
 msgid "Security Release"
 msgstr "Actualização de segurança"
 
-#: wp-admin/about.php:248
+#: wp-admin/about.php:245
 msgid "Maintenance Releases"
 msgstr "Actualizações de manutenção"
 
-#: wp-admin/about.php:247
+#: wp-admin/about.php:244
 msgid "Maintenance Release"
 msgstr "Actualização de manutenção"
 
-#: wp-admin/about.php:236
+#: wp-admin/about.php:233
 msgid "Go to Dashboard"
 msgstr "Ir para o painel"
 
-#: wp-admin/about.php:236
+#: wp-admin/about.php:233
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Ir para o painel &rarr; Início"
 
-#: wp-admin/about.php:233
+#: wp-admin/about.php:230
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Voltar ao painel &rarr; Actualizações"
 
-#: wp-admin/about.php:233
+#: wp-admin/about.php:230
 msgid "Return to Updates"
 msgstr "Voltar às actualizações"
 
-#: wp-admin/about.php:223
+#: wp-admin/about.php:220
 msgid "Rejoice! New responsive breakpoints have been added to the customizer sidebar to make it wider on high-resolution screens. Customizer controls should use percentage-based widths instead of pixels."
 msgstr "Foram adicionados novos pontos de quebra responsivos à barra lateral do personalizador para a tornar mais ampla em ecrãs de alta resolução. Os controlos do personalizador passarão a utilizar larguras definidas em percentagens em vez de píxeis."
 
-#: wp-admin/about.php:222
+#: wp-admin/about.php:219
 msgid "Customizer Width Variable"
 msgstr "Largura variável do Personalizador"
 
-#: wp-admin/about.php:219
+#: wp-admin/about.php:216
 msgid "The introduction of a new base media widget REST API schema to 4.8 opens up possibilities for even more media widgets (like galleries or playlists) in the future. The three new media widgets are powered by a shared base class that covers most of the interactions with the media modal. That class also makes it easier to create new media widgets and paves the way for more to come."
 msgstr "A introdução de um novo esquema base na API REST para o widget de multimédia na versão 4.8, lança novas possibilidades para outros widgets multimédia futuros (tais como galerias ou listas de reprodução). Os três novos widgets assentam sobre uma classe base compartilhada que cobre a maioria das interacções com a janela modal de multimédia. Esta classe também torna mais fácil a criação de novos widgets de multimédia e abre caminho para outras futuras funcionalidades."
 
-#: wp-admin/about.php:218
+#: wp-admin/about.php:215
 msgid "Media Widgets API"
 msgstr "API de widgets multimédia"
 
-#: wp-admin/about.php:215
+#: wp-admin/about.php:212
 msgid "With the addition of TinyMCE to the text widget in 4.8 comes a new JavaScript API for instantiating the editor after page load. This can be used to add an editor instance to any text area, and customize it with buttons and functions. Great for plugin authors!"
 msgstr "Ao adicionar o TinyMCE ao widget de texto, a versão 4.8 inclui uma nova API de JavaScript para iniciar o editor após o carregamento da página. Isto pode ser utilizado para adicionar uma instância do editor em qualquer área de edição de texto, personalizável com botões e funções. Óptimo para autores de plugins!"
 
-#: wp-admin/about.php:214
+#: wp-admin/about.php:211
 msgid "Text-Editor JavaScript API"
 msgstr "API de JavaScript do editor de texto"
 
-#: wp-admin/about.php:211
+#: wp-admin/about.php:208
 msgid "New capabilities have been introduced to 4.8 with an eye towards removing calls to <code>is_super_admin()</code>. Additionally, new hooks and tweaks to more granularly control site and user counts per network have been added."
 msgstr "Na versão 4.8 foram introduzidas novas funcionalidades no sentido de remover chamadas à função <code>is_super_admin()</code>. Foram também adicionados novos <em>hooks</em> e melhoramentos para um controlo mais preciso à contagem de sites e utilizadores por cada rede."
 
-#: wp-admin/about.php:210
+#: wp-admin/about.php:207
 msgid "Multisite Updates"
 msgstr "Novidades para Multisite"
 
-#: wp-admin/about.php:207
+#: wp-admin/about.php:204
 msgid "As fewer and fewer browsers support Silverlight, file formats which require the presence of the Silverlight plugin are being removed from core support. Files will still display as a download link, but will no longer be embedded automatically."
 msgstr "Dado que cada vez menos navegadores suportam Silverlight, o suporte para os tipos de ficheiro que necessitem da presença do respectivo plugin está a ser removido do core. Embora os ficheiros ainda sejam mostrados como ligações para descarregar, deixarão de ser incorporados automaticamente."
 
-#: wp-admin/about.php:206
+#: wp-admin/about.php:203
 msgid "Removal of Core Support for WMV and WMA Files"
 msgstr "Fim de suporte nativo para ficheiros WMV e WMA"
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:200
 msgid "New CSS rules mean extraneous content (like &ldquo;Add New&rdquo; links) no longer need to be included in admin-area headings. These panel headings improve the experience for people using assistive technologies."
 msgstr "Novas regras de CSS permitem retirar conteúdo desnecessário dos títulos da administração (p.ex. ligações &ldquo;Adicionar novo&rdquo;). Esta alteração melhora a acessibilidade para quem necessita de recorrer a tecnologias de apoio."
 
-#: wp-admin/about.php:202
+#: wp-admin/about.php:199
 msgid "More Accessible Admin Panel Headings"
 msgstr "Títulos do painel de administração com mais acessibilidade"
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:195
+#: wp-admin/about.php:192
 msgid "Even More Developer Happiness %s"
 msgstr "Mais razões de alegria para os programadores %s"
 
-#: wp-admin/about.php:166
+#: wp-admin/about.php:163
 msgid "Being part of the community can help you improve your WordPress skills and network with people you wouldn&#8217;t otherwise meet. Now you can easily find your local events just by logging in to your dashboard and looking at the new Events and News dashboard widget."
 msgstr "Pertencer à comunidade ajuda a ganhar perícia no WordPress e a conhecer outras pessoas que, de outra forma, provavelmente nunca iria conhecer. Agora, ao aceder ao painel, poderá saber muito facilmente quais os eventos locais, através do novo wigdet de eventos e notícias."
 
-#: wp-admin/about.php:164
+#: wp-admin/about.php:161
 msgid "This is quickly becoming one of our favorite features. While you are in the dashboard (because you&#8217;re running updates and writing posts, right?) all upcoming WordCamps and WordPress Meetups &mdash; local to you &mdash; will be displayed."
 msgstr "Esta funcionalidade está rapidamente a tornar-se uma das nossas preferidas. Quando estiver no seu painel de administração (a fazer actualizações, a escrever artigos…), vai poder ver informação sobre os próximos WordCamps e WordPress Meetups perto de si."
 
-#: wp-admin/about.php:162
+#: wp-admin/about.php:159
 msgid "Did you know that WordPress has a thriving offline community with groups meeting regularly in more than 400 cities around the world? WordPress now draws your attention to the events that help you continue improving your WordPress skills, meet friends, and, of course, publish!"
 msgstr "Sabia que o WordPress é constituído por uma vibrante comunidade que se encontra regularmente em grupos em mais de 400 cidades de todo o mundo? O WordPress agora chama a sua atenção para os eventos que podem ajudar a melhorar a sua perícia no WordPress, a encontrar-se com amigos e, claro, a publicar!"
 
-#: wp-admin/about.php:160
+#: wp-admin/about.php:157
 msgid "Nearby WordPress Events"
 msgstr "Eventos WordPress perto de si"
 
-#: wp-admin/about.php:141
+#: wp-admin/about.php:138
 msgid "Have you ever tried updating a link, or the text around a link, and found you can&#8217;t seem to edit it correctly? When you edit the text after the link, your new text also ends up linked. Or you edit the text in the link, but your text ends up outside of it. This can be frustrating! With link boundaries, a great new feature, the process is streamlined and your links will work well. You’ll be happier. We promise."
 msgstr "Já alguma vez tentou editar uma ligação ou o texto em torno de uma ligação e verificou que não conseguia fazê-lo de forma correcta? Quando edita o texto após a ligação e o seu novo texto fica dentro da ligação. Ou quando edita o texto da ligação mas esse texto fica fora da ligação… Isto pode ser frustrante! Com limites de ligações, uma nova funcionalidade, o processo é mais simples e as ligações vão funcionar. Mesmo. Vai ser uma felicidade. De certeza."
 
-#: wp-admin/about.php:140
+#: wp-admin/about.php:137
 msgid "Link Boundaries"
 msgstr "Limites das ligações"
 
-#: wp-admin/about.php:132
+#: wp-admin/about.php:129
 msgid "This feature deserves a parade down the center of town! Rich-text editing capabilities are now native for Text widgets. Add a widget anywhere and format away. Create lists, add emphasis, and quickly and easily insert links. Have fun with your newfound formatting powers, and watch what you can accomplish in a short amount of time."
 msgstr "Esta funcionalidade merece um desfile na avenida principal! A edição de widgets de texto passa a ser possível com as funções de formatação do editor. Adicione um widget em qualquer lugar e formate o seu conteúdo no momento. Crie listas, coloque negritos e itálicos e insira ligações facilmente. Divirta-se com os seus novos poderes de formatação e veja o quanto poderá fazer em pouco mais que um instante."
 
-#: wp-admin/about.php:131
+#: wp-admin/about.php:128
 msgid "Rich Text Widget"
 msgstr "Widget de texto formatado"
 
-#: wp-admin/about.php:128
+#: wp-admin/about.php:125
 msgid "Are you a podcaster, musician, or avid blogger? Adding a widget with your audio file has never been easier. Upload your audio file to the Media Library, go to the widget settings, select your file, and you&#8217;re ready for listeners. This would be a easy way to add a more personal welcome message, too!"
 msgstr "É músico ou produtor de podcasts? Adicionar um widget com o seu ficheiro de áudio nunca foi tão fácil. Carregue o seu ficheiro para a biblioteca multimédia, defina as configurações do widget, seleccione o seu ficheiro e está feito. Esta pode ser também uma forma mais intimista de desejar as boas-vindas aos seus visitantes!"
 
-#: wp-admin/about.php:124
+#: wp-admin/about.php:121
 msgid "A welcome video is a great way to humanize the branding of your website. You can now add any video from the Media Library to a sidebar on your site with the new Video widget. Use this to showcase a welcome video to introduce visitors to your site or promote your latest and greatest content."
 msgstr "Um vídeo de boas-vindas é uma excelente forma de aproximar a marca do seu site às pessoas que o visitam. Pode adicionar qualquer vídeo da biblioteca multimédia à barra lateral do seu site com o novo widget de vídeo. Use esta funcionalidade para receber os visitantes do seu site com um vídeo de boas-vindas ou promover o seu mais recente e fantástico conteúdo."
 
-#: wp-admin/about.php:120
+#: wp-admin/about.php:117
 msgid "Adding an image to a widget is now a simple task that is achievable for any WordPress user without needing to know code. Simply insert your image right within the widget settings. Try adding something like a headshot or a photo of your latest weekend adventure &mdash; and see it appear automatically."
 msgstr "Adicionar uma imagem a um widget é agora uma tarefa simples e disponível para qualquer utilizador, sem necessidade de saber programar. Basta inserir a sua imagem nas definições do próprio widget. Tente adicionar uma foto de perfil ou uma foto das aventuras do seu último fim de semana e veja como aparece automaticamente."
 
-#: wp-admin/about.php:71
+#: wp-admin/about.php:68
 msgid "Exciting Widget Updates"
 msgstr "Novidades nos widgets"
 
-#: wp-admin/about.php:65
+#: wp-admin/about.php:62
 msgid "Though some updates seem minor, they&#8217;ve been built by hundreds of contributors with <em>you</em> in mind. Get ready for new features you&#8217;ll welcome like an old friend: link improvements, <em>three</em> new media widgets covering images, audio, and video, an updated text widget that supports visual editing, and an upgraded news section in your dashboard which brings in nearby and upcoming WordPress events."
 msgstr "Embora algumas actualizações pareçam menos importantes, foram preparadas por centenas de colaboradores <em>a pensar em si</em>. Prepare-se para as novas funcionalidades que irá receber como quem recebe um amigo de longa data: melhorias nas ligações, <em>três</em> novos widgets de multimédia para imagens, áudio e vídeo, um novo widget de texto que agora permite edição visual e uma secção de notícias melhorada no seu painel, onde vai poder ver os futuros eventos WordPress mais próximos de si."
 
-#: wp-admin/about.php:64
+#: wp-admin/about.php:61
 msgid "WordPress 4.8 adds some great new features. Gear up for a more intuitive WordPress!"
 msgstr "O WordPress 4.8 inclui novas funcionalidades. Prepare-se para um WordPress mais intuitivo!"
 
-#: wp-admin/about.php:63
+#: wp-admin/about.php:60
 msgid "An Update with You in Mind"
 msgstr "Uma actualização a pensar em si"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:55 wp-admin/about.php:262
+#: wp-admin/about.php:52 wp-admin/about.php:259
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu %2$s bug."
 msgstr[1] "A <strong>versão %1$s</strong> corrigiu %2$s bugs."
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:49 wp-admin/about.php:53 wp-admin/about.php:57
-#: wp-admin/about.php:274
+#: wp-admin/about.php:50 wp-admin/about.php:54 wp-admin/about.php:271
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Para mais informações, consulte as <a href=\"%s\">notas sobre esta actualização</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:51 wp-admin/about.php:270
+#: wp-admin/about.php:48 wp-admin/about.php:267
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu alguns problemas de segurança e %2$s bug."
 msgstr[1] "A <strong>versão %1$s</strong> corrigiu alguns problemas de segurança e %2$s bugs."
 
-#: wp-admin/about.php:47 wp-admin/about.php:254
+#: wp-admin/about.php:47 wp-admin/about.php:251
 msgid "Maintenance and Security Releases"
 msgstr "Actualizações de manutenção e segurança"
 

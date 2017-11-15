@@ -28,7 +28,7 @@ if ( ! defined( 'ELEMENTOR_PARTNER_ID' ) ) {
 	define( 'ELEMENTOR_PARTNER_ID', 2112 );
 }
 
-define( 'HESTIA_VERSION', '1.1.54' );
+define( 'HESTIA_VERSION', '1.1.53' );
 
 define( 'HESTIA_VENDOR_VERSION', '1.0.1' );
 
@@ -88,9 +88,8 @@ if ( ! function_exists( 'hestia_setup_theme' ) ) {
 		// Add theme support for custom logo. https://codex.wordpress.org/Theme_Logo
 		add_theme_support(
 			'custom-logo', array(
-				'flex-width'  => true,
-				'flex-height' => true,
-				'height'      => 100,
+				'flex-width' => true,
+				'height'     => 100,
 			)
 		);
 

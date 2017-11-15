@@ -1,0 +1,10 @@
+0000.066 () Opened log file at time: Wed, 15 Nov 2017 04:01:51 +0000 on http://futifmg.serveblog.net:8080
+0000.067 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.8.3 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) OpenSSL/1.1.0f PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 41.8M | 6M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.067 () Free space on disk containing Updraft's temporary directory: 19378.3 MB
+0000.115 () Restore job started. Entities to restore: plugins, themes, uploads, others. Restore options: {"updraft_restorer_replacesiteurl":false,"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false}
+0000.156 () Requested file from remote service: googledrive: backup_2017-11-13-2127_Portal_do_Torneio_de_Futsal_cf0c4f202b3c-plugins.zip
+0001.502 () Google Drive download: was already downloaded (14608141/14608141 bytes)
+0001.511 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/wamp64/www/wp-content/plugins-old
+0001.548 () Restore failed...
+0001.549 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/wamp64/www/wp-content/plugins-old
+0001.549 () Restore failed
