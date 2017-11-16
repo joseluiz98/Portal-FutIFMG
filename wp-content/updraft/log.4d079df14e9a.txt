@@ -1,0 +1,19 @@
+0000.073 () Opened log file at time: Thu, 16 Nov 2017 01:14:32 +0000 on http://futifmg.serveblog.net:8080
+0000.074 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.8.3 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) OpenSSL/1.1.0f PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 37.8M | 2M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.075 () Free space on disk containing Updraft's temporary directory: 18976.1 MB
+0000.099 () Restore job started. Entities to restore: plugins. Restore options: {"updraft_restorer_replacesiteurl":false,"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false}
+0000.139 () Requested file from remote service: googledrive: backup_2017-11-15-2232_Portal_do_Torneio_de_Futsal_2045f202e3d4-plugins.zip
+0001.613 () Google Drive download: was already downloaded (11484414/11484414 bytes)
+0001.720 () Entity: plugins
+0001.720 () restore_backup(backup_file=backup_2017-11-15-2232_Portal_do_Torneio_de_Futsal_2045f202e3d4-plugins.zip, type=plugins, info=a:2:{s:4:"path";s:32:"C:\wamp64\www/wp-content/plugins";s:11:"description";s:7:"Plugins";}, last_one=1)
+0001.721 () Desempacotando o backup... (backup_2017-11-15-2232_Portal_do_Torneio_de_Futsal_2045f202e3d4-plugins.zip, 11 Mb)
+0072.274 () Moving old data: filesystem method / updraft_dir is potentially possible
+0072.275 () Moving old data: can potentially use wp_filesystem method / -old
+0072.275 () Movendo dados antigos para fora do caminho...
+0072.881 () Top-level entities being moved: akismet, all-in-one-wp-migration, baw-login-logout-menu, easy-google-fonts, elementor, hello.php, index.php, php-everywhere, pirate-forms, soccer-info, themeisle-companion, updraftplus, wp-product-review, wp-super-cache
+0072.909 () Movendo backup desempacotado para o local...
+0073.461 () Top-level entities being moved: akismet, all-in-one-wp-migration, baw-login-logout-menu, easy-google-fonts, elementor, hello.php, index.php, php-everywhere, pirate-forms, themeisle-companion, updraftplus, wp-color-browser, wp-super-cache
+0073.488 () Limpando a sujeira...
+0073.582 () Clearing cached pages (WP Super Cache)...
+0073.627 () Restore successful!
+0073.627 () Restore successful
