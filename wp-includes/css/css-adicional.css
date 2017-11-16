@@ -2,6 +2,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove espaço da scrollbar */
+    background: transparent;  /* opcional: apeans faz scrollbar invisível */
+}
+
 .table-responsive.leagueTable {
 	padding: 0.5em;
 }
@@ -78,6 +87,6 @@ td {
 
 @media screen and (min-width: 768px){
 	.carousel .page-header {
-		height: 55em !important;
+		height: 59em !important;
 	}
 }
