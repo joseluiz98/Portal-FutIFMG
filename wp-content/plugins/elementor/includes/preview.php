@@ -5,32 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Preview
- *
- * @since 1.0.0
- */
 class Preview {
 
-	/**
-	 * Post ID.
-	 *
-	 * Holds the ID of the current post being previewed
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 *
-	 * @var int Post ID.
-	 */
 	private $post_id;
 
 	/**
-	 * Init.
+	 * Initialize the preview mode. Fired by `init` action.
 	 *
-	 * Initialize Elementor preview mode. Fired by `init` action.
-	 *
-	 * @since 1.0.0
 	 * @access public
+	 * @since 1.0.0
+	 * @return void
 	 */
 	public function init() {
 		if ( is_admin() || ! $this->is_preview_mode() ) {
@@ -62,28 +46,18 @@ class Preview {
 	}
 
 	/**
-	 * Retrieve post ID.
-	 *
-	 * Get the ID of the current post.
-	 *
-	 * @since 1.0.0
 	 * @access public
-	 * 
-	 * @return int Post ID.
 	 */
 	public function get_post_id() {
 		return $this->post_id;
 	}
 
 	/**
-	 * Whether preview mode is active.
+	 * Method detect if we are in the preview mode (iFrame).
 	 *
-	 * Used to determine whether we are in the preview mode (iframe).
-	 *
-	 * @since 1.0.0
 	 * @access public
-	 *
-	 * @return bool Whether preview mode is active.
+	 * @since 1.0.0
+	 * @return bool
 	 */
 	public function is_preview_mode() {
 		if ( ! User::is_current_user_can_edit() ) {
@@ -98,25 +72,24 @@ class Preview {
 	}
 
 	/**
-	 * Builder wrapper.
+	 * Do not show the content from the page. Just print empty start HTML.
+	 * The Javascript will add the content later.
 	 *
-	 * Used to add an empty HTML wrapper for the builder, the javascript will add
-	 * the content later.
-	 *
-	 * @since 1.0.0
 	 * @access public
+	 * @since 1.0.0
 	 *
-	 * @return string HTML wrapper for the builder.
+	 * @return string
 	 */
 	public function builder_wrapper() {
 		return '<div id="elementor" class="elementor elementor-edit-mode"></div>';
 	}
 
 	/**
-	 * Enqueue preview styles.
+	 * Enqueue preview scripts and styles.
 	 *
-	 * @since 1.0.0
 	 * @access private
+	 * @since 1.0.0
+	 * @return void
 	 */
 	private function enqueue_styles() {
 		// Hold-on all jQuery plugins after all HTML markup render.
@@ -141,11 +114,9 @@ class Preview {
 	}
 
 	/**
-	 * Enqueue preview scripts.
-	 *
 	 * @since 1.5.4
 	 * @access private
-	 */
+	*/
 	private function enqueue_scripts() {
 		Plugin::$instance->frontend->register_scripts();
 		Plugin::$instance->frontend->enqueue_scripts();
@@ -168,8 +139,8 @@ class Preview {
 	/**
 	 * Preview constructor.
 	 *
-	 * @since 1.0.0
 	 * @access public
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'template_redirect', [ $this, 'init' ], 0 );

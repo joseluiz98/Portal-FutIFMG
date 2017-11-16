@@ -12,7 +12,9 @@ abstract class CSS_File {
 	const FILE_NAME_PATTERN = '%s/%s.css';
 
 	const CSS_STATUS_FILE = 'file';
+
 	const CSS_STATUS_INLINE = 'inline';
+
 	const CSS_STATUS_EMPTY = 'empty';
 
 	/**
@@ -39,11 +41,6 @@ abstract class CSS_File {
 	 * @var Stylesheet
 	 */
 	protected $stylesheet_obj;
-
-	/**
-	 * @var array
-	 */
-	private static $printed = [];
 
 	/**
 	 * @abstract
@@ -114,14 +111,6 @@ abstract class CSS_File {
 	 * @access public
 	*/
 	public function enqueue() {
-		$handle_id = $this->get_file_handle_id();
-
-		if ( isset( self::$printed[ $handle_id ] ) ) {
-			return;
-		}
-
-		self::$printed[ $handle_id ] = true;
-
 		$meta = $this->get_meta();
 
 		if ( self::CSS_STATUS_EMPTY === $meta['status'] ) {
@@ -147,7 +136,7 @@ abstract class CSS_File {
 			wp_enqueue_style( $this->get_file_handle_id(), $this->url, $this->get_enqueue_dependencies(), $meta['time'] );
 		}
 
-		// Handle fonts.
+		// Handle fonts
 		if ( ! empty( $meta['fonts'] ) ) {
 			foreach ( $meta['fonts'] as $font ) {
 				Plugin::$instance->frontend->enqueue_font( $font );

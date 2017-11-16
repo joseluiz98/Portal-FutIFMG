@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-14 12:22:39+0000\n"
+"PO-Revision-Date: 2017-10-09 14:17:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,19 +10,6 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: pt\n"
 "Project-Id-Version: WordPress - 4.8.x\n"
-
-#. translators: 1: number of placeholders, 2: number of arguments passed
-#: wp-includes/wp-db.php:1364
-msgid "The query does not contain the correct number of placeholders (%1$d) for the number of arguments passed (%2$d)."
-msgstr "A consulta não contém o número correcto de placeholders (%1$d) para o número de argumentos passados (%2$d)."
-
-#: wp-includes/wp-db.php:1353
-msgid "The query only expected one placeholder, but an array of multiple placeholders was sent."
-msgstr "A consulta só esperava um placeholder, mas foi enviado um array de múltiplos placeholders."
-
-#: wp-includes/wp-db.php:1316
-msgid "Unsupported value type (%s)."
-msgstr "Tipo de valor não suportado (%s)."
 
 #: wp-trackback.php:125
 msgid "We already have a ping from that URL for this post."
@@ -375,15 +362,15 @@ msgstr "Digite a nova senha abaixo."
 
 #: wp-login.php:624 wp-login.php:662
 msgid "Reset Password"
-msgstr "Redefinir senha"
+msgstr "Alterar a senha"
 
 #: wp-login.php:616
 msgid "Your password has been reset."
-msgstr "A sua senha foi redefinida."
+msgstr "A senha foi alterada."
 
 #: wp-login.php:616
 msgid "Password Reset"
-msgstr "Redefinição de senha"
+msgstr "Alteração de senha"
 
 #: wp-login.php:601
 msgid "The passwords do not match."
@@ -403,11 +390,11 @@ msgstr "Senha perdida"
 
 #: wp-login.php:509
 msgid "Your password reset link has expired. Please request a new link below."
-msgstr "A sua ligação para redefinição de senha expirou. Por favor, repita o pedido abaixo."
+msgstr "A sua ligação para alteração da senha expirou. Por favor, repita o pedido abaixo."
 
 #: wp-login.php:507
 msgid "Your password reset link appears to be invalid. Please request a new link below."
-msgstr "A sua ligação para redefinição de senha parece ser inválida. Por favor, repita o pedido abaixo."
+msgstr "A sua ligação para alteração da senha parece ser inválida. Por favor, repita o pedido abaixo."
 
 #: wp-login.php:375
 msgid "Possible reason: your host may have disabled the mail() function."
@@ -420,11 +407,11 @@ msgstr "Não foi possível enviar o email."
 #. translators: Password reset email subject. 1: Site name
 #: wp-login.php:345
 msgid "[%s] Password Reset"
-msgstr "[%s] Redefinição de senha"
+msgstr "[%s] Alteração de senha"
 
 #: wp-login.php:331
 msgid "To reset your password, visit the following address:"
-msgstr "Para redefinir a sua senha, visite este endereço:"
+msgstr "Para alterar a senha, visite este endereço:"
 
 #: wp-login.php:330
 msgid "If this was a mistake, just ignore this email and nothing will happen."
@@ -432,7 +419,7 @@ msgstr "Se foi um erro ignore este email e nada acontecerá."
 
 #: wp-login.php:327
 msgid "Someone has requested a password reset for the following account:"
-msgstr "Foi recebido um pedido de redefinição de senha desta conta:"
+msgstr "Foi recebido um pedido de mudança da senha desta conta:"
 
 #: wp-login.php:314
 msgid "<strong>ERROR</strong>: Invalid username or email."
@@ -486,71 +473,71 @@ msgstr "Ligações para %s"
 
 #. translators: 1: WordPress version number, 2: Minimum required MySQL version
 #. number
-#: wp-includes/wp-db.php:3345
+#: wp-includes/wp-db.php:3232
 msgid "<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher"
 msgstr "<strong>ERRO</strong>: WordPress %1$s requer MySQL %2$s ou superior"
 
-#: wp-includes/wp-db.php:1866 wp-includes/wp-db.php:1872
+#: wp-includes/wp-db.php:1811 wp-includes/wp-db.php:1817
 msgid "Unable to retrieve the error message from MySQL"
 msgstr "Não foi possível retornar a mensagem de erro do MySQL"
 
-#: wp-includes/wp-db.php:1764
+#: wp-includes/wp-db.php:1709
 msgid "Are you sure that the database server is not under particularly heavy load?"
 msgstr "Tem a certeza de que o servidor da base de dados não está sob carga intensa?"
 
 #. translators: %s: database host
-#: wp-includes/wp-db.php:1758
+#: wp-includes/wp-db.php:1703
 msgid "This means that we lost contact with the database server at %s. This could mean your host&#8217;s database server is down."
 msgstr "Isto significa que perdemos o contacto com o servidor de base de dados em %s. Isto pode significar que o servidor de base de dados do seu alojamento está em baixo."
 
-#: wp-includes/wp-db.php:1754
+#: wp-includes/wp-db.php:1699
 msgid "Error reconnecting to the database"
 msgstr "Erro ao religar à base de dados"
 
 #. translators: %s: support forums URL
-#: wp-includes/wp-db.php:1665 wp-includes/wp-db.php:1769
+#: wp-includes/wp-db.php:1610 wp-includes/wp-db.php:1714
 msgid "If you&#8217;re unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href=\"%s\">WordPress Support Forums</a>."
 msgstr "Se não tem a certeza do significado destes termos, deveria provavelmente contactar o seu serviço de alojamento. Se precisar de mais ajuda, pode ainda visitar o <a href=\"%s\">fórum de suporte do WordPress</a>."
 
-#: wp-includes/wp-db.php:1660 wp-includes/wp-db.php:1763
+#: wp-includes/wp-db.php:1605 wp-includes/wp-db.php:1708
 msgid "Are you sure that the database server is running?"
 msgstr "Tem a certeza que o servidor da base de dados está a funcionar?"
 
-#: wp-includes/wp-db.php:1659
+#: wp-includes/wp-db.php:1604
 msgid "Are you sure that you have typed the correct hostname?"
 msgstr "Tem a certeza que indicou o nome correcto do servidor?"
 
-#: wp-includes/wp-db.php:1658
+#: wp-includes/wp-db.php:1603
 msgid "Are you sure you have the correct username and password?"
 msgstr "Tem a certeza que o nome de utilizador e a senha estão correctos?"
 
 #. translators: 1: wp-config.php. 2: database host
-#: wp-includes/wp-db.php:1652
+#: wp-includes/wp-db.php:1597
 msgid "This either means that the username and password information in your %1$s file is incorrect or we can&#8217;t contact the database server at %2$s. This could mean your host&#8217;s database server is down."
 msgstr "Isto pode querer dizer que o nome de utilizador e a senha para a base de dados, que indicou no seu ficheiro %1$s não estão correctos, ou então que não é possível ligar ao servidor de base de dados em %2$s (o que pode indicar que o servidor está em baixo)."
 
-#: wp-includes/wp-db.php:1450 wp-includes/wp-db.php:1467
+#: wp-includes/wp-db.php:1395 wp-includes/wp-db.php:1412
 msgid "WordPress database error:"
 msgstr "Erro da base de dados do WordPress:"
 
 #. translators: 1: Database error message, 2: SQL query
-#: wp-includes/wp-db.php:1437
+#: wp-includes/wp-db.php:1382
 msgid "WordPress database error %1$s for query %2$s"
 msgstr "Erro na base de dados do WordPress %1$s na query %2$s"
 
 #. translators: 1: Database error message, 2: SQL query, 3: Name of the calling
 #. function
-#: wp-includes/wp-db.php:1434
+#: wp-includes/wp-db.php:1379
 msgid "WordPress database error %1$s for query %2$s made by %3$s"
 msgstr "Erro na base de dados do WordPress %1$s na query %2$s feita por %3$s"
 
-#: wp-includes/wp-db.php:1300
+#: wp-includes/wp-db.php:1297
 msgid "The query argument of %s must have a placeholder."
 msgstr "O argumento da query de %s deve ter um placeholder"
 
 #. translators: %s: database access abstraction class, usually wpdb or a class
 #. extending wpdb
-#: wp-includes/wp-db.php:1179
+#: wp-includes/wp-db.php:1180
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s deve definir uma ligação à base de dados para usar com escapes."
 
@@ -1074,7 +1061,7 @@ msgstr "Mostrar número de artigos"
 #: wp-includes/widgets/class-wp-widget-archives.php:159
 #: wp-includes/widgets/class-wp-widget-categories.php:164
 msgid "Display as dropdown"
-msgstr "Mostrar como selector"
+msgstr "Mostrar como dropdown"
 
 #: wp-includes/widgets/class-wp-widget-archives.php:91
 msgid "Select Post"
@@ -1157,11 +1144,11 @@ msgstr "Chave inválida"
 
 #: wp-includes/user.php:2140
 msgid "Could not save password reset key to database."
-msgstr "Não foi possível guardar a chave de redefinição de senha na base de dados."
+msgstr "Não foi possível guardar a chave de reposição de senha na base de dados."
 
 #: wp-includes/user.php:2114
 msgid "Password reset is not allowed for this user"
-msgstr "Este utilizador não tem permissão para redefinir a senha"
+msgstr "A alteração da senha não é permitida para este utilizador"
 
 #: wp-includes/user.php:2050
 msgid "Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ &amp; )."
@@ -1654,7 +1641,7 @@ msgstr "Não foi possível dividir o termo partilhado."
 #. translators: 1: Taxonomy term slug
 #: wp-includes/taxonomy.php:2658
 msgid "The slug &#8220;%s&#8221; is already in use by another term"
-msgstr "A slug &#8220;%s&#8221; já está a ser usada por outro termo"
+msgstr "O nome para o URL &#8220;%s&#8221; já está a ser usado por outro termo"
 
 #: wp-includes/taxonomy.php:2304
 msgid "Could not insert term relationship into the database"
@@ -3243,7 +3230,7 @@ msgstr "Limita conjunto de resultados a todos os itens, com excepção dos que t
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2153
 msgid "Limit result set to items with particular parent IDs."
-msgstr "Limita conjunto de resultados a itens com superiores com ID específicos."
+msgstr "Limitar resultados para itens com ID ascendentes específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2111
 msgid "Limit result set to posts with a specific menu_order value."
@@ -3563,15 +3550,15 @@ msgstr "Limita conjunto de resultados a comentários com um estado específico a
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1428
 msgid "Limit result set to comments assigned to specific post IDs."
-msgstr "Limita conjunto de resultados a comentários atribuídos a ID de conteúdos específicos."
+msgstr "Limita conjunto de resultados a comentários atribuídos a IDs de conteúdos específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1419
 msgid "Ensure result set excludes specific parent IDs."
-msgstr "Assegura que o conjunto de resultados exclui superiores com ID específicos."
+msgstr "Assegura que o conjunto de resultados exclui superiores com IDs específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1410
 msgid "Limit result set to comments of specific parent IDs."
-msgstr "Limita conjunto de resultados a comentários de superiores com ID específicos."
+msgstr "Limita conjunto de resultados a comentários de superiores com IDs específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1394
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2129
@@ -3598,14 +3585,14 @@ msgstr "Faz saltar o conjunto de resultados um número específico de itens."
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:920
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1325
 msgid "Limit result set to specific IDs."
-msgstr "Limita conjunto de resultados a ID específicos."
+msgstr "Limita conjunto de resultados a IDs específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1361
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2092
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:911
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1316
 msgid "Ensure result set excludes specific IDs."
-msgstr "Assegura que o conjunto de resultados exclui ID específicos."
+msgstr "Assegura que o conjunto de resultados exclui IDs específicos."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1355
 msgid "Limit response to comments published before a given ISO8601 compliant date."
@@ -3617,11 +3604,11 @@ msgstr "Limita conjunto de resultados a um email específico de autor. Requer au
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1340
 msgid "Ensure result set excludes comments assigned to specific user IDs. Requires authorization."
-msgstr "Assegura que o conjunto de resultados exclui comentários atribuídos a utilizadores com ID específicos. Requer autorização."
+msgstr "Assegura que o conjunto de resultados exclui comentários atribuídos a utilizadores com IDs específicos. Requer autorização."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1332
 msgid "Limit result set to comments assigned to specific user IDs. Requires authorization."
-msgstr "Limita conjunto de resultados a comentários atribuídos a ID de utilizadores específicos. Requer autorização."
+msgstr "Limita conjunto de resultados a comentários atribuídos a IDs de utilizadores específicos. Requer autorização."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1326
 msgid "Limit response to comments published after a given ISO8601 compliant date."
@@ -5447,7 +5434,7 @@ msgstr "Pesquisar itens multimédia..."
 
 #: wp-includes/media.php:3534
 msgid "Search Media"
-msgstr "Pesquisar multimédia"
+msgstr "Procurar media"
 
 #: wp-includes/media.php:3533
 msgid "Filter by type"
@@ -5830,7 +5817,7 @@ msgstr "Ligar ao ficheiro multimédia"
 
 #: wp-includes/media-template.php:651
 msgid "Embed Media Player"
-msgstr "Incorporar reprodutor de multimédia"
+msgstr "Incorporar reprodutor de media"
 
 #: wp-includes/media-template.php:640 wp-includes/media-template.php:718
 #: wp-includes/media-template.php:866 wp-includes/media-template.php:970
@@ -5966,11 +5953,11 @@ msgstr "Editar imagem"
 
 #: wp-includes/media-template.php:285
 msgid "Edit next media item"
-msgstr "Editar item multimédia seguinte"
+msgstr "Editar item de media seguinte"
 
 #: wp-includes/media-template.php:284
 msgid "Edit previous media item"
-msgstr "Editar item multimédia anterior"
+msgstr "Editar item de media anterior"
 
 #: wp-includes/media-template.php:264
 msgid "Dismiss Errors"
@@ -6028,7 +6015,7 @@ msgstr "Largue os ficheiros a carregar"
 
 #: wp-includes/media-template.php:166
 msgid "Close media panel"
-msgstr "Fechar o painel de multimédia"
+msgstr "Fechar o painel de media"
 
 #: wp-includes/load.php:536
 msgid "The site you have requested is not installed properly. Please contact the system administrator."
@@ -6569,7 +6556,7 @@ msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.
 msgstr "%1$s <strong>não é usado</strong> desde a versão %2$s! Use %3$s em substituição."
 
 #: wp-includes/functions.php:3770 wp-includes/ms-load.php:462
-#: wp-includes/wp-db.php:1648
+#: wp-includes/wp-db.php:1593
 msgid "Error establishing a database connection"
 msgstr "Erro ao estabelecer uma ligação com a base de dados"
 
@@ -6637,42 +6624,42 @@ msgid "off"
 msgstr "off"
 
 #. translators: used to join items in a list with only 2 items
-#: wp-includes/formatting.php:4492
+#: wp-includes/formatting.php:4487
 msgid "%s and %s"
 msgstr "%s e %s"
 
 #. translators: used to join last two items in a list with more than 2 times
-#: wp-includes/formatting.php:4490
+#: wp-includes/formatting.php:4485
 msgid "%s, and %s"
 msgstr "%s e %s"
 
 #. translators: used to join items in a list with more than 2 items
-#: wp-includes/formatting.php:4488
+#: wp-includes/formatting.php:4483
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: wp-includes/formatting.php:4257
+#: wp-includes/formatting.php:4252
 msgid "https://codex.wordpress.org/Using_Permalinks#Choosing_your_permalink_structure"
 msgstr "https://codex.wordpress.org/Using_Permalinks#Choosing_your_permalink_structure"
 
 #. translators: %s: Codex URL
-#: wp-includes/formatting.php:4256
+#: wp-includes/formatting.php:4251
 msgid "A structure tag is required when using custom permalinks. <a href=\"%s\">Learn more</a>"
 msgstr "É necessária uma estrutura de etiquetas quando usa ligações permanentes personalizadas. <a href=\"%s\">Mais informações</a>"
 
-#: wp-includes/formatting.php:4238
+#: wp-includes/formatting.php:4233
 msgid "The timezone you have entered is not valid. Please select a valid timezone."
 msgstr "O fuso horário que indicou não é válido. Por favor indique um fuso válido."
 
-#: wp-includes/formatting.php:4183
+#: wp-includes/formatting.php:4178
 msgid "The Site address you entered did not appear to be a valid URL. Please enter a valid URL."
 msgstr "O endereço do site que inseriu não parece ser um URL válido. Por favor, insira um URL válido."
 
-#: wp-includes/formatting.php:4170
+#: wp-includes/formatting.php:4165
 msgid "The WordPress address you entered did not appear to be a valid URL. Please enter a valid URL."
 msgstr "O endereço do WordPress que inseriu não parece ser um URL válido. Por favor, insira um URL válido."
 
-#: wp-includes/formatting.php:4064
+#: wp-includes/formatting.php:4059
 msgid "The email address entered did not appear to be a valid email address. Please enter a valid email address."
 msgstr "O endereço de email introduzido não aparenta ser válido. Por favor introduza um endereço de email válido."
 
@@ -6796,7 +6783,7 @@ msgid "&#8221;"
 msgstr "&#8221;"
 
 #. translators: opening curly double quote
-#: wp-includes/formatting.php:88 wp-includes/formatting.php:4797
+#: wp-includes/formatting.php:88 wp-includes/formatting.php:4792
 msgctxt "opening curly double quote"
 msgid "&#8220;"
 msgstr "&#8220;"
@@ -7122,7 +7109,7 @@ msgstr "(Actual: %s)"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:67
 msgid "Display Location"
-msgstr "Onde mostrar"
+msgstr "Mostrar localização"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:61
 msgid "Delete Menu"
@@ -10132,7 +10119,7 @@ msgstr "Adicionar um menu"
 
 #: wp-includes/class-wp-customize-nav-menus.php:589
 msgid "Menu Locations"
-msgstr "Localizações dos menus"
+msgstr "Localizações do menu"
 
 #. translators: URL to the widgets panel of the customizer
 #: wp-includes/class-wp-customize-nav-menus.php:585
@@ -10143,8 +10130,8 @@ msgstr "Também pode colocar menus em <a href=\"%s\">áreas de widgets</a> com o
 #: wp-includes/class-wp-customize-nav-menus.php:581
 msgid "Your theme supports %s menu. Select which menu appears in each location."
 msgid_plural "Your theme supports %s menus. Select which menu appears in each location."
-msgstr[0] "O seu tema suporta %s menu. Escolha o menu a mostrar em cada localização."
-msgstr[1] "O seu tema suporta %s menus. Escolha o menu a mostrar em cada localização."
+msgstr[0] "O seu tema suporta %s menu. Escolha qual o menu que aparece em cada local."
+msgstr[1] "O seu tema suporta %s menus. Escolha qual o menu que aparece em cada local."
 
 #: wp-includes/class-wp-customize-nav-menus.php:578
 msgid "Your theme supports one menu. Select which menu you would like to use."
@@ -10152,7 +10139,7 @@ msgstr "O seu tema suporta um menu. Escolha o menu que pretende usar."
 
 #: wp-includes/class-wp-customize-nav-menus.php:564
 msgid "Menus can be displayed in locations defined by your theme."
-msgstr "Os menus podem ser mostrados em localizações definidas pelo seu tema."
+msgstr "Os menus podem ser mostrados em localizações definidas pelo tema."
 
 #. translators: URL to the widgets panel of the customizer
 #: wp-includes/class-wp-customize-nav-menus.php:562
@@ -11026,8 +11013,8 @@ msgstr "Feedback"
 
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:129
 #: wp-includes/update.php:321 wp-includes/update.php:499
-#: wp-includes/wp-db.php:1129 wp-includes/wp-db.php:1666
-#: wp-includes/wp-db.php:1770 wp-login.php:796
+#: wp-includes/wp-db.php:1129 wp-includes/wp-db.php:1611
+#: wp-includes/wp-db.php:1715 wp-login.php:796
 msgid "https://wordpress.org/support/"
 msgstr "https://pt.wordpress.org/support/"
 
@@ -11091,12 +11078,12 @@ msgstr "Ocorreu um erro durante a activação"
 #. lost password URL
 #: wp-activate.php:112
 msgid "Your site at <a href=\"%1$s\">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;. Please check your email inbox at %4$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%5$s\">reset your password</a>."
-msgstr "O seu site <a href=\"%1$s\">%2$s</a> está activo. Pode agora iniciar a sessão no site com o nome de utilizador que escolheu &#8220;%3$s&#8221;. Por favor verifique na sua caixa de email em %4$s a senha e instruções de início de sessão. Se não receber o email, verifique a sua pasta de spam. Se mesmo assim não receber o email no espaço de uma hora, pode <a href=\"%5$s\">redefinir a sua senha</a>."
+msgstr "O seu site <a href=\"%1$s\">%2$s</a> está activo. Pode agora iniciar a sessão no site com o nome de utilizador que escolheu &#8220;%3$s&#8221;. Por favor verifique na sua caixa de email em %4$s a senha e instruções de início de sessão. Se não receber o email, verifique a sua pasta de spam. Se mesmo assim não receber o email no espaço de uma hora, pode <a href=\"%5$s\">pedir uma nova senha</a>."
 
 #. translators: 1: login URL, 2: username, 3: user email, 4: lost password URL
 #: wp-activate.php:103
 msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
-msgstr "A sua conta foi activada. Pode <a href=\"%1$s\">iniciar a sessão</a> no site, com o nome de utilizador que escolheu, &#8220;%2$s&#8221;. Por favor, verifique a sua caixa de email em %3$s a senha e instruções para início de sessão. Se não receber o email, verifique a sua pasta de spam ou lixo. Se mesmo assim não receber o email no espaço de uma hora, pode <a href=\"%4$s\">redefinir a sua senha</a>."
+msgstr "A sua conta foi activada. Pode agora <a href=\"%1$s\">iniciar a sua sessão</a> no site, usando o nome de utilizador que escolheu, &#8220;%2$s&#8221;. Por favor, verifique a sua caixa de correio em %3$s para ver a sua senha e instruções de início de sessão Se não receber um email, verifique a sua pasta de spam ou lixo. Se mesmo assim não receber um email dentro de uma hora, pode sempre <a href=\"%4$s\"> redefinir a sua senha</a>."
 
 #: wp-activate.php:97 wp-activate.php:131
 msgid "Your account is now active!"

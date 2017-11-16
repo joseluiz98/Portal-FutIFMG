@@ -1,0 +1,18 @@
+0144.275 (1) Opened log file at time: Wed, 15 Nov 2017 03:55:25 +0000 on http://futifmg.serveblog.net:8080
+0144.323 (1) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.8.3 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) OpenSSL/1.1.0f PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 31.8M | 2M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0144.362 (1) Free space on disk containing Updraft's temporary directory: 19439 MB
+0144.472 (1) Backup run: resumption=1, nonce=fa25cefd3b01, begun at=1510717981 (144s ago), job type=backup, previous check-in=6.4s
+0144.538 (1) Scheduling a resumption (2) after 300 seconds (1510718425) in case this run gets aborted
+0144.594 (1) Checking if we have a zip executable available
+0144.637 (1) Creation of backups of directories: already finished
+0144.727 (1) Saving backup status to database (elements: 0)
+0144.868 (1) Database dump (WordPress DB): Creation was completed already
+0144.937 (1) backup_2017-11-15-0353_Portal_do_Torneio_de_Futsal_fa25cefd3b01-db.gz: db: Note: This file was not marked as successfully uploaded, but does not exist on the local filesystem (C:\wamp64\www/wp-content/updraft/backup_2017-11-15-0353_Portal_do_Torneio_de_Futsal_fa25cefd3b01-db.gz)
+0145.041 (1) Recording as successfully uploaded: backup_2017-11-15-0353_Portal_do_Torneio_de_Futsal_fa25cefd3b01-db.gz (56f68472d5579e9b0510ba92c2cda4ad)
+0145.251 (1) Saving backup history. Total backup size: Unknown
+0145.284 (1) Resume backup (fa25cefd3b01, 1): finish run
+0145.317 (1) There were no more files that needed uploading
+0145.331 (1) There were no errors in the uploads, so the 'resume' event (2) is being unscheduled
+0145.424 (1) The backup apparently succeeded and is now complete
+0145.439 (1) No email will be sent - this backup set was empty.
+0145.457 (1) O backup aparentemente foi bem sucedido e está completo agora.

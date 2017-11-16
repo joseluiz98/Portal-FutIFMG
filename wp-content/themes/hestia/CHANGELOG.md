@@ -1,15 +1,7 @@
 
- ### v1.1.54 - 2017-11-13 
- **Changes:** 
- * Updated resources for bundled images
-* Removed duplicated featured images on single portfolio pages
-* Added missing IDs for Ribbon and Clients Bar sections
-* Fixed issue with hidden label for the custom color controls in customizer in WordPress 4.9
-* Allow Skip logo cropping
- 
  ### v1.1.53 - 2017-11-06 
  **Changes:** 
- * [Hestia PRO] NEW Video background option in the header area
+ * [Hestia PRO] NEW Video background option
 * [Hestia PRO] NEW Container width option
 * [Hestia PRO] New option for changing the Header Gradient color
 * Fixed compatibility issues with SiteOrigin Page Builder overriding the About section
