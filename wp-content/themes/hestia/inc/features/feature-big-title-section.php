@@ -264,7 +264,7 @@ function hestia_big_title_image_callback() {
 	$hestia_big_title_background = get_theme_mod( 'hestia_big_title_background' );
 	if ( ! empty( $hestia_big_title_background ) ) { ?>
 		<style class="big-title-image-css">
-			#carousel-hestia-generic .page-header {
+			#carousel-hestia-generic .header-filter {
 				background-image: url(<?php echo esc_url( $hestia_big_title_background ); ?>) !important;
 			}
 		</style>
