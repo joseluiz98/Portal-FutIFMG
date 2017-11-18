@@ -1,0 +1,108 @@
+0000.002 (0) Opened log file at time: Sat, 18 Nov 2017 01:04:38 +0000 on http://futifmg.serveblog.net:8080
+0000.033 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.13.12 WP: 4.9 PHP: 7.1.9 (apache2handler, Windows NT PC1 10.0 build 15063 (Windows 10) AMD64) MySQL: 5.7.19 WPLANG: pt_BR Server: Apache/2.4.27 (Win64) OpenSSL/1.1.0f PHP/7.1.9 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 31.1M | 2M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.085 (0) Free space on disk containing Updraft's temporary directory: 13141.8 MB
+0000.158 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB:  (schedule: daily)
+0000.229 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.904 (0) Requesting semaphore lock (fd) (apparently via scheduler: last_scheduled_action_called_at=1510881486, seconds_ago=85593)
+0001.134 (0) Set semaphore last lock (fd) time to 2017-11-18 01:04:40
+0001.178 (0) Semaphore lock (fd) complete
+0001.286 (0) Backup run: resumption=0, nonce=0746cbcbc62b, begun at=1510967078 (2s ago), job type=backup
+0001.382 (0) Scheduling a resumption (1) after 300 seconds (1510967380) in case this run gets aborted
+0001.457 (0) Checking if we have a zip executable available
+0001.556 (0) Creation of backups of directories: beginning
+0001.623 (0) No backup of plugins: excluded by user's options
+0001.663 (0) No backup of themes: excluded by user's options
+0001.696 (0) No backup of uploads: excluded by user's options
+0001.729 (0) No backup of others: excluded by user's options
+0001.978 (0) Saving backup status to database (elements: 0)
+0002.019 (0) Beginning creation of database dump (WordPress DB)
+0002.507 (0) Testing: C:\Program Files\MySQL\MySQL Workbench 6.3 CE\mysqldump.exe
+0002.745 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `wp_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */;\nCRE (truncated - 1202 bytes total)
+0002.796 (0) Binary mysqldump: error (code: 2)
+0003.100 (0) Table wp_options: Total expected rows (approximate): 331
+0003.750 (0) Table wp_options: Total rows added: 340 in 0.56 seconds
+0003.866 (0) Table wp_options: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_options.table.gz - 236.9 KB)
+0004.160 (0) Table wp_users: Total expected rows (approximate): 4
+0004.193 (0) Table wp_users: Total rows added: 4 in 0.01 seconds
+0004.224 (0) Table wp_users: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_users.table.gz - 0.9 KB)
+0004.364 (0) Table wp_usermeta: Total expected rows (approximate): 73
+0004.470 (0) Table wp_usermeta: Total rows added: 78 in 0.06 seconds
+0004.543 (0) Table wp_usermeta: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_usermeta.table.gz - 2.2 KB)
+0004.951 (0) Table wp_commentmeta: Total expected rows (approximate): 0
+0004.994 (0) Table wp_commentmeta: Total rows added: 0 in 0.00 seconds
+0005.050 (0) Table wp_commentmeta: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_commentmeta.table.gz - 0.4 KB)
+0005.197 (0) Table wp_comments: Total expected rows (approximate): 0
+0005.231 (0) Table wp_comments: Total rows added: 0 in 0.01 seconds
+0005.264 (0) Table wp_comments: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_comments.table.gz - 0.5 KB)
+0005.376 (0) Table wp_links: Total expected rows (approximate): 0
+0005.405 (0) Table wp_links: Total rows added: 0 in 0.00 seconds
+0005.452 (0) Table wp_links: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_links.table.gz - 0.4 KB)
+0005.556 (0) Table wp_postmeta: Total expected rows (approximate): 226
+0005.599 (0) Table wp_postmeta: Total rows added: 240 in 0.02 seconds
+0005.638 (0) Table wp_postmeta: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_postmeta.table.gz - 4.8 KB)
+0005.729 (0) Table wp_posts: Total expected rows (approximate): 137
+0005.789 (0) Table wp_posts: Total rows added: 151 in 0.04 seconds
+0005.836 (0) Table wp_posts: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_posts.table.gz - 10.7 KB)
+0005.919 (0) Table wp_term_relationships: Total expected rows (approximate): 6
+0006.045 (0) Table wp_term_relationships: Total rows added: 6 in 0.04 seconds
+0006.089 (0) Table wp_term_relationships: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_term_relationships.table.gz - 0.4 KB)
+0006.260 (0) Table wp_term_taxonomy: Total expected rows (approximate): 2
+0006.375 (0) Table wp_term_taxonomy: Total rows added: 2 in 0.04 seconds
+0006.429 (0) Table wp_term_taxonomy: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_term_taxonomy.table.gz - 0.4 KB)
+0006.547 (0) Table wp_termmeta: Total expected rows (approximate): 0
+0006.627 (0) Table wp_termmeta: Total rows added: 0 in 0.00 seconds
+0006.689 (0) Table wp_termmeta: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_termmeta.table.gz - 0.4 KB)
+0006.762 (0) Table wp_terms: Total expected rows (approximate): 2
+0006.799 (0) Table wp_terms: Total rows added: 2 in 0.01 seconds
+0006.829 (0) Table wp_terms: finishing file (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_terms.table.gz - 0.4 KB)
+0006.914 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_options.table.gz (1/12): adding to final database dump
+0007.026 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_users.table.gz (2/12): adding to final database dump
+0007.059 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_usermeta.table.gz (3/12): adding to final database dump
+0007.079 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_commentmeta.table.gz (4/12): adding to final database dump
+0007.109 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_comments.table.gz (5/12): adding to final database dump
+0007.128 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_links.table.gz (6/12): adding to final database dump
+0007.171 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_postmeta.table.gz (7/12): adding to final database dump
+0007.193 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_posts.table.gz (8/12): adding to final database dump
+0007.224 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_term_relationships.table.gz (9/12): adding to final database dump
+0007.250 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_term_taxonomy.table.gz (10/12): adding to final database dump
+0007.277 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_termmeta.table.gz (11/12): adding to final database dump
+0007.299 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db-table-wp_terms.table.gz (12/12): adding to final database dump
+0007.334 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz: finished writing out complete database file (224 KB)
+0007.500 (0) Total database tables backed up: 12 (backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz, size: 261735, sha256)
+0007.711 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz: db: This file has not yet been successfully uploaded: will queue
+0007.773 (0) Saving backup history. Total backup size: 255.6 KB
+0007.998 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0008.156 (0) Cloud backup selection (1/1): googledrive (last)
+0008.235 (0) Beginning dispatch of backup to remote (googledrive)
+0014.227 (0) Google Drive quota usage: used=1394.1 MB, total=15360 MB, available=13965.9 MB
+0014.262 (0) backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz: Attempting to upload to Google Drive (into folder id: 0B7KY7uiORovwMzFRbTBTSnA5Snc)
+0017.276 (0) Googledrive chunked upload: 100 % uploaded
+0017.353 (0) OK: Archive backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz uploaded to Google Drive in 3.07 seconds
+0017.394 (0) Recording as successfully uploaded: backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz (e61eae8f61bbf569890200257133469d)
+0017.518 (0) Deleting local file: backup_2017-11-17-2304_Portal_do_Torneio_de_Futsal_0746cbcbc62b-db.gz: skipped: user has unchecked updraft_delete_local option
+0017.559 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+0017.583 (0) Number of backup sets in history: 3; groups (db): 1
+0017.618 (0) Examining (for databases) backup set with group_id=0, nonce=0746cbcbc62b, datestamp=1510967078 (Nov 18 2017 01:04:38)
+0017.657 (0) This backup set is the backup set just made, so will not be deleted.
+0017.657 (0) Examining (for databases) backup set with group_id=0, nonce=704cfe01a114, datestamp=1510881486 (Nov 17 2017 01:18:06)
+0017.657 (0) 1510881486: db: this set includes a database (backup_2017-11-16-2318_Portal_do_Torneio_de_Futsal_704cfe01a114-db.gz); db count is now 1
+0017.657 (0) 1510881486: db: over retain limit (1); will delete this database
+0017.657 (0) Delete file: backup_2017-11-16-2318_Portal_do_Torneio_de_Futsal_704cfe01a114-db.gz, service=googledrive
+0017.692 (0) Deleting local copy (backup_2017-11-16-2318_Portal_do_Torneio_de_Futsal_704cfe01a114-db.gz)
+0019.047 (0) backup_2017-11-16-2318_Portal_do_Torneio_de_Futsal_704cfe01a114-db.gz: Deletion successful
+0019.132 (0) This backup set is now empty; will remove from history
+0019.172 (0) Deleting log file (log.704cfe01a114.txt)
+0019.215 (0) Examining (for databases) backup set with group_id=0, nonce=2045f202e3d4, datestamp=1510792349 (Nov 16 2017 00:32:29)
+0019.215 (0) Number of backup sets in history: 2; groups (files): 1
+0019.239 (0) Examining (for files) backup set with nonce=0746cbcbc62b, datestamp=1510967078 (Nov 18 2017 01:04:38)
+0019.239 (0) This backup set remains non-empty (f=0/d=1); will retain in history
+0019.292 (0) Examining (for files) backup set with nonce=2045f202e3d4, datestamp=1510792349 (Nov 16 2017 00:32:29)
+0019.292 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0019.313 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0019.495 (0) Resume backup (0746cbcbc62b, 0): finish run
+0019.628 (0) Decremented the semaphore (fd) by 1
+0019.694 (0) Semaphore (fd) unlocked
+0019.720 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0019.849 (0) The backup apparently succeeded and is now complete
+0019.886 (0) No email will/can be sent - the user has not configured an email address.
+0019.909 (0) O backup aparentemente foi bem sucedido e está completo agora.
