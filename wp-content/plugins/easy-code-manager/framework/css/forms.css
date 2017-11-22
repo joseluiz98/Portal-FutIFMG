@@ -1,0 +1,104 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,400italic,500,500italic,300italic,300,200,200italic,100italic,100,600,600italic,700,700italic,800,800italic,900,900italic);
+body {font-size: 14px; font-family: 'Raleway', sans-serif;}
+p.field-note {font-size: 13px; color: #9F9F9F;}
+.cjt-form fieldset{border: none;}
+.cjt-form label {
+	display: inline-block;
+    width: 180px;
+    font-weight: 500;
+    color: #565656;
+    font-family: 'Raleway', sans-serif;
+}
+.cjt-form ul {
+	margin: 0; 
+	padding: 0;
+}
+.cjt-form ul li {
+	list-style: none; 
+	margin-bottom: 5px;
+}
+.cjt-form ul li.last {
+	margin-top: 60px; 
+	text-align: right;
+}
+.cjt-form ul li.last .cjt-button {
+	min-width: 70px;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.cjt-form ul li.last .cjt-button.save{
+	border: 1px solid #e52600;
+    background: #e52600;
+    color: #fff;
+}	
+
+.cjt-form ul li input[type=submit] { 
+	border: 1px solid #e52600;
+	color:#fff;
+    background: #e52600;
+    padding: 8px; 
+}
+.cjt-form ul li input[type=text],
+.cjt-form ul li select {    
+	min-width: 230px;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+.loading {background : url('images/loading.gif') center no-repeat;}
+.link-loading {display: inline-block; height: 20px;background : url('images/loading.gif') center no-repeat; }
+input[type="submit"].cjt-submit {float: right;}
+
+#cjtoolbox_new_block_form ul li.cjt-checkbox-field
+{
+    position: relative;
+    margin: 10px 0;
+}
+
+#cjtoolbox_new_block_form ul input[type=checkbox] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+}
+#cjtoolbox_new_block_form ul input[type=checkbox] + label.cjt-checkbox {
+padding-left: 0;
+    height: 23px;
+    margin-bottom: 10px;
+    display: inline-block;
+    line-height: 23px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: 46% 2%;
+}
+#cjtoolbox_new_block_form ul input[type=checkbox]:checked + label.cjt-checkbox {
+	background-position: 44% -23px;
+}
+#cjtoolbox_new_block_form ul label.cjt-checkbox{
+    background-image: url(images/checkbox.png);
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    line-height: 23px;
+}
+
+.cjt-link-sep-pipe {
+    padding: 0 14px;
+}

@@ -1,0 +1,65 @@
+/* Toolboxes */
+.cjt-toolbox .divider,
+.cjt-toolbox .empty-divider {
+	margin: 0 20px;
+	width: 2px;
+	display: inline-block;
+	height: 25px;
+}
+
+.cjt-toolbox .divider {
+	background-image: url('images/divider.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.cjt-toolbox .icons-group {
+	display: inline-block;
+	float:left;
+}
+.cjt-toolbox .icons-group a.cjt-tb-link {
+
+	display: inline-block;
+	cursor: pointer;
+	margin-left: 0px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.cjt-toolbox .icons-group a.cjt-tb-text-link {
+	padding-left: 0px;
+	width: 100%;
+}
+.cjt-toolbox .icons-group .popup-menu {
+	margin-top: 0px;
+	z-index: 2;
+	padding: 0;
+	border: 0px solid;
+    position: absolute;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+.cjt-toolbox .icons-group .popup-menu a.cjt-tb-text-link {
+    width: 100%;
+    background-position-x: left;
+    padding-left: 0;
+    padding-top: 6px;
+    background: none;
+}
+.cjt-toolbox .icons-group a.l-127x23 {
+
+}
+.cjt-toolbox .icons-group a.l-45x27 {
+	width: 45px;
+	height: 27px;
+}
+
+.cjt-toolbox a.cjt-tb-link:hover {
+	opacity : 0.7;
+	filter:alpha(opacity = 70%);
+}
+.cjt-toolbox a.cjttbs-disabled,
+.cjt-toolbox a.cjttbs-disabled:hover {
+	opacity : 0.4;
+	filter:alpha(opacity = 4%);
+}

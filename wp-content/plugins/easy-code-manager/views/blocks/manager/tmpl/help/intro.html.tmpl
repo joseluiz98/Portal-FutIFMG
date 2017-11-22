@@ -1,0 +1,20 @@
+<?php
+/**
+* 
+*/
+
+// Diallow direct access.
+defined('ABSPATH') or die("Access denied");
+?>
+
+<div id="cjt-noblocks-intro-dialog-container" <?php if (apply_filters(CJTPluggableHelper::FILTER_BLOCKS_MANAGER_INTRO_HAS_BLOCKS_CHECK, $this->hasBlocks)) : ?> style="display:none"<?php endif; ?>>
+
+    <div id="cjt-noblocks-intro" class="cjt-noblocks-intro">
+
+        <h1><?php echo cssJSToolbox::__('Welcome to the ECM dashboard page') ?></h1>
+        <h5 class="cjt-intro-color-title"><?php echo cssJSToolbox::__('You currently do not have any Code Blocks.') ?></h5>
+        <br>
+        <p><?php echo cssJSToolbox::__('For help to get started, click: ') ?><a target="_blank" href="http://<?php echo cssJSToolbox::CJT_WEB_SITE_DOMAIN ?>/ecm-quick-reference/">Quick Reference</a></p>
+        
+    </div>
+</div>

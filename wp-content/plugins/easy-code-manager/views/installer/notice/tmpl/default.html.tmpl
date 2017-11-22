@@ -1,0 +1,25 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+                                                                                       
+$pluginTitles = apply_filters(
+    CJTPluggableHelper::FILTER_INSTALLER_NOTICE_PLUGIN_TITLES,
+    cssJSToolbox::getInstance()->getPluginTitles()
+);
+
+?>
+<div class="cjt-installation-notice updated">
+
+	<input type="hidden" id="cjt-securityToken" value="<?php echo cssJSToolbox::getSecurityToken() ?>" />
+    
+    <h1><?php echo cssJSToolbox::__('Success!!!') ?></h1>
+    <p class="cjt-second-title"><?php echo cssJSToolbox::__('But before you get excited, we have one more procedure.  :)') ?></p>
+	<p><?php echo sprintf(cssJSToolbox::__('%s has been successfully installed and activated via the WordPress Plugins page, but before you can start using the plugin, another installation procedure needs to run. '), $pluginTitles[0]) ?></p>
+	<p><?php echo cssJSToolbox::__('To begin the procedure, please click:') ?> <a href="<?php echo admin_url('admin.php?page=' . CJTPlugin::PLUGIN_REQUEST_ID) ?>"><?php echo sprintf(cssJSToolbox::__('%s - Installation Procedure'), $pluginTitles[1]) ?></a>.</p>
+    
+	<a class="dismiss" href="#"><?php echo cssJSToolbox::__('Dismiss') ?></a>
+</div>

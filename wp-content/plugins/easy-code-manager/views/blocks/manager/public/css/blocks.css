@@ -1,0 +1,300 @@
+/** CSS &amp; Javascript Toolkit - blocks page CSS **/
+/* Wordpress Page */
+.wrap {
+    position: relative;
+}
+.cjt-banner-bar .cjt-banner-link a, 
+.cjt-banner-bar a:hover, 
+.cjt-banner-bar a:visited{
+    color: #A5581B;
+}
+
+#ecmp-pro-banner,
+#ecmp-pro-banner-link
+{
+    width: 370px;
+    height: 132px;
+}
+
+#ecmp-pro-banner
+{
+    position: relative;
+    float: right;
+    margin: -68px 0 -41px 0;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 11px;
+    text-align: center;
+}
+#ecmp-pro-banner-link
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+#ecmp-pro-banner strong
+{
+    color: red;
+    padding: 10px;
+    font-size: 12px;
+}
+#ecmp-pro-banner ul
+{
+    padding-left: 15px;
+    list-style-type: circle;
+    float: left;
+    width: 156px;
+    text-align: left;
+    margin-left: 18px;
+    font-size: 11px;
+    margin-top: 8px;
+}
+#ecmp-pro-banner ul li
+{
+    margin: 0 0 3px 0;
+}
+
+span#support-us {
+    color: #aaa;
+    padding: 0 0px 0 50px;
+}
+h2.cjt-main-title.logo 
+{
+    background: transparent url('../images/ecm-logo.png') no-repeat;
+    width: 198px;
+    height: 78px;
+    margin: 0;
+    display: inline-block;
+}
+.popup-menu.admin-tools
+{
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgb(66, 66, 66) !important;
+}
+.col-xs-6.header-links
+{
+    width: 60%;
+    margin-right: 0;
+    text-align: right;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+#post-body{
+    display: none; 
+    min-width:700px; 
+}
+/* Give extra space for the last Block Code-Auto-Completion dialog */
+#wpbody-content {margin-bottom: 129px; overflow: visible !important;}
+.postbox {}
+#cjtoolbox_form { clear:both; }
+#cjt-info {
+  background-color: #EFE;
+  font-family: sans-serif;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.3;
+  padding: 14px 0px;
+}
+.cjt-toolbox-blocks .icons-group.left-bar .cjt-tb-link.cjt-tb-text-link
+{
+    padding: 7px 10px !important;
+    margin: 0 !important;
+}
+
+/* Blocks loader */
+#cjt-blocks-loader { width: 100%; text-align: center; vertical-align: middle; }
+#cjt-blocks-loader p.loading-text{ padding-left: 20px; font-weight: bold; font-size: 14px;}
+/* Footer Tips */
+#cjtoolbox-tips { padding:20px; }
+#cjtoolbox-tips ul li { list-style-type:square; }
+/* Blocks  Page toolbox */
+.cjt-toolbox-blocks {
+
+	margin-bottom: 20px;
+	padding: 0 !important;
+	clear: both;
+	visibility: hidden; 
+	border:0;
+	box-shadow: 0 0;
+}
+.cjt-toolbox-manager-button-flash
+{
+    background-color: rgb(66, 66, 66);
+    color: white;
+}
+
+.cjt-toolbox-blocks .icons-group.tools-menu .cjt-tb-link
+{
+    padding: 11px 10px !important;
+}
+.cjt-toolbox-blocks .icons-group.left-bar .cjt-tb-link
+{
+    padding: 1px !important;
+}
+
+.cjt-toolbox-blocks .cjt-tb-link.cjttbl-admin-tools 
+{
+    position: relative;
+    top:0px;
+}
+.cjt-toolbox-blocks .icons-group.left-bar {
+	margin-left: 0px;
+}
+
+.main-menu .popup-menu
+{
+    background-color: #ffffff;    
+}
+
+.cjt-toolbox-blocks a.textButton {
+	background-position: left top !important;
+	text-decoration: none;
+	padding-left: 0;
+	padding-top: 0px;
+	margin-top: 0px;
+	position: relative;
+}
+/* Links */
+.cjt-toolbox-blocks a.cjttbl-restore.cjttbs-disabled 
+{
+	height: 11px !important;
+	margin-left: 40px;
+	top: 2px;
+}
+
+#templates-lookup-form {height: 330px;}
+
+.hide { display: none }
+.cjt-block-scripts ul{ list-style: none; margin: 0px; padding: 5px 5px 5px 5px; height: 450px; overflow: auto; }
+.cjt-block-scripts ul li{ display: inline-block; background: none; width: 200px; }
+.marked-text{ color: #bf6b19; }
+
+/* No Blocks Intro Help text */
+cjt-noblocks-intro h2 {font-weight: bold; margin: 4px 0px;}
+cjt-noblocks-intro h4 {font-weight: bold; font-size: 15px;}
+
+.cjt-toolbox .divider{
+	display:none;
+}
+
+.icons-group.tools-menu.menu-wrap {
+    float: right;
+}
+
+/* Intro Message */
+.cjt-noblocks-intro,
+.cjt-noblocks-intro h5,
+.cjt-noblocks-intro p
+{
+    font-family: Helvetica, sans-serif;
+}
+.cjt-noblocks-intro h1 
+{
+    padding: 8px 0;
+    font-size: 23px;
+    font-weight: 400;
+}
+.cjt-noblocks-intro h5
+{
+    margin-top: 22px;
+}
+.cjt-noblocks-intro ol
+{
+    
+}
+.cjt-noblocks-intro ol li span
+{
+    font-weight: bold;
+}
+.cjt-noblocks-intro p
+{
+    font-size: 14px;    
+}
+.cjt-noblocks-intro ol li
+{
+    font-size: 16px;
+}
+.cjt-intro-color-title
+{
+    color: red;
+}
+
+.cjt-noblocks-intro .hot-tips h5,
+.cjt-noblocks-intro .hot-tips p
+{
+    display: inline;
+}
+
+.cjt-noblocks-intro a
+{
+    text-decoration: underline;
+}
+@media screen and (max-width : 768px)
+{
+    .cjt-toolbox-blocks .icons-group.left-bar
+    {
+        margin-top: 10px;
+    }
+    #ecmp-pro-banner
+    {
+        margin: -57px 0 -51px 0;
+    }
+}
+
+@media screen and (max-width : 670px)
+{
+    #ecmp-pro-banner
+    {
+        margin: 0;
+        float: none;
+        position: static;
+    }
+}
+
+@media screen and (max-width : 470px)
+{
+    #ecmp-pro-banner
+    {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width : 460px)
+{
+    .popup-menu.admin-tools {
+        margin-top: -9px !important;
+        margin-left: 1px !important;
+    }
+}
+
+@media screen and (max-width : 425px)
+{
+
+    h2.cjt-main-title.logo 
+    {
+        width: 102px;
+        height: 40px;
+        background: url('../images/ecm-logo-mobile.png');
+    }    
+    
+}
+
+@media screen and (max-width : 340px)
+{
+    .wrap
+    {
+        margin-right: 0 !important;
+    }
+
+    #wpcontent
+    {
+        padding: 0 !important;
+    }
+    
+    .popup-menu.admin-tools {
+        margin-left: -74px !important;
+    }
+}

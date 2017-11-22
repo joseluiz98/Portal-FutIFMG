@@ -1,0 +1,79 @@
+<?php
+/**
+* 
+*/
+
+// Diallow direct access.
+defined('ABSPATH') or die("Access denied");
+?>
+<div id="cjtoolbox-admin" class="wrap">
+    <?php
+        $content = '';
+        echo CJTBlocksManagerView::trigger( 'CJTBlocksManagerView.loadglobalcomponents', $content );
+    ?>
+    <?php do_action(CJTPluggableHelper::ACTION_BLOCKS_MAN_TMPL_TOP); ?>
+    <div id="custom-icon" class="icon32 blocks-icon32"></div>
+    <div class="header">
+        <div class="container-fluid">                                                                           
+            <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                    <h2 class="cjt-main-title logo" />
+                </div>
+                <div class="col-sm-6 col-xs-6 header-links">
+                    <?php ob_start(); ?>
+                    
+                    <?php echo apply_filters( 'cjt_main_titlt_supportus_link', ob_get_clean() ); ?>
+                    <span class="cjt-banner-link">
+                        <a target="_blank" id="top-link-quick-ref" href="<?php echo apply_filters(CJTPluggableHelper::FILTER_BLOCKS_MANAGER_QUICK_REF_HREF, 'http://' . cssJSToolbox::CJT_WEB_SITE_DOMAIN . '/ecm-quick-reference/') ?>"><?php echo cssJSToolbox::__('Quick Reference') ?></a>
+                    </span>
+                    <span id="support-us"><a target="_blank" href="http://<?php echo cssJSToolbox::CJT_WEB_SITE_DOMAIN ?>"><?php echo cssJSToolbox::__('Get ECM PLUS') ?></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="ecmp-pro-banner">
+        <a target="_blank" id="ecmp-pro-banner-link" href="http://<?php echo cssJSToolbox::CJT_WEB_SITE_DOMAIN ?>"></a>
+        <strong><?php echo cssJSToolbox::__('Features in Easy Code Manager PLUS') ?></strong>
+        <ul>
+            <li><?php echo cssJSToolbox::__('Code Auto Completion') ?></li>
+            <li><?php echo cssJSToolbox::__('Code Beautify & Minify') ?></li>
+            <li><?php echo cssJSToolbox::__('More Assignments') ?></li>
+            <li><?php echo cssJSToolbox::__('Reusable Code Templates') ?></li>
+            <li><?php echo cssJSToolbox::__('Shortcode Embed Button') ?></li>
+        </ul>
+        <ul> 
+            <li><?php echo cssJSToolbox::__('Editor Tools & Themes') ?></li>
+            <li><?php echo cssJSToolbox::__('External Script support') ?></li>
+            <li><?php echo cssJSToolbox::__('Header / Footer support') ?></li>
+            <li><?php echo cssJSToolbox::__('Custom Post support') ?></li>
+            <li><?php echo cssJSToolbox::__('Backup & Revisions') ?></li>
+        </ul>
+    </div>
+    <div id="cjtoolbox-blocks-page-form" method="post">
+        <?php wp_nonce_field('cjtoolbox'); ?>
+        <?php wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false); ?>
+        <?php wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false); ?>
+        <input type="hidden" id="cjt-hasBlocks" value="<?php echo $this->hasBlocks ? 'true' : 'false' ?>" />
+        <input type="hidden" id="cjt-securityToken" value="<?php echo $this->securityToken ?>" />
+        <div id="poststuff" class="metabox-holder">
+            <div id="post-body">
+                <?php if ($this->backupId) : ?>
+                    <p id="cjt-info"><?php  echo cssJSToolbox::__('You have now restored the code blocks from the current backup. Nothing is saved until you click "Restore" button. To revert back to the previous code blocks and discard this action, simply click the "Cancel Restore" button.') ?></p>
+                    <?php endif; ?>
+                <?php 	echo $this->getTemplate('toolbox', array('location' => 'top'));	?>
+                <?php		do_meta_boxes($this->pageHook, 'normal', null); ?>
+
+                <?php
+                echo apply_filters(
+                    CJTPluggableHelper::FILTER_BLOCKS_MANAGER_INTRO_SCREEN,
+                    $this->getTemplate('intro', array(), 'tmpl/help')
+                );
+                ?>
+
+                <?php do_action(CJTPluggableHelper::ACTION_BLOCKS_MANAGER_AFTER_INTRO, $this); ?>
+            </div>
+        </div>
+    </div>
+    <div id="cjt-inline-popup"></div>
+</div>

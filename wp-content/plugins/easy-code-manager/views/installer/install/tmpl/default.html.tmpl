@@ -1,0 +1,94 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+
+$pluginTitles = apply_filters(
+    CJTPluggableHelper::FILTER_INSTALLER_NOTICE_PLUGIN_TITLES,
+    cssJSToolbox::getInstance()->getPluginTitles()
+);
+
+// Set vars based on detected installed version number!
+if ($this->upgrade) 
+{
+    $title = cssJSToolbox::__('%s - Upgrade Procedure');
+    $installButtonTitle = 'Upgrade';
+}
+else 
+{
+    $title = cssJSToolbox::__('%s - Installation Procedure');
+    $installButtonTitle = 'Install';
+}
+
+
+?>
+
+<div class="cjt-installer-view">
+    <?php if (!$this->error) : ?>
+        <form name="installation-form" action="">
+            <input type="hidden" id="cjt-securityToken" value="<?php echo $this->securityToken ?>" />
+            
+            <h1><?php echo sprintf($title, $pluginTitles[0]) ?></h1>
+            
+            <p class="cjt-second-title"><?php echo cssJSToolbox::__('You must run the install procedure before you can start using the plugin') ?></p>
+            
+            <p><?php echo cssJSToolbox::__('This will create the database tables and records, check for previous versions as well as a number of other tasks. Easy Code Manager will be in a disabled state until this procedure is complete.') ?></p>
+            
+            <h3><?php echo cssJSToolbox::__('Installing Version') . ' ' . CJTPlugin::VERSION ?></h3>
+            
+            <p><?php echo cssJSToolbox::__('When you install a new version of ECM, reinstall, or even upgrade from a previous version, a number of processes will take place. Overall, this should take under a minute so please be patient.  Click the '); ?> <a href="#install"><?php echo cssJSToolbox::__('Install') ?></a>  <?php echo cssJSToolbox::__('button to begin. ') ?></p>
+            
+            <ul class="installation-list install">
+                <?php 
+                // Print installation operations (to be executed in the same order below).
+                echo $this->getTemplate(
+                    'default_operations_list',
+                    array
+                    (
+                        'type' => 'install',
+                        'operations' => apply_filters(
+                            CJTPluggableHelper::FILTER_INSTALLER_VIEW_OPERATIONS,
+                            array
+                            (
+                                'database' => array
+                                (
+                                    'text' => cssJSToolbox::__('Create database tables.')
+                                ),
+                                'fileSystem' => array
+                                (
+                                    'text' => cssJSToolbox::__('Creating file system directories')
+                                ),
+                                'finalize' => array
+                                (
+                                    'text' => cssJSToolbox::__('Finalize Installation.')
+                                ),
+                            ),
+                            false
+                        )
+                    )
+                );
+                
+                
+                ?>
+            </ul>
+            <?php
+            // Print upgrade operations (to be executed in the same order below).
+            if ($this->upgrade) {
+                echo $this->getTemplate('upgrade', array(), 'tmpl/upgrades');
+            }
+            ?>
+            <input type="button" name="install" value="<?php echo cssJSToolbox::__($installButtonTitle) ?>" />
+            <?php else : ?>
+            <div class="error"><p><?php echo $this->error->getMessage() ?></p></div>
+            <br>
+            <?php endif ?>
+    </form>
+    <div id="installer-success-dialog-holder">
+        <div id="installer-success-dialog">
+            <p><?php echo cssJSToolbox::__('Click the') ?> <a href="<?php echo admin_url('admin.php?page=' . CJTPlugin::PLUGIN_REQUEST_ID) ?>"><?php echo cssJSToolbox::__('Start') ?></a> <?php echo sprintf(cssJSToolbox::__('button for the %s dashboard.'), $pluginTitles[0]) ?></p>
+        </div>
+    </div>
+</div>

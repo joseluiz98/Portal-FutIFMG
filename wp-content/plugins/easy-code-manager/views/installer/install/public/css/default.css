@@ -1,0 +1,61 @@
+ul li{padding-left: 10px;}
+.cjt-installer-view {padding: 8px 8px;}
+.installation-bottom-list {margin-top: -6px;}
+
+ul.installation-list li.progress,
+ul.installation-list li.installed,
+ul.installation-list li.fail
+{
+    margin-left: 32px; padding-left: 0px;
+}
+
+ul.installation-list li.progress .text,
+ul.installation-list li.installed .text,
+ul.installation-list li.fail .text
+{
+    top: -3px; position: relative;
+}
+
+ul.installation-list li.progress {list-style-image: url('../images/progress.gif');}
+ul.installation-list li.fail {list-style-image: url('../images/error.png');}
+ul.installation-list li.installed {margin-left: 34px; list-style-image: url('../images/installed.png');}
+
+input[name="install"] {width: 79px;}
+.error {font-size: 20px}
+
+#installer-success-dialog-holder
+{
+    display: none;
+}
+
+#installer-success-dialog a,
+#installer-success-dialog a:visited
+{
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+#installer-success-dialog a:hover
+{
+    color: #505050
+}
+
+.cjt-installer-view,
+.cjt-installer-view h3,
+.cjt-installer-view p
+{
+    font-family: helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.cjt-installer-view h3
+{
+    font-weight: bold;
+}
+
+.cjt-installer-view h1
+{
+    font-size: 23px;
+    font-weight: 400;
+}

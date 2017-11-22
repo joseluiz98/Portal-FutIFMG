@@ -1,0 +1,74 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+
+// Allow view to enqueue scripts and styles.
+$this->enququeScripts();
+//$this->enququeStyles();
+$this->suppressPrintScriptsHook();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+<?php wp_print_head_scripts() ?>
+<?php wp_print_styles() ?>
+    <style type="text/css" id="info-style">
+
+        ul
+        {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body
+        {
+            font-family: Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        a button
+        {
+            cursor: pointer;
+        }
+        
+        span.cjt-block-shorcode-text {
+            display: block;
+        }
+        
+        span.cjt-block-shorcode-text input[type="text"] {
+            border: none;
+            margin: 6px 0px;
+            font: inherit;
+            width: 90%;
+        }
+        
+        a.copyshortcode 
+        {
+            display: inline-block;
+        }
+        
+        a.copyshortcode button {
+            padding: 10px;
+            border: 1px solid;
+        }
+    </style>
+    </head>
+    <body>
+        <div id="cjtoolbox_popup">
+        
+            <div class="block-info">
+                <ul>
+<?php               do_action( CJTPluggableHelper::ACTION_BLOCK_SCREEN_INFO_TOP, $this->info ); ?>
+                    <li><span style="font-weight:bold"><?php echo cssJSToolbox::__( 'Shortcode' ) ?>: </span><span class="cjt-block-shorcode-text"><input type="text" readonly="readonly" value="<?php echo $this->info->shortcode ?>" /></span></li>
+<?php               do_action( CJTPluggableHelper::ACTION_BLOCK_SCREEN_INFO_BOTTOM, $this->info ); ?>
+                </ul>
+            </div>
+            
+<?php wp_print_footer_scripts() ?>
+        </div>        
+        
+        <input type="hidden" id="blockId" value="<?php echo $_GET[ 'id' ] ?>" />
+    </body>
+</html>

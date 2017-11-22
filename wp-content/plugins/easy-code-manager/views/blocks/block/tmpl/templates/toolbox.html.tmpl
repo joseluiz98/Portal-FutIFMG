@@ -1,0 +1,32 @@
+		<div class="cjt-toolbox block-toolbox block-panel-toolbox">
+
+			<div class="icons-group">
+                
+                <a href="#" class="cjt-tb-link cjt-tb-text-link cjttbl-panel-list">
+					<button><?php echo cssJSToolbox::__( 'Panel' ) ?></button>
+				</a>
+                <div class="cjt-block-panels-list popup-menu" style="display:none">
+<?php               do_action(CJTPluggableHelper::ACTION_BLOCK_PANEL_FIRST) ?>
+                    <?php echo do_action( CJTPluggableHelper::ACTION_BLOCK_PANELS_BEFORE_EDITOR_TOOLS ) ?>
+                    <a  href="#editor-tools" class="cjt-tb-link cjt-tb-text-link cjt-panel-list-item cjttbl-panel-editortools"><?php echo cssJSToolbox::__( 'Editor Tools' )  ?></a>
+                    <div class="cjt-block-panel-window cjt-panel-window-editor-tools">
+                        <span class="editor-lang">
+                            <a class="cjt-block-editor-tools-action editor-lang-css" href="#switchEditorLanguage(css)"><?php echo cssJSToolbox::__( 'CSS' ) ?></a>
+                            <br />
+                            <a class="cjt-block-editor-tools-action editor-lang-javascript" href="#switchEditorLanguage(javascript)"><?php echo cssJSToolbox::__( 'JavaScript' ) ?></a>
+                            <br />
+                            <a class="cjt-block-editor-tools-action editor-lang-html" href="#switchEditorLanguage(html)"><?php echo cssJSToolbox::__( 'HTML' ) ?></a>
+                            <br />
+                            <a class="cjt-block-editor-tools-action editor-lang-php" href="#switchEditorLanguage(php)"><?php echo cssJSToolbox::__( 'PHP' ) ?></a>                        
+                        </span>
+<?php                   do_action( CJTPluggableHelper::ACTION_BLOCK_PANEL_EDITOR_TOOLS_EXTENSION ) ?>
+                    </div>
+                    <br />
+<?php               do_action( CJTPluggableHelper::ACTION_BLOCK_PANEL_AFTER_EDITOR_TOOLS ) ?>
+                    <a href="#block-info" class="cjt-tb-link cjt-tb-text-link cjt-panel-list-item cjttbl-panel-information"><?php echo cssJSToolbox::__( 'Information' ) ?></a>
+                    <iframe src="" class="cjt-block-panel-window cjt-panel-window-block-info" NOBORDER="1" style="display:none"></iframe>
+                </div>
+                
+			</div>
+
+		</div>

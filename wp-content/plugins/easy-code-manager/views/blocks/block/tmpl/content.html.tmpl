@@ -1,0 +1,34 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+?>
+<?php
+	    // Add activeFileId into codeFile object.
+	    $this->block->file->activeFileId = $this->block->activeFileId;
+			// Hidden fields.
+			$fields = array('name', 'type', 'activeFileId');
+			foreach ($fields as $field) :
+				// Don't output until it has a value
+				// It better for traffic, client side
+				// should take care of this.
+				if (!$fieldValue = $this->block->file->$field) {
+					continue;
+				}
+?>
+		<input type="hidden" name="cjtoolbox[<?php echo $this->block->id; ?>][file][<?php echo $field ?>]" value="<?php echo $fieldValue ?>" />
+<?php endforeach; ?>
+        <div class="cjpageblock">
+            <span class="panel-title"></span>
+            <a href="#" class="close-panel"><?php echo cssJSToolbox::__('Close') ?></a>
+        </div>
+		<div class="cjcontainer">
+			<div class="cjcodeblock">
+				<div class="datablock">
+					<div id="editor-<?php echo $this->block->id ?>" class="code-editor"><?php echo htmlentities($this->block->file->code, null, 'UTF-8') ?></div>
+				</div>
+			</div>
+		</div>

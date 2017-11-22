@@ -1,0 +1,63 @@
+<?php
+// Define tabs.
+$tabs = array
+(
+    'tab' => array
+    (
+        'id' => 'tabs',
+        'class'=> 'cjt-pages-tab'
+    ),
+    'tabs' => array
+    (
+        'pages' => array
+        (
+            'title' => cssJSToolbox::__('Page'),
+            'renderer' => __DIR__ . DIRECTORY_SEPARATOR . 'templates/objects-list.html.tmpl',
+            'type' => array
+            (
+                'type' => 'page',
+                'group' => 'pages', 
+                'targetType' => 'post'
+            )
+        ),
+        'posts' => array(
+            'title' => cssJSToolbox::__('Post'),
+            'renderer' => __DIR__ . DIRECTORY_SEPARATOR . 'templates/objects-list.html.tmpl',
+            'type' => array
+            (
+                'type' => 'post',
+                'group' => 'posts',
+                'targetType' => 'post'
+            )
+        ),
+        'categories' => array(
+            'title' => cssJSToolbox::__('Cat'),
+            'renderer' => __DIR__ . DIRECTORY_SEPARATOR . 'templates/objects-list.html.tmpl',
+            'type' => array
+            (
+                'type' => 'category', 
+                'group' => 'categories', 
+                'targetType' => 'taxonomy'
+            )
+        ),
+    )
+);
+
+$tabs['tabs'] = apply_filters(
+    CJTPluggableHelper::FILTER_BLOCK_ASSIGN_PANEL_TABS,
+    $tabs['tabs'],
+    __DIR__ . DIRECTORY_SEPARATOR . 'templates'
+);
+
+?>
+<div class="cjt-block-panel-window cjt-panel-window-assignment-panel">
+    <?php
+    // Render assigment panel root tab. All nested tabs will be rendered
+    // internally by the tab template.
+    echo $this->getTemplate('tab', 
+        array('tab' => $tabs, 'block' => $block),
+        'tmpl/templates/assign-panel/templates'
+    );
+    ?>
+    <div style="clear:both;"></div>
+</div>

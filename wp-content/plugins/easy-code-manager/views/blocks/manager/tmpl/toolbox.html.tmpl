@@ -1,0 +1,36 @@
+<div class="main-nav cjt-toolbox cjt-toolbox-blocks cjtb-position-<?php echo $location ?> widgets-holder-wrap">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+	            <div class="icons-group left-bar">
+                    <?php do_action(CJTPluggableHelper::ACTION_BLOCKS_MANAGER_MENU_BUTTONS_FIRST); ?>
+		            <a class="cjt-tb-link l-127x23 textButton cjttbl-add-block" title="<?php echo cssJSToolbox::__('Add new code block') ?>"><button><?php echo cssJSToolbox::__('New Code Block') ?></button></a>
+		            <a class="cjt-tb-link l-127x23 textButton cjttbl-save-changes" title="<?php echo cssJSToolbox::__('Save changes to all code blocks') ?>"><button><?php echo cssJSToolbox::__('Save All') ?></button></a>
+                    <a class="cjt-tb-link cjttbl-admin-tools" title="<?php echo cssJSToolbox::__('Tools for block cleanup and backup') ?>"><button><?php echo cssJSToolbox::__('Tools') ?></button></a>
+                    <div class="popup-menu admin-tools" style="display:none">
+        
+                        <?php do_action( CJTPluggableHelper::ACTION_BLOCKS_MANAGER_TOOLBOX_ADMIN_TOOLS_TOP ); ?>
+
+                        <a class="cjt-tb-link cjt-tb-text-link cjttbl-reinstall" title="<?php echo cssJSToolbox::__('Use this if ECM is not running correctly after installation') ?>"><?php echo cssJSToolbox::__('Re-Install') ?></a>
+                        <br>
+                        <a class="cjt-tb-link cjt-tb-text-link cjttbl-uninstall" title="<?php echo cssJSToolbox::__('Completely uninstall ECM Plugin and erase all data') ?>"><?php echo cssJSToolbox::__('Uninstall') ?></a>
+                    </div>
+                    
+	            </div>
+	            <div class="icons-group tools-menu menu-wrap">
+	
+                <?php do_action( CJTPluggableHelper::ACTION_BLOCKS_MANAGER_TOOLBOX_LEFT_BUTTONS ); ?>
+
+		<div class="main-menu">
+		    <ul>
+
+			   <li><?php do_action( CJTPluggableHelper::ACTION_BLOCKS_MANAGER_TOOLBOX_RIGHT_BUTTONS ); ?></li>
+               
+             </ul>
+        </div>
+
+	</div>
+	</div>
+    </div>
+    </div>
+</div>

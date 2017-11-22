@@ -1,0 +1,74 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+
+// Allow view to enqueue scripts and styles.
+CJTBlocksNewView::enququeScripts();
+CJTBlocksNewView::enququeStyles();
+$this->suppressPrintScriptsHook();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <?php wp_print_head_scripts() ?>
+        <?php wp_print_styles() ?>
+
+        <style type="text/css">
+            form
+            {
+                margin: 0;
+            }
+            fieldset
+            {
+                padding-bottom: 0;
+            }
+
+            .cjt-form ul li.last {
+                margin-top: 21px;
+                text-align: left;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="cjtoolbox_popup">
+            <form id="cjtoolbox_new_block_form" class="cjt-form">
+                <fieldset>
+                    <ul>
+                        <li>
+                            <label for="cjt-new-block-name" title="<?php echo cssJSToolbox::__('Name or title of code block  (must be unique and cannot be left blank)') ?>"><?php echo cssJSToolbox::__('Name') ?>*</label>
+                            <input type="text" id="cjt-new-block-name" name="name" maxlength="50" value="" />
+                        </li>
+                        <li>
+                            <label for="cjt-new-block-position" title="<?php echo cssJSToolbox::__('Set initial code block position to: First Block or Last Block') ?>"><?php echo cssJSToolbox::__('Initial Block Position') ?></label>
+                            <select name="position" id="cjt-new-block-position">
+                                <?php
+                                // Static locations.
+                                $positions = array(
+                                    'top' => cssJSToolbox::__('First Block'),
+                                    'bottom' => cssJSToolbox::__('Last Block'),
+                                );
+                                // Display locations list.
+                                foreach ($positions as $position => $displayName) :
+                                    ?>
+                                    <option value="<?php echo $position ?>"<?php if ($this->position == $position) : ?> selected="selected"<?php endif; ?>><?php echo $displayName ?></option>
+                                    <?php
+                                    endforeach;
+                                ?>
+                            </select>
+                        </li>
+                        <?php do_action(CJTPluggableHelper::ACTION_BLOCK_NEW_FORM_BOTTOM); ?>
+                        <li class="last">
+                            <input class="cjt-button cancel" type="button" value="<?php echo cssJSToolbox::__('Cancel') ?>" />
+                            <input class="cjt-button save" type="submit" name="submit" value="<?php echo cssJSToolbox::__('Create') ?>" />
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+            <?php print_footer_scripts() ?>
+        </div>
+    </body>
+</html>

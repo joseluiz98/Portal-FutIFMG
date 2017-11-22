@@ -1,0 +1,41 @@
+<?php
+/**
+* 
+*/
+
+// Disallow direct access.
+defined('ABSPATH') or die("Access denied");
+?>
+        <div class="cjt-toolbox block-toolbox block-state-toolbox">
+            <div class="icons-group">
+                <?php do_action(CJTPluggableHelper::ACTION_BLOCK_TOOL_BUTTONS, $this) ?>
+            </div>
+        </div>
+		<div class="cjt-toolbox edit-block-name">
+			<input disabled="disabled" type="text" name="cjtoolbox[<?php echo $this->block->id; ?>][name]" class="block-name" value="<?php echo $this->block->name ?>" maxlength="50" />
+		</div>
+        <div class="cjt-toolbox block-toolbox block-toolbox block-manage-toolbox">
+            <div class="icons-group">
+                <a href="#" class="cjt-tb-link waitingToLoad cjttbl-save" title="<?php echo cssJSToolbox::__('Save changes to code block') ?>"><button><?php echo cssJSToolbox::__('Save') ?></button></a>
+                <a href="#" class="cjt-tb-link cjttbl-delete" title="<?php echo cssJSToolbox::__('Delete code block') ?>"><button><?php echo cssJSToolbox::__('Delete') ?></button></a>
+            </div>
+        </div>
+<?php echo $this->getTemplate( 'toolbox', array(), 'tmpl/templates' ) ?>
+		<input type="hidden" name="blocks[]" value="<?php echo $this->block->id ?>" />
+<?php
+
+	// Hidden fields.
+	$fields = array('state', 'location');
+    
+	foreach ( $fields as $field ) :
+?>
+		<input type="hidden" name="cjtoolbox[<?php echo $this->block->id; ?>][<?php echo $field ?>]" value="<?php echo $this->block->$field ?>" />
+<?php  
+
+    endforeach; 
+    
+	if ( ! $this->isClosed ) 
+    {
+		echo $this->getTemplate('content');
+	}	
+?>

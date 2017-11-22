@@ -1,0 +1,26 @@
+.ecm-migrate-cjt-slogan
+{
+    color: red;
+    margin: 0.9em 0;
+}
+
+.ecm-migrate-cjt-section
+{
+    margin: 18px 0 0 0;
+    font-weight: bold;
+}
+
+.ecm-migrate-cjt-notice p
+{
+    padding: 0 !important;
+    margin: 0 0 0 1px !important;
+}
+
+.ecm-migrate-cjt-notice ol{
+    margin-left: 41px;
+}
+
+#ecm-migrate-cjt-success-message
+{
+    display: none;
+}

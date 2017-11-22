@@ -1,0 +1,10 @@
+{
+	"name" : "wipeoutmedia/easy-code-manager",
+	"description" : "Easy Code Manager ",
+	"autoload" : {
+		"classmap" : [
+            "access.points",
+			"framework/"
+		]
+	}
+}
