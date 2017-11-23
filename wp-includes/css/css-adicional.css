@@ -1,6 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageClassificacao.css');
+@import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageJogos.css');
 
 html {
     overflow: scroll;
@@ -11,77 +13,13 @@ html {
     background: transparent;  /* opcional: apeans faz scrollbar invisível */
 }
 
-.table-responsive.leagueTable {
-	padding: 0.5em;
-}
-
-table, th, td {
-   	border: 1px solid lightgrey;
-   	text-align: center;
-   	text-transform: uppercase;
-	font-family: Open Sans;
-	font-weight: bold;
-	word-spacing: 0px;
-}
-
-#teamNameColumn {
-	font-family: Open Sans !important;
-	font-weight: 500 !important;
-	width: 25% !important;
-}
-
-.leagueTableColumn{
-	width: 10.7%;
-}
-
-td {
-	border-right-width: 1px;
-    border-right-style: solid !important;
-}
-
-tr td {
-	border-color: #e1e1e1 !important;
-    border-bottom: 0px  !important;
-}
-tr:nth-child(odd) td {
-    background-color: #f3f3f3;
-}
-
-tr:nth-child(even) td {
-    background-color: #ebebeb;
-}
-
-td {
-	padding: 0.5em 1em;
-}
-
-#tableHeader td {
-	font-size: 15px;
-   	border: 1px solid black !important;
-	background-color: #373737;
-	color: white;
-	font-family: Open Sans Condensed;
-	font-weight: bold;
-}
-
-#tableData {
-	font-size: 13px;
-	font-family: "OpenSans-CondLight";
-	font-weight: 500;
-}
-
-.col-md-8.col-md-offset-2.page-content-wrap {
-    margin: 0 auto !important;
-    width: 100%;
-}
-
 @media screen and (max-width: 768px){
 	.navbar .container {
 	    padding-top: 10px;
 	    background-color: #59d600;
 	}
 	#main-navigation {
-	background-color: #7ed640;
+		background-color: #7ed640;
 }
 }
 
