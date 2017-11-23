@@ -2,7 +2,7 @@
 set_include_path('C:/wamp64/www/wp-includes/');
 require_once('mysql/credentials.php');
 
-$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $username, $password);
+$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try

@@ -1,5 +1,5 @@
 <?php
-$username = "root";
-$password = "adminifmg";
+$dbuser = "root";
+$dbpass = "adminifmg";
 $dbname = "db_portal";
 ?>
