@@ -6,7 +6,7 @@ require_once('C:\wamp64\www\wp-includes\mysql\credentials.php');
 $sql = "SELECT * FROM time where idTime = 1";
 $sql2="SELECT * FROM time where idTime = 2";
 
-$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $username, $password);
+$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $result = $conn->prepare($sql);
 $result->execute();
