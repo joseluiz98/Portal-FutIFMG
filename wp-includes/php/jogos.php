@@ -26,7 +26,7 @@
             	<div class="fourthFinals">
 	              <?php
 	                $sqlCasa = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (13,14,15,16) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sqlVisitante = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (13,14,15,16) and idTime = idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sqlVisitante = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (13,14,15,16) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
 	                $conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 	                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	                $resultCasa = $conn->prepare($sqlCasa);
@@ -53,7 +53,7 @@
             	<div class="semiFinals">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (17,18) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (17,18) and idTime = idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (17,18) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
 	                $conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 	                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	                $resultCasa = $conn->prepare($sql);
@@ -80,7 +80,7 @@
             	<div class="finals">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
 	                $conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 	                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	                $resultCasa = $conn->prepare($sql);
@@ -105,7 +105,7 @@
 				<span id="thirdPlaceTitle" style="font-size: 24px;">Terceiro lugar</span>
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
 	                $conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
 	                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	                $resultCasa = $conn->prepare($sql);
