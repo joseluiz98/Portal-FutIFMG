@@ -4,6 +4,10 @@
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageClassificacao.css');
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageJogos.css');
 
+/*body, body h2, body h3, body h4, body h5, body h6 {
+	font-family: Open Sans !important;
+}*/
+
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -13,6 +17,19 @@ html {
     background: transparent;  /* opcional: apeans faz scrollbar invisível */
 }
 
+.line-break {
+	display: none;
+}
+
+.elementor-element-f7d7123 {
+	height: 21em;
+}
+
+#nextGameContent {
+	text-align: center;
+}
+
+/* Media Queries */
 @media screen and (max-width: 768px){
 	.navbar .container {
 	    padding-top: 10px;
@@ -20,11 +37,55 @@ html {
 	}
 	#main-navigation {
 		background-color: #7ed640;
-}
+	}
+
+	.elementor-element.elementor-element-e896207 {
+		top: 2em;
+	}
 }
 
 @media screen and (min-width: 768px){
 	.carousel .page-header {
 		height: 59em !important;
+	}
+}
+
+@media screen and (max-width: 532px){
+	.elementor-element-caa9148 {
+		width: 532px !important;
+	}
+}
+
+@media screen and (max-width: 515px){	
+	.elementor-element-caa9148 {
+		width: 100%;
+		height: 25em;
+		left: -20px !important;
+	}
+
+	.elementor-element.elementor-element-e896207 {
+		top: 4em;
+	}
+}
+
+@media screen and (max-width: 503px){
+	.line-break {
+		display: block;
+	}
+	#nextGameContent {
+		margin: 0.7em auto;
+	}
+	.elementor-element.elementor-element-e896207 {
+		top: 8em;
+	}
+	.elementor-element-caa9148 {
+		height: 32em;
+	}
+}
+
+@media screen and (max-width: 470px){
+	.elementor-element-caa9148 {
+		width: inherit !important;
+		left: inherit !important;
 	}
 }

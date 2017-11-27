@@ -1,25 +1,40 @@
-﻿<?php
+<?php
+setlocale(LC_ALL,'');
+
 try
 {
-require_once('C:\wamp64\www\wp-includes\mysql\credentials.php');
+	require_once('C:\wamp64\www\wp-includes\mysql\credentials.php');
+	//Recupera IDs dos times que participarão do próximo jogo
+	$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = file_get_contents('wp-includes/mysql/queries/recuperaIDsProximoJogo.sql');
+	$resultado = $conn->prepare($sql);
+	$resultado->execute();
+	$dadosJogo = $resultado->fetch(PDO::FETCH_ASSOC);
+	$phpdate = strtotime($dadosJogo["dataJogo"]);
+	$mysqldate = strftime('%d de %B de %Y, às %R', $phpdate);
+	$mysqldate{6} = strtoupper($mysqldate{6});;
 
-$sql = "SELECT * FROM time where idTime = 1";
-$sql2="SELECT * FROM time where idTime = 2";
+	//Atribui IDs recuperados
+	$idTimeCasa = $dadosJogo["idTimeCasa"];
+	$idTimeVisitante = $dadosJogo["idTimeVisitante"];
 
-$conn = new PDO('mysql:host=localhost;dbname='.$dbname, $dbuser, $dbpass);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$result = $conn->prepare($sql);
-$result->execute();
-$result2 = $conn->prepare($sql2);
-$result2->execute();
+	//Recupera dados do time da casa
+	$idTime = $idTimeCasa;
+	$sql = include 'wp-includes/mysql/queries/recuperaDadosTime.sql';
+	$resultado = $conn->query($sql);
+	$dadosTimeCasa = $resultado->fetch(PDO::FETCH_ASSOC);
 
-$row = $result->fetch(PDO::FETCH_ASSOC);
-$row2 = $result2->fetch(PDO::FETCH_ASSOC);
+	//Recupera dados do time de fora
+	$idTime = $idTimeVisitante;
+	$sql = include 'wp-includes/mysql/queries/recuperaDadosTime.sql';
+	$resultado = $conn->prepare($sql);
+	$resultado->execute();
+	$dadosTimeVisitante = $resultado->fetch(PDO::FETCH_ASSOC);
 
-echo '<h2 style="text-align: center;">Próximo Jogo:</h2>
-<h2 style="text-align: center;"> <img class="wp-image-75 alignnone" style="color: #3c4858; font-size: 16px; width:88px;" src="data: imagem/png;base64, '. base64_encode($row['escudo']). '" alt="" width="100" height="100" /> '.$row['nomeTime'].'  <em><strong style="color:red;"> VS </strong></em>   '.$row2['nomeTime'].'<img class="wp-image-76 alignnone" style="width:88px;" src="https://portalifmg.000webhostapp.com/wp-content/uploads/2017/09/331px-Melbourne_Victory.svg_-251x300.png" alt="" width="101" height="121" /></h2>
-<p style="text-align: center;"><strong><em>26 de janeiro de 2017 </em></strong></p>';
-
+	echo '<h2 style="text-align: center;">Próximo Jogo:</h2>
+	<h2 id="nextGameContent"> <span id="team1Scores"> <img class="wp-image-75 alignnone" style="color: #3c4858; font-size: 16px; width:88px; margin: auto 1em;" src="'.$dadosTimeCasa['escudo'].'", alt="" width="100" height="100" /> <span id="nextGameTeam1">'.$dadosTimeCasa['nomeTime'].'</span></span> <em><strong style="color:red;"><br class="line-break"> X <br class="line-break"></strong></em> <span id="team2Scores"><span id="nextGameTeam2">'.$dadosTimeVisitante['nomeTime'].'</span><img class="wp-image-76 alignnone" style="width:88px; margin: auto 1em;" src="'.$dadosTimeVisitante['escudo'].'", alt="" width="101" height="121"; /></span></h2>
+	<p style="text-align: center;"><strong><em>'.$mysqldate.' </em></strong></p>';
 }
 catch(PDOException $ex)
 {
