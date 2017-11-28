@@ -1,4 +1,20 @@
 
+ ### v1.1.56 - 2017-11-28 
+ **Changes:** 
+ * Added back titles on pages when WooCoomerce is not installed
+ 
+ ### v1.1.55 - 2017-11-27 
+ **Changes:** 
+ * [New Feature] Scroll to top option
+* [New Feature] Search icon in the navigation menu
+* Fixed issue with primary menu items not visible on iPads
+* [Hestia PRO] Fixed issue with the footer widgets layout
+* Fixed issue with Team member section not opening external links in a new tab
+* [Hestia PRO] Fixed issue with navbar background color on mobile devices
+* [Hestia PRO] Fixed issue with navigation menu ( with the Full menu option activated ) closing button color
+* Improved layout for the WooCommerce Cart and Checkout pages
+* Fixed alignment issues with the front page sections
+ 
  ### v1.1.54 - 2017-11-13 
  **Changes:** 
  * Updated resources for bundled images

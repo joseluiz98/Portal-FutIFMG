@@ -44,7 +44,7 @@ if ( ! function_exists( 'hestia_contact' ) ) :
 
 		$wrapper_class = $is_shortcode === true ? 'is-shortcode' : '';
 		?>
-		<section class="contactus section-image <?php echo esc_attr( $wrapper_class ); ?>" id="contact" data-sorder="hestia_contact" style="background-image: url('<?php echo get_theme_mod( 'hestia_contact_background', get_template_directory_uri() . '/assets/img/contact.jpg' ); ?>')">
+		<section class="contactus section-image <?php echo esc_attr( $wrapper_class ); ?>" id="contact" data-sorder="hestia_contact" style="background-image: url('<?php echo get_theme_mod( 'hestia_contact_background', apply_filters( 'hestia_contact_background_default', get_template_directory_uri() . '/assets/img/contact.jpg' ) ); ?>')">
 			<?php
 			if ( is_customize_preview() ) {
 			?>

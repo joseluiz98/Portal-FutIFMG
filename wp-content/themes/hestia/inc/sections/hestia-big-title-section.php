@@ -22,7 +22,7 @@ if ( ! function_exists( 'hestia_big_title' ) ) :
 
 					$section_content = hestia_get_big_title_content();
 
-					$hestia_big_title_background = get_theme_mod( 'hestia_big_title_background', get_template_directory_uri() . '/assets/img/slider2.jpg' );
+					$hestia_big_title_background = get_theme_mod( 'hestia_big_title_background', apply_filters( 'hestia_big_title_background_default', get_template_directory_uri() . '/assets/img/slider2.jpg' ) );
 
 					if ( ! empty( $hestia_big_title_background ) || ! empty( $section_content ) ) {
 					?>

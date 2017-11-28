@@ -119,6 +119,25 @@ function hestia_header_customize_register( $wp_customize ) {
 		)
 	);
 
+	/**
+	 * Search in menu.
+	 */
+	$wp_customize->add_setting(
+		'hestia_search_in_menu', array(
+			'sanitize_callback' => 'hestia_sanitize_checkbox',
+			'default'           => false,
+		)
+	);
+
+	$wp_customize->add_control(
+		'hestia_search_in_menu', array(
+			'type'     => 'checkbox',
+			'label'    => esc_html__( 'Enable Search in Menu', 'hestia' ),
+			'section'  => 'hestia_navigation',
+			'priority' => 5,
+		)
+	);
+
 	if ( class_exists( 'Hestia_Customize_Control_Radio_Image' ) ) {
 		$wp_customize->add_setting(
 			'hestia_header_alignment', array(
@@ -156,6 +175,11 @@ function hestia_header_customize_register( $wp_customize ) {
 		if ( ! empty( $hestia_header_alignment ) ) {
 			$hestia_header_alignment->section  = 'sidebar-widgets-header-sidebar';
 			$hestia_header_alignment->priority = -1;
+		}
+		$hestia_search_in_menu = $wp_customize->get_control( 'hestia_search_in_menu' );
+		if ( ! empty( $hestia_search_in_menu ) ) {
+			$hestia_search_in_menu->section  = 'sidebar-widgets-header-sidebar';
+			$hestia_search_in_menu->priority = -1;
 		}
 	}
 

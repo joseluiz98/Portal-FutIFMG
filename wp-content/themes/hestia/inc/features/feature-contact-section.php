@@ -56,7 +56,7 @@ function hestia_contact_customize_register( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'hestia_contact_background', array(
-			'default'           => get_template_directory_uri() . '/assets/img/contact.jpg',
+			'default'           => apply_filters( 'hestia_contact_background_default', get_template_directory_uri() . '/assets/img/contact.jpg' ),
 			'sanitize_callback' => 'esc_url_raw',
 			'transport'         => $selective_refresh,
 		)
@@ -361,7 +361,7 @@ function hestia_contact_form_placeholder() {
  * @return string
  */
 function hestia_contact_content_default() {
-	return '<div class="hestia-info info info-horizontal">
+	$html = '<div class="hestia-info info info-horizontal">
 			<div class="icon icon-primary">
 				<i class="fa fa-map-marker"></i>
 			</div>
@@ -379,4 +379,6 @@ function hestia_contact_content_default() {
 				<p>Michael Jordan <br> +40 762 321 762<br>Mon - Fri, 8:00-22:00</p>
 			</div>
 		</div>';
+
+	return apply_filters( 'hestia_contact_content_default', $html );
 }

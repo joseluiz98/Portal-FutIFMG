@@ -365,7 +365,7 @@
 					style += '.card-blog a.moretag:hover, aside .widget a:hover' +
 					'{ color: ' + newval + '!important; }';
 
-					style += '.dropdown-menu li > a:hover ' +
+					style += '.dropdown-menu li > a:hover' +
 					'{ background-color:' + newval + '!important; }';
 
 					// BUTTONS BOX SHADOW
@@ -399,8 +399,8 @@
 			value.bind(
 				function( newval ) {
 
-            var gradientColor1 = convertHex(newval, 100);
-            var gradientColor2 = generateGradientSecondColor( newval, 100 );
+					var gradientColor1 = convertHex( newval, 100 );
+					var gradientColor2 = generateGradientSecondColor( newval, 100 );
 
 					var style = '<style class="gradient-styles">';
 

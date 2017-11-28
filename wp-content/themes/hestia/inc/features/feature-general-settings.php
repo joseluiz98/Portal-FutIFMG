@@ -149,6 +149,21 @@ function hestia_general_customize_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'hestia_enable_scroll_to_top', array(
+			'sanitize_callback' => 'hestia_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		'hestia_enable_scroll_to_top', array(
+			'label'    => esc_html__( 'Enable Scroll to Top', 'hestia' ),
+			'section'  => 'hestia_general',
+			'priority' => 40,
+			'type'     => 'checkbox',
+		)
+	);
+
 }
 add_action( 'customize_register', 'hestia_general_customize_register' );
 

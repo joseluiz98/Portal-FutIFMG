@@ -20,7 +20,7 @@ function hestia_colors_customize_register( $wp_customize ) {
 	// Alpha Color Picker setting.
 	$wp_customize->add_setting(
 		'accent_color', array(
-			'default'           => '#e91e63',
+			'default'           => apply_filters( 'hestia_accent_color_default', '#e91e63' ),
 			'transport'         => 'postMessage',
 			'sanitize_callback' => 'hestia_sanitize_colors',
 		)
@@ -48,7 +48,7 @@ add_action( 'customize_register', 'hestia_colors_customize_register' );
  */
 function hestia_custom_colors_inline_style() {
 
-	$color_accent = get_theme_mod( 'accent_color', '#e91e63' );
+	$color_accent = get_theme_mod( 'accent_color', apply_filters( 'hestia_accent_color_default', '#e91e63' ) );
 
 	$custom_css = '';
 
@@ -113,7 +113,7 @@ input#searchsubmit,
 .hestia-sidebar-close.btn.btn-rose:focus,
 .label.label-primary,
 .hestia-work .portfolio-item:nth-child(6n+1) .label,
-.nav-cart .nav-cart-content .widget .buttons .button {
+.nav-cart .nav-cart-content .widget .buttons .button{
     background-color: ' . esc_attr( $color_accent ) . ';
 }
 
@@ -180,7 +180,7 @@ background-image: -webkit-gradient(linear,left top, left bottom,from(' . esc_att
 		// Hover Effect for navbar items
 		$custom_css .= '
  .navbar:not(.navbar-transparent) .navbar-nav > li:not(.btn) > a:hover,
- body:not(.home) .navbar:not(.navbar-transparent) .navbar-nav > li.active:not(.btn) > a, .navbar:not(.navbar-transparent) .navbar-nav > li:not(.btn) > a:hover i, .navbar .container .nav-cart:hover .nav-cart-icon {
+ body:not(.home) .navbar:not(.navbar-transparent) .navbar-nav > li.active:not(.btn) > a, .navbar:not(.navbar-transparent) .navbar-nav > li:not(.btn) > a:hover i, .navbar .container .nav-cart:hover .nav-cart-icon, .navbar-not-transparent .hestia-toggle-search:hover {
 		 color:' . esc_attr( $color_accent ) . '}';
 
 	}// End if().

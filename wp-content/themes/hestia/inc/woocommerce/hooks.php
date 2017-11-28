@@ -85,3 +85,15 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
  * Ensure cart contents update when products are added to the cart via AJAX
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'hestia_cart_link_fragment' );
+
+/**
+ * Reposition Cross Sells after Cart Totals
+ */
+remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+add_action( 'woocommerce_after_cart_table', 'woocommerce_cross_sell_display' );
+
+/**
+ * Add before and after cart totals code for card.
+ */
+add_action( 'woocommerce_before_cart_totals', 'hestia_woocommerce_before_cart_totals', 1 );
+add_action( 'woocommerce_after_cart_totals', 'hestia_woocommerce_after_cart_totals', 1 );

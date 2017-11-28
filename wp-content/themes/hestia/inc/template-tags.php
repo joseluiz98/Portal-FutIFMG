@@ -677,7 +677,7 @@ if ( ! function_exists( 'hestia_the_footer_content' ) ) :
 		/**
 		 * Array holding all registered footer widgets areas
 		 */
-		$hestia_footer_widgets_ids = array( 'footer-one-widgets', 'footer-two-widgets', 'footer-three-widgets' );
+		$hestia_footer_widgets_ids = array( 'footer-one-widgets', 'footer-two-widgets', 'footer-three-widgets', 'footer-four-widgets' );
 		$hestia_footer_class       = 'col-md-4';
 		$footer_has_widgets        = false;
 		$hestia_nr_footer_widgets  = get_theme_mod( 'hestia_nr_footer_widgets', '3' );
@@ -849,7 +849,7 @@ if ( ! function_exists( 'hestia_the_header_top_bar' ) ) :
 			return;
 		}
 
-		$hestia_top_bar_alignment = get_theme_mod( 'hestia_top_bar_alignment', 'right' );
+		$hestia_top_bar_alignment = get_theme_mod( 'hestia_top_bar_alignment', apply_filters( 'hestia_top_bar_alignment_default', 'right' ) );
 		$menu_class               = 'pull-right';
 		$sidebar_class            = 'pull-left';
 		if ( ! empty( $hestia_top_bar_alignment ) && $hestia_top_bar_alignment === 'left' ) {
@@ -1172,3 +1172,23 @@ add_filter(
 		return $elements;
 	}, 20
 );
+
+if ( ! function_exists( 'hestia_scroll_to_top' ) ) :
+	/**
+	 * Display scroll to top button.
+	 *
+	 * @since 1.1.54
+	 */
+	function hestia_scroll_to_top() {
+		$hestia_enable_scroll_to_top = get_theme_mod( 'hestia_enable_scroll_to_top' );
+		if ( empty( $hestia_enable_scroll_to_top ) ) {
+			return;
+		}
+		?>
+		<button class="hestia-scroll-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</button>
+		<?php
+	}
+	add_action( 'wp_footer', 'hestia_scroll_to_top' );
+endif;

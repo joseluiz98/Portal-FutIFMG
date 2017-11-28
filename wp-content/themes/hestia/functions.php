@@ -28,7 +28,7 @@ if ( ! defined( 'ELEMENTOR_PARTNER_ID' ) ) {
 	define( 'ELEMENTOR_PARTNER_ID', 2112 );
 }
 
-define( 'HESTIA_VERSION', '1.1.54' );
+define( 'HESTIA_VERSION', '1.1.56' );
 
 define( 'HESTIA_VENDOR_VERSION', '1.0.1' );
 
@@ -193,13 +193,32 @@ function hestia_widgets_init() {
 		'sidebar-1'              => esc_html__( 'Sidebar', 'hestia' ),
 		'subscribe-widgets'      => esc_html__( 'Subscribe', 'hestia' ),
 		'blog-subscribe-widgets' => esc_html__( 'Blog Subscribe Section', 'hestia' ),
-		'footer-one-widgets'     => esc_html__( 'Footer One', 'hestia' ),
-		'footer-two-widgets'     => esc_html__( 'Footer Two', 'hestia' ),
-		'footer-three-widgets'   => esc_html__( 'Footer Three', 'hestia' ),
 		'sidebar-woocommerce'    => esc_html__( 'WooCommerce Sidebar', 'hestia' ),
 		'sidebar-top-bar'        => esc_html__( 'Very Top Bar', 'hestia' ),
 		'header-sidebar'         => esc_html__( 'Navigation', 'hestia' ),
 	);
+
+	$hestia_nr_footer_widgets = get_theme_mod( 'hestia_nr_footer_widgets', '3' );
+	switch ( $hestia_nr_footer_widgets ) {
+		case 1:
+			$sidebars_array['footer-one-widgets'] = esc_html__( 'Footer One', 'hestia' );
+			break;
+		case 2:
+			$sidebars_array['footer-one-widgets'] = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets'] = esc_html__( 'Footer Two', 'hestia' );
+			break;
+		case 3:
+			$sidebars_array['footer-one-widgets']   = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets']   = esc_html__( 'Footer Two', 'hestia' );
+			$sidebars_array['footer-three-widgets'] = esc_html__( 'Footer Three', 'hestia' );
+			break;
+		case 4:
+			$sidebars_array['footer-one-widgets']   = esc_html__( 'Footer One', 'hestia' );
+			$sidebars_array['footer-two-widgets']   = esc_html__( 'Footer Two', 'hestia' );
+			$sidebars_array['footer-three-widgets'] = esc_html__( 'Footer Three', 'hestia' );
+			$sidebars_array['footer-four-widgets']  = esc_html__( 'Footer Four', 'hestia' );
+			break;
+	}
 
 	foreach ( $sidebars_array as $sidebar_id => $sidebar_name ) {
 		$sidebar_settings = array(
@@ -820,4 +839,107 @@ add_action( 'after_switch_theme', 'hestia_import_flagship_content', 0 );
  * Allow html tags in descriptions.
  */
 remove_filter( 'nav_menu_description', 'strip_tags' );
+
+
+if ( ! function_exists( 'hestia_after_primary_navigation' ) ) :
+	/**
+	 * Function to display cart icon after primary navigation.
+	 *
+	 * @since 1.1.24
+	 * @access public
+	 */
+	function hestia_after_primary_navigation() {
+
+		$nav  = '<ul id="%1$s" class="%2$s">';
+		$nav .= '%3$s';
+
+		// If WooCommerce exists
+		if ( class_exists( 'woocommerce' ) ) {
+			$is_in_topbar_sidebar = false;
+			$is_in_header_sidebar = false;
+			$nav_cart             = false;
+			$top_bar_hide         = get_theme_mod( 'hestia_top_bar_hide', true );
+			$header_alignment     = get_theme_mod( 'hestia_header_alignment', 'left' );
+
+			// Check if WooCommerce cart is in the top bar sidebar
+			if ( is_active_sidebar( 'sidebar-top-bar' ) ) {
+				$active_widgets = get_option( 'sidebars_widgets' );
+
+				// Check active widgets
+				if ( $active_widgets['sidebar-top-bar'] ) {
+					foreach ( $active_widgets['sidebar-top-bar'] as $item ) {
+
+						if ( strpos( $item, 'woocommerce_widget_cart' ) !== false ) {
+							$is_in_topbar_sidebar = true;
+							break;
+						}
+					}
+				}
+			}
+
+			// Check if WooCommerce cart is in the header sidebar
+			if ( is_active_sidebar( 'header-sidebar' ) ) {
+				$active_widgets = get_option( 'sidebars_widgets' );
+
+				// Check active widgets
+				if ( $active_widgets['header-sidebar'] ) {
+					foreach ( $active_widgets['header-sidebar'] as $item ) {
+
+						if ( strpos( $item, 'woocommerce_widget_cart' ) !== false ) {
+							$is_in_header_sidebar = true;
+							break;
+						}
+					}
+				}
+			}
+
+			// Check if top bar is hide OR Topbar sidebar is active but with no cart widget inside OR Header sidebar is active but with no cart widget inside
+			if ( ( ( ! $top_bar_hide && ! $is_in_topbar_sidebar ) || $top_bar_hide ) && ( $header_alignment !== 'right' || ( $header_alignment == 'right' && ! $is_in_header_sidebar ) ) ) {
+				$nav_cart = true;
+			}
+
+			// Add cart after nav
+			if ( $nav_cart && function_exists( 'hestia_cart_item' ) ) {
+				$nav .= hestia_cart_item();
+			}
+		}
+
+		// Add search after nav
+		$hestia_search_in_menu = get_theme_mod( 'hestia_search_in_menu', false );
+		if ( function_exists( 'hestia_search_in_menu' ) && $hestia_search_in_menu === true ) {
+			$nav .= hestia_search_in_menu();
+		}
+		$nav .= '</ul>';
+
+		return $nav;
+	}
+endif;
+
+
+if ( ! function_exists( 'hestia_search_in_menu' ) ) :
+	/**
+	 * Display search form in menu.
+	 */
+	function hestia_search_in_menu() {
+		$form = '
+		<li class="hestia-search-in-menu">
+			<form role="search" method="get" class="hestia-search-in-nav" action="' . esc_url( home_url( '/' ) ) . '">
+                <div class="hestia-nav-search">
+                    <span class="screen-reader-text">' . _x( 'Search for:', 'label', 'hestia' ) . '</span>
+                    <span class="search-field-wrapper">
+                    
+                    <input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder', 'hestia' ) . '" value="' . get_search_query() . '" name="s" />
+					</span>
+                    <span class="search-submit-wrapper">
+                    <button type="submit" class="search-submit hestia-search-submit" ><i class="fa fa-search"></i></button>
+					</span>
+                </div>
+            </form>
+        	<div class="hestia-toggle-search">
+                <i class="fa fa-search"></i>
+            </div>
+        </li>';
+		return $form;
+	}
+endif;
 

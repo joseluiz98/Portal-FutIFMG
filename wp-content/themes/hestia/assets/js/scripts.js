@@ -539,7 +539,28 @@ jQuery( document ).ready(
 				return document.body.clientWidth;
 			}
 		}
-	}
+
+		$.hestia = {
+			'init':function () {
+				this.navSearch();
+            },
+
+			'navSearch':function () {
+				$('.hestia-toggle-search').on('click', function () {
+					$('.navbar').toggleClass('nav-searching');
+                    $('.nav-searching').find('.hestia-nav-search').addClass('is-focused');
+                    $('.nav-searching').find('.hestia-nav-search').find('.search-field').focus();
+					$(this).find('i')
+						.fadeOut(200, function() {
+                            $(this).toggleClass('fa-search');
+                            $(this).toggleClass('fa-times');
+                        }).fadeIn(200);
+                });
+            }
+		};
+        $.hestia.init();
+
+    }
 );
 
 (function ($) {
@@ -568,5 +589,30 @@ jQuery( document ).ready(
 			}
 		}
 	);
+
+	var showScrollToTop = 0;
+    $(window).on('scroll', function() {
+
+        var y_scroll_pos = window.pageYOffset;
+        var scroll_pos_test = $('header').height();
+
+        if(y_scroll_pos > scroll_pos_test && showScrollToTop === 0 ) {
+        	$('.hestia-scroll-to-top').addClass('hestia-fade');
+            showScrollToTop = 1;
+        }
+
+        if(y_scroll_pos < scroll_pos_test && showScrollToTop === 1 ) {
+            $('.hestia-scroll-to-top').removeClass('hestia-fade');
+            showScrollToTop = 0;
+		}
+
+    });
+
+    $('.hestia-scroll-to-top').on('click', function () {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 
 }(jQuery));

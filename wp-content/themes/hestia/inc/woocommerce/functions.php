@@ -104,9 +104,15 @@ function hestia_woocommerce_before_main_content() {
 				<div class="col-md-10 col-md-offset-1">
 						<h1 class="hestia-title"><?php woocommerce_page_title(); ?></h1>
 				</div>
-				<?php } ?>
+				<?php
+}
 
-				<div class="cart-contents-content"><a class="cart-contents btn btn-white pull-right" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'hestia' ); ?>"><i class="fa fa-shopping-cart"></i></a></div>
+				$enable_cart = apply_filters( 'hestia_enable_header_cart', '' );
+
+if ( ! empty( $enable_cart ) ) {
+?>
+<div class="cart-contents-content"><a class="cart-contents btn btn-white pull-right" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'hestia' ); ?>"><i class="fa fa-shopping-cart"></i></a></div>
+<?php } ?>
 			</div>
 		</div>
 		<?php
@@ -415,4 +421,18 @@ if ( ! function_exists( 'hestia_always_show_live_cart' ) ) {
 	function hestia_always_show_live_cart() {
 		return false;
 	}
+}
+
+/**
+ * Add before cart totals code for card.
+ */
+function hestia_woocommerce_before_cart_totals() {
+	echo '<div class="card card-raised"><div class="content">';
+}
+
+/**
+ * Add after cart totals code for card.
+ */
+function hestia_woocommerce_after_cart_totals() {
+	echo '</div></div>';
 }

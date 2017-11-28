@@ -149,7 +149,7 @@ function hestia_big_title_customize_register( $wp_customize ) {
 	$hestia_slider_content = get_theme_mod( 'hestia_slider_content' );
 
 	if ( empty( $hestia_slider_content ) ) {
-		$wp_customize->get_setting( 'hestia_big_title_background' )->default  = esc_url( get_template_directory_uri() . '/assets/img/slider2.jpg' );
+		$wp_customize->get_setting( 'hestia_big_title_background' )->default  = esc_url( apply_filters( 'hestia_big_title_background_default', get_template_directory_uri() . '/assets/img/slider2.jpg' ) );
 		$wp_customize->get_setting( 'hestia_big_title_title' )->default       = esc_html__( 'Change in the Customizer', 'hestia' );
 		$wp_customize->get_setting( 'hestia_big_title_text' )->default        = esc_html__( 'Change in the Customizer', 'hestia' );
 		$wp_customize->get_setting( 'hestia_big_title_button_text' )->default = esc_html__( 'Change in the Customizer', 'hestia' );
