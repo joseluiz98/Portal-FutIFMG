@@ -59,6 +59,11 @@ A: Yes, but you need to check for a position parameter usinf if statements in yo
 
 == Changelog ==
 
+= 1.4 - November 26, 2017 =
+
+* New: Added Wordpress.org translation support
+* Fix: Fixed security flaw where authenticated users were able to make themself administrators and execute php. Thanks [@dandr3ss](https://twitter.com/dandr3ss)
+
 = 1.3 - November 08, 2017 =
 
 * Fix: Fixed deprecation notice on PHP 7.1
@@ -96,6 +101,6 @@ A: Yes, but you need to check for a position parameter usinf if statements in yo
 == Other Notes ==
 **Translation**
 
-English and German : Alexander Fuchs (https://www.alexander-fuchs.net)
-Portuguese : Luis Reis (http://inforarte.com/)
-Serbian : Borisa Djuraskovic (http://www.webhostinghub.com)
+English and German : [Alexander Fuchs](https://www.alexander-fuchs.net)
+Portuguese : [Luis Reis](http://inforarte.com/)
+Serbian : [Borisa Djuraskovic](http://www.webhostinghub.com)
