@@ -33,7 +33,6 @@ try
 
     while ( $rowJogadores = $result2->fetch()) {
       $nomeJogador = $rowJogadores['nome'];
-    utf8_encode($nomeJogador);
     $caminho = "http://futifmg.serveblog.net:8080/jogador?tmpString=";
     $caminho .= $nomeJogador;
     $tabela .= '<tr>'; // abre uma linha
