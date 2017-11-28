@@ -58,32 +58,32 @@ try
     echo $tabela;
     echo '</div>';
 
-      } else {
+  } else {
 
-      $sqlTimes = "SELECT nomeTime, escudo FROM time ";
-        $resultTimes = $conn->prepare($sqlTimes);
-        $resultTimes->execute();
-        $tabela2 = '<table border="1" tbody style = "border-color: transparent;"';
-        $tabela2 .='<tbody>'; //abre corpo da tabela
+  $sqlTimes = "SELECT nomeTime, escudo FROM time ";
+    $resultTimes = $conn->prepare($sqlTimes);
+    $resultTimes->execute();
+    $tabela2 = '<table border="1" tbody style = "border-color: transparent;"';
+    $tabela2 .='<tbody>'; //abre corpo da tabela
 
-        while ( $rowTimes = $resultTimes->fetch()) {
-        $imagem = $rowTimes['escudo'];
-        $caminho = "http://futifmg.serveblog.net:8080/times?tmpString=";
-        $caminho .= utf8_encode($rowTimes['nomeTime']);
-        $tabela2 .= '<tr>'; // abre uma linha
-        $tabela2 .= "<td> <img src='$imagem' style = 'height:200px; width:200px;'/> </td>";
-        $tabela2 .= "<td> <a href='$caminho'>" .$rowTimes['nomeTime']."</a></td>";
-        $tabela2 .= '</tr>'; // fecha linha
-      }
+    while ( $rowTimes = $resultTimes->fetch()) {
+    $imagem = $rowTimes['escudo'];
+    $caminho = "http://futifmg.serveblog.net:8080/times?tmpString=";
+    $caminho .= $rowTimes['nomeTime'];
+    $tabela2 .= '<tr>'; // abre uma linha
+    $tabela2 .= "<td> <img src='$imagem' style = 'height:200px; width:200px;'/> </td>";
+    $tabela2 .= "<td> <a href='$caminho'>" .$rowTimes['nomeTime']."</a></td>";
+    $tabela2 .= '</tr>'; // fecha linha
+  }
 
-        $tabela2 .='</tbody>'; //fecha corpo
-        $tabela2 .= '</table>';//fecha tabela
+    $tabela2 .='</tbody>'; //fecha corpo
+    $tabela2 .= '</table>';//fecha tabela
 
-        echo '<div class = "times" style = "position:relative;">';
-        echo $tabela2;
-        echo '</div>';
+    echo '<div class = "times" style = "position:relative;">';
+    echo $tabela2;
+    echo '</div>';
 
-    }
+}
 }
 catch(PDOException $ex)
 {
