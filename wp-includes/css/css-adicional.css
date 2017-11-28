@@ -4,10 +4,7 @@
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageClassificacao.css');
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageJogos.css');
 
-/*body, body h2, body h3, body h4, body h5, body h6 {
-	font-family: Open Sans !important;
-}*/
-
+/* Barra de Scroll */
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -17,6 +14,7 @@ html {
     background: transparent;  /* opcional: apeans faz scrollbar invisível */
 }
 
+/* Estilos widget "Próximo Jogo" */
 .line-break {
 	display: none;
 }

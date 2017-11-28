@@ -4,9 +4,10 @@
 
 .carousel nav.carousel-buttons {
 	white-space: nowrap;
-	display: flex;
+	display: inline-flex;
 	overflow: hidden;
-	text-align: center;
+    text-align: center;
+    width: 100%;
 }
 
 nav.carousel-buttons a {
