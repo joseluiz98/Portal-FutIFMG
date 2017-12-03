@@ -1,7 +1,4 @@
 <?php
-$dbuser = "root";
-$dbpass = "adminifmg";
-$dbname = "db_portal";
 
 /*$conn = new PDO("mysql:host=localhost;dbname=".$dbname, $dbuser, $dbpass, 
     array(

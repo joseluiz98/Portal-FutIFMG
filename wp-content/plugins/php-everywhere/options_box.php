@@ -3,7 +3,7 @@
 
 // display the metabox
 function php_everywhere_options_box_content( $post_id ) {
-	load_plugin_textdomain('phpeverywhere', false, plugin_dir_path( __FILE__ )  . 'languages/' );
+	load_plugin_textdomain('php-everywhere', false, plugin_dir_path( __FILE__ )  . 'languages/' );
     // nonce field for security check, you can have the same
     // nonce field for all your meta boxes of same plugin
     wp_nonce_field( plugin_basename( __FILE__ ), 'php_everywhere' );
@@ -11,7 +11,7 @@ function php_everywhere_options_box_content( $post_id ) {
 	$text = htmlspecialchars($text);
 	if($text == '')
 	{
-		$text = __('Just put [php_everywhere] where you want the code to be executed.', 'phpeverywhere');
+		$text = __('Just put [php_everywhere] where you want the code to be executed.', 'php-everywhere');
 	}
     echo '<div style="width:100%;"><textarea name="php_everywhere_code" rows="7" style="width:100%">'.$text.'</textarea></div>';
     

@@ -3,7 +3,7 @@ Contributors: alexander_fuchs
 Donate link:http://www.alexander-fuchs.net/donate/
 Tags: code,html,php,post,page,widget
 Requires at least: 3.0
-Tested up to: 4.8.3
+Tested up to: 4.9.1
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.de/documents/gpl-2.0.de.html
@@ -50,7 +50,7 @@ A: You can find a usage guide on the options page
 
 **Q: Does this Plugin support multiple PHP instances?**
 
-A: Yes, but you need to check for a position parameter usinf if statements in your PHP snippet. 
+A: Yes, but you need to check for a position parameter using an if statements in your PHP snippet. 
 
 == Screenshots ==
 
@@ -58,6 +58,10 @@ A: Yes, but you need to check for a position parameter usinf if statements in yo
 2. This is the plugins multiple PHP instance functionality
 
 == Changelog ==
+
+= 1.4.1 - December 01, 2017 =
+
+* Fix: Added Wordpress.org translation support
 
 = 1.4 - November 26, 2017 =
 

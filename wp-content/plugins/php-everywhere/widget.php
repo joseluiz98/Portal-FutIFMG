@@ -3,8 +3,8 @@ class phpeverywherewidget extends WP_Widget
 {
   function __construct()
   {
-	load_plugin_textdomain('phpeverywhere', false, plugin_dir_path( __FILE__ )  . 'languages/' );
-    $widget_ops = array('classname' => 'phpeverywherewidget', 'description' => __('Enables the execution of PHP and HTML', 'phpeverywhere') );
+	load_plugin_textdomain('php-everywhere', false, plugin_dir_path( __FILE__ )  . 'languages/' );
+    $widget_ops = array('classname' => 'phpeverywherewidget', 'description' => __('Enables the execution of PHP and HTML', 'php-everywhere') );
     parent::__construct('phpeverywherewidget', 'PHP + HTML', $widget_ops);
   }
  
