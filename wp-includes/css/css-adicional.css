@@ -14,6 +14,10 @@ html {
     background: transparent;  /* opcional: apeans faz scrollbar invisível */
 }
 
+.navbar {
+	z-index: 1;
+}
+
 /* Estilos widget "Próximo Jogo" */
 .line-break {
 	display: none;
@@ -44,7 +48,7 @@ html {
 
 @media screen and (min-width: 768px){
 	.carousel .page-header {
-		height: 59em !important;
+		/*height: 59em !important;*/
 	}
 }
 

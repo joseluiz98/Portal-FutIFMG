@@ -1,9 +1,22 @@
-.content div {
-	text-align: center;
+.col-sm-4 {
+	width: auto !important;
 }
 
-.carousel nav.carousel-buttons {
-	white-space: nowrap;
+.carousel-content div {
+  border: 1px solid #c0c0c0;
+}
+
+div .game {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+span.game-content {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 3.5;
+}
+.carousel-jogos nav.carousel-buttons {
 	display: inline-flex;
 	overflow: hidden;
     text-align: center;
@@ -24,4 +37,58 @@ nav.carousel-buttons a:hover {
 	cursor: pointer;
 	color: green;
 	text-decoration: none;
+}
+
+img.escudoTime {
+	width: 60px;
+	height: 60px;
+	vertical-align: middle;
+}
+
+img.escudoMandante {
+	position: relative;
+	float: left;
+	margin-right: 1em;
+	left: 1%;
+}
+
+img.escudoVisitante {
+	position: relative;
+	float: right;
+	margin-left: 1em;
+	right: 1%;
+}
+
+div#actual-title {
+	z-index: 0;
+}
+
+div#left-row, div#right-row {
+	z-index: 1;
+}
+
+div#left-row {
+	position: relative;
+    padding-left: 0;
+    left: 0;
+}
+
+div#right-row {
+	position: absolute;
+    right: 0;
+    padding-right: 0;
+}
+
+div#actual-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+/* Media queries */
+@media screen and (max-width: 360px)
+{
+	.carousel-buttons {
+		padding-bottom: 1em;
+	}
 }

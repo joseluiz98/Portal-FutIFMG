@@ -14,6 +14,7 @@
  * @modified 1.1.30
  */
 
+
 $hestia_alternative_blog_layout = get_theme_mod( 'hestia_alternative_blog_layout', false );
 $hestia_remove_sidebar_on_index = get_theme_mod( 'hestia_sidebar_on_index', false );
 
