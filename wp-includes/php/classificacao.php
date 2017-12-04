@@ -119,19 +119,11 @@ function preencheTabela($conn,$grupo)
                   		echo '<span class="game-content">';
 	                  	echo '<span class="nomeMandante">'.$rowMandante["nomeTime"].'</span>';
 <<<<<<< HEAD
-<<<<<<< HEAD
                       	echo '<img class="escudoTime escudoMandante" src='.$rowMandante["escudo"].'></img>';
                   		echo " " . $rowMandante["placarCasa"];
                 	  	echo ' x ';
 	                  	echo $rowVisitante["placarVisitante"]. " ";
                       	echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
-=======
-                      		echo '<img class="escudoTime escudoManda" src='.$rowMandante["escudo"].'></img>';
-                  		echo " " . $rowMandante["placarCasa"];
-                	  	echo ' x ';
-	                  	echo $rowVisitante["placarVisitante"]. " ";
-                      		echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
->>>>>>> 8dbf4b940bb318b8756c438c038ae1c9fe6ce540
 =======
                       		echo '<img class="escudoTime escudoManda" src='.$rowMandante["escudo"].'></img>';
                   		echo " " . $rowMandante["placarCasa"];
