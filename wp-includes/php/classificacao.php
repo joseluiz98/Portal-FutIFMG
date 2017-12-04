@@ -151,7 +151,7 @@ function preencheTabela($conn,$grupo)
                     echo ' x ';
                     echo $rowVisitante["placarVisitante"]. " ";
                     echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
-                    echo '<span class="nomeVisitante">'.$rowVisitante["nomeTime"].'</span>';
+                    
                     echo '</span>';
                     echo '</div>';
 	                }
