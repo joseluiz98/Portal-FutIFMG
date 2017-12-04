@@ -64,13 +64,17 @@
 	                $resultVisitante->execute();
 
 	                while($rowMandante = $resultCasa->fetch() and $rowVisitante = $resultVisitante->fetch()){
-	                  echo '<div class="game">';
-	                  echo $rowMandante["nomeTime"];
-	                  echo " " . $rowMandante["placarCasa"];
-	                  echo ' x ';
-	                  echo $rowVisitante["placarVisitante"]. " ";
-	                  echo $rowVisitante["nomeTime"];
-	                  echo '</div>';
+                  		echo '<div class="game">';
+              			echo '<span class="game-content">';
+                  		echo '<img class="escudoTime escudoMandante" src='.$rowMandante["escudo"].'></img>';
+	                  	echo '<span class="nomeMandante">'.$rowMandante["nomeTime"].'</span>';
+                  		echo " " . $rowMandante["placarCasa"];
+                	  	echo ' x ';
+	                  	echo $rowVisitante["placarVisitante"]. " ";
+	                  	echo '<span class="nomeVisitante">'.$rowVisitante["nomeTime"].'</span>';
+	                  	echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+	                  	echo '</span>';
+	                  	echo '</div>';
 	                }
 	              ?>
 				</div>
@@ -82,7 +86,7 @@
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
 	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
-
+	                
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
 
@@ -90,22 +94,29 @@
 	                $resultVisitante->execute();
 
 	                while($rowMandante = $resultCasa->fetch() and $rowVisitante = $resultVisitante->fetch()){
-	                  echo '<div class="game">';
-	                  echo $rowMandante["nomeTime"];
-	                  echo " " . $rowMandante["placarCasa"];
-	                  echo ' x ';
-	                  echo $rowVisitante["placarVisitante"]. " ";
-	                  echo $rowVisitante["nomeTime"];
-	                  echo '</div>';
+                  		echo '<div class="game">';
+              			echo '<span class="game-content">';
+                  		echo '<img class="escudoTime escudoMandante" src='.$rowMandante["escudo"].'></img>';
+	                  	echo '<span class="nomeMandante">'.$rowMandante["nomeTime"].'</span>';
+                  		echo " " . $rowMandante["placarCasa"];
+                	  	echo ' x ';
+	                  	echo $rowVisitante["placarVisitante"]. " ";
+	                  	echo '<span class="nomeVisitante">'.$rowVisitante["nomeTime"].'</span>';
+	                  	echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+	                  	echo '</span>';
+	                  	echo '</div>';
 	                }
 	              ?>
 				</div>
+			</div>
 
-				<div class="thirdPlace" style="margin-top: 20px; margin-bottom: 10px;">
-				<span id="thirdPlaceTitle" style="font-size: 24px;">Terceiro lugar</span>
+			<div id="item" style="display: none;">
+				<span id="currentcarousel-contentTitle"><h2>Terceiro Lugar</h2></span>
+            	<div class="thirdPlace">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
 	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
 
@@ -113,16 +124,21 @@
 	                $resultVisitante->execute();
 
 	                while($rowMandante = $resultCasa->fetch() and $rowVisitante = $resultVisitante->fetch()){
-	                  echo '<div class="game" style="margin:15px">';
-	                  echo $rowMandante["nomeTime"];
-	                  echo " " . $rowMandante["placarCasa"];
-	                  echo ' x ';
-	                  echo $rowVisitante["placarVisitante"]. " ";
-	                  echo $rowVisitante["nomeTime"];
-	                  echo '</div>';
+                  		echo '<div class="game">';
+              			echo '<span class="game-content">';
+                  		echo '<img class="escudoTime escudoMandante" src='.$rowMandante["escudo"].'></img>';
+	                  	echo '<span class="nomeMandante">'.$rowMandante["nomeTime"].'</span>';
+                  		echo " " . $rowMandante["placarCasa"];
+                	  	echo ' x ';
+	                  	echo $rowVisitante["placarVisitante"]. " ";
+	                  	echo '<span class="nomeVisitante">'.$rowVisitante["nomeTime"].'</span>';
+	                  	echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+	                  	echo '</span>';
+	                  	echo '</div>';
 	                }
 	              ?>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>

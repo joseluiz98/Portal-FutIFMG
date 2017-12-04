@@ -21,8 +21,8 @@ $(document).ready(function(){
 	slideAtivo.show();
 
 	//Atribui tamanho ideal para as divs
-	atribuiTamanhoDivs();
-	$('.carousel-content').height($('.fourth-finals').height());
+	atribuiLarguraDivs();
+	$('.carousel-content').height($('.fourth-finals').height()+100);
 
 	//Função para responsividade do nome dos times
 	if($(window).width() < 450){
@@ -98,7 +98,7 @@ $(document).ready(function(){
 	}
 
 	//Função que atribui alturas visualmente agradáveis ao css das divs do slider
-	function atribuiTamanhoDivs() {
+	function atribuiLarguraDivs() {
 		var maiorLargura = -1;
 
 	   	$('.game-content').each(function() {

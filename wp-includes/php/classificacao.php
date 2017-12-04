@@ -103,9 +103,9 @@ function preencheTabela($conn,$grupo)
 		</nav>
 
 		<div class="carousel-content">
-			<div id="item active" style="display: none;">
+			<div id="item" style="display: none;">
 				<span id="currentcarousel-contentTitle"><h2>Grupo A</h2></span>
-            	<div class="fourth-finals">
+            	<div class="grupo-a">
 	              <?php
 	                $sqlCasa = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (1,2,5,6,9,10) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
 	                $sqlVisitante = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (1,2,5,6,9,10) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
@@ -118,11 +118,19 @@ function preencheTabela($conn,$grupo)
                   		echo '<div class="game">';
                   		echo '<span class="game-content">';
 	                  	echo '<span class="nomeMandante">'.$rowMandante["nomeTime"].'</span>';
-                      echo '<img class="escudoTime escudoManda" src='.$rowMandante["escudo"].'></img>';
+<<<<<<< HEAD
+                      	echo '<img class="escudoTime escudoMandante" src='.$rowMandante["escudo"].'></img>';
                   		echo " " . $rowMandante["placarCasa"];
                 	  	echo ' x ';
 	                  	echo $rowVisitante["placarVisitante"]. " ";
-                      echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+                      	echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+=======
+                      		echo '<img class="escudoTime escudoManda" src='.$rowMandante["escudo"].'></img>';
+                  		echo " " . $rowMandante["placarCasa"];
+                	  	echo ' x ';
+	                  	echo $rowVisitante["placarVisitante"]. " ";
+                      		echo '<img class="escudoTime escudoVisitante" src='.$rowVisitante["escudo"].'></img>';
+>>>>>>> 8dbf4b940bb318b8756c438c038ae1c9fe6ce540
 	                  	echo '<span class="nomeVisitante">'.$rowVisitante["nomeTime"].'</span>';
 	                  	echo '</span>';
 	                  	echo '</div>';
@@ -131,9 +139,9 @@ function preencheTabela($conn,$grupo)
 				</div>
 			</div>
 
-			<div id="item" style="display: none;">
+			<div id="item active" style="display: none;">
 				<span id="currentcarousel-contentTitle"><h2>Grupo B</h2></span>
-            	<div class="semiFinals">
+            	<div class="grupo-b">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (3,4,7,8,11,12) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
 	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (3,4,7,8,11,12) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";

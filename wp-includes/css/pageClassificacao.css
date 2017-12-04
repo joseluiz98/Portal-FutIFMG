@@ -61,3 +61,11 @@ td {
     margin: 0 auto !important;
     width: 100%;
 }
+
+.carousel-content {
+	height: 640px;
+}
+
+.carousel-jogos {
+	margin-top: 2em;
+}
