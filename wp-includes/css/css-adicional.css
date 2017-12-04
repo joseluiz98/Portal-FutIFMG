@@ -4,6 +4,11 @@
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageClassificacao.css');
 @import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageJogos.css');
 
+/* Estilos gerais */
+html, body {
+	height: 100%;
+}
+
 /* Barra de Scroll */
 html {
     overflow: scroll;
@@ -14,28 +19,75 @@ html {
     background: transparent;  /* opcional: apeans faz scrollbar invisível */
 }
 
-.navbar {
-	z-index: 1;
+.carousel .page-header {
+	height: 110% !important;
 }
 
 /* Estilos widget "Próximo Jogo" */
-.line-break {
-	display: none;
-}
-
 .elementor-element-f7d7123 {
 	height: 21em;
+	top: 2em;
 }
 
-#nextGameContent {
+#proximo-jogo-data {
+	position: relative;
+    margin-top: 1em;
+    text-align: center;
+    top: 1em;
+}
+.proximo-jogo-conteudo {
 	text-align: center;
+	margin: -0.6em;
+	white-space: nowrap;
+}
+
+.proximo-jogo-conteudo em {
+    font-style: normal;
+    margin: auto 0.2em;
+}
+
+.logo-time-proximo-jogo {
+	color: #3c4858;
+	font-size: 16px;
+	margin: auto 1em;
+	max-width: 100%;
+	min-width: 7em;
+}
+/* Estilos widget "Equipes" */
+
+.card .card-image {
+	height: 30% !important;
+}
+
+.tabela-equipes {
+	display: table;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    background-color: white;
+}
+
+.info-equipe {
+	display: table-cell;
+}
+
+.info-equipe img {
+	width: 120px;
+	height: 120px;
 }
 
 /* Media Queries */
 @media screen and (max-width: 768px){
+	
+	.elementor-element-f7d7123 {
+		height: 22em;
+		top: 1em;
+	}
+
 	.navbar .container {
 	    padding-top: 10px;
 	    background-color: #59d600;
+	    max-width: 100%;
 	}
 	#main-navigation {
 		background-color: #7ed640;
@@ -46,9 +98,9 @@ html {
 	}
 }
 
-@media screen and (min-width: 768px){
-	.carousel .page-header {
-		/*height: 59em !important;*/
+@media screen and (max-width: 622px){
+	.proximo-jogo-nome-time {
+		display: none;
 	}
 }
 
@@ -58,36 +110,41 @@ html {
 	}
 }
 
-@media screen and (max-width: 515px){	
-	.elementor-element-caa9148 {
-		width: 100%;
-		height: 25em;
-		left: -20px !important;
-	}
-
-	.elementor-element.elementor-element-e896207 {
-		top: 4em;
-	}
-}
-
-@media screen and (max-width: 503px){
-	.line-break {
-		display: block;
-	}
-	#nextGameContent {
-		margin: 0.7em auto;
-	}
-	.elementor-element.elementor-element-e896207 {
-		top: 8em;
-	}
-	.elementor-element-caa9148 {
-		height: 32em;
-	}
-}
-
 @media screen and (max-width: 470px){
 	.elementor-element-caa9148 {
 		width: inherit !important;
 		left: inherit !important;
 	}
+}
+
+@media screen and (max-width: 455px){
+	.elementor-element-caa9148 {
+		height: 20em;
+		width: 0;
+	}
+
+	.elementor-element.elementor-element-e896207 {
+		top: 1.5em;
+	}
+
+	.elementor-element-f7d7123 {
+		height: 20em;
+	}
+
+	#proximo-jogo-data {
+		margin-top: 0;
+	}
+}
+
+@media screen and (max-width: 315px){
+	.logo-time-proximo-jogo {
+		margin: auto;
+		min-width: 7em;
+	}
+
+	.elementor-element-caa9148 {
+	    height: 21em;
+    	top: 0.3em;
+    }
+}
 }

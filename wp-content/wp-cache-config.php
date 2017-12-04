@@ -14,7 +14,7 @@ $cache_time_interval = 600;
 if ( ! defined('WPCACHEHOME') )
 	define( 'WPCACHEHOME', WP_CONTENT_DIR . "/plugins/wp-super-cache/" );
 
-$cache_compression = 1;
+$cache_compression = 0;
 $cache_enabled = true;
 $super_cache_enabled = true;
 $cache_max_time = 1800;
@@ -92,7 +92,7 @@ $wp_cache_mod_rewrite = 0;
 $wp_supercache_304 = 1;
 $wp_cache_front_page_checks = 0;
 $wp_cache_disable_utf8 = 0;
-$wp_cache_no_cache_for_get = 0;
+$wp_cache_no_cache_for_get = 1;
 $cache_scheduled_time = "00:00";
 $wp_cache_preload_interval = 600;
 $cache_schedule_type = 'interval';
