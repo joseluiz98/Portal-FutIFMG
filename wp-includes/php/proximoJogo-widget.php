@@ -22,6 +22,8 @@ try
 	$sql = include 'wp-includes/mysql/queries/recuperaDadosTime.sql';
 	$resultado = $conn->query($sql);
 	$dadosTimeCasa = $resultado->fetch(PDO::FETCH_ASSOC);
+	$linkTimeCasa = "http://futifmg.serveblog.net:8080/times?tmpString=";
+	$linkTimeCasa .= $dadosTimeCasa["nomeTime"];
 
 	//Recupera dados do time de fora
 	$idTime = $idTimeVisitante;
@@ -29,14 +31,14 @@ try
 	$resultado = $conn->prepare($sql);
 	$resultado->execute();
 	$dadosTimeVisitante = $resultado->fetch(PDO::FETCH_ASSOC);
+	$linkTimeVisitante= "http://futifmg.serveblog.net:8080/times?tmpString=";
+	$linkTimeVisitante .= $dadosTimeCasa["nomeTime"];
 
 	echo '<h2 style="text-align: center;">Próximo Jogo:</h2>
-	<h2 id="nextGameContent"> <span id="team1Scores"> <img class="wp-image-75 alignnone" style="color: #3c4858; font-size: 16px; width:88px; margin: auto 1em;" src="'.$dadosTimeCasa['escudo'].'", alt="" width="100" height="100" /> <span id="nextGameTeam1">'.$dadosTimeCasa['nomeTime'].'</span></span> <em><strong style="color:red;"><br class="line-break"> X <br class="line-break"></strong></em> <span id="team2Scores"><span id="nextGameTeam2">'.$dadosTimeVisitante['nomeTime'].'</span><img class="wp-image-76 alignnone" style="width:88px; margin: auto 1em;" src="'.$dadosTimeVisitante['escudo'].'", alt="" width="101" height="121"; /></span></h2>
-	<p style="text-align: center;"><strong><em>'.$mysqldate.' </em></strong></p>';
+	<h2 class="proximo-jogo-conteudo"><a href="'.$linkTimeCasa.'"><img class="logo-time-proximo-jogo" src="'.$dadosTimeCasa['escudo'].'", alt="" width="100" height="100" /></a><span class="proximo-jogo-nome-time">'.$dadosTimeCasa['nomeTime'].'</span><em><strong style="color:red;"> X </strong></em><span class="proximo-jogo-nome-time">'.$dadosTimeVisitante['nomeTime'].'</span><a href="'.$linkTimeVisitante.'"><img class="logo-time-proximo-jogo" src="'.$dadosTimeVisitante['escudo'].'", alt="" width="101" height="121"; /></a></h2><p id="proximo-jogo-data" style="text-align: center;"><strong><em>'.$mysqldate.' </em></strong></p>';
 }
 catch(PDOException $ex)
 {
     echo 'ERROR: ' . $ex->getMessage();
 }
-
 ?>
