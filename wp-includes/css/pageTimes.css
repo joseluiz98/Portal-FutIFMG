@@ -1,0 +1,28 @@
+.infoTime {
+	position:relative;
+	margin-top:15%
+}
+
+.imagemTime {
+	position:absolute;
+}
+
+.imagemTime img {
+	height:200px;
+	width:200px;
+	position:relative;
+	margin-top:-21%;
+}
+
+.time {
+	margin-left:25%;
+	margin-top:-15%;
+}
+
+.jogadores h2 {
+	margin-left:40%;
+}
+
+#plantel-time {
+	margin: 2em auto;
+}

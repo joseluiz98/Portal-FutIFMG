@@ -1,5 +1,4 @@
 <?php
-
 require_once("C:\wamp64\www\wp-includes\mysql\credentials.php");
 
 if (isset($_GET['tmpString'])){
@@ -22,7 +21,7 @@ try
 
     $imagem = $row["escudo"];
 
-    $tabela = '<table border="1">';//abre table
+    $tabela = '<table id="plantel-time" border="1">';//abre table
     $tabela .='<thead>';//abre cabeçalho
     $tabela .= '<tr>';//abre uma linha
     $tabela .= '<th>Número</th>'; // colunas do cabeçalho
@@ -44,24 +43,25 @@ try
     $tabela .='</tbody>'; //fecha corpo
     $tabela .= '</table>';//fecha tabela
 
-    echo '<div class = "infoTime" style = "position:relative; margin-top:15%">';
-    echo '<div class = "imagemTime" style = "position:absolute;">';
-    echo "<img src='$imagem' style = 'height:200px; width:200px; position:relative; margin-top:-21%'/>";
+    echo '<div class = "infoTime">';
+    echo '<div class = "imagemTime">';
+    echo "<img src='$imagem' />";
     echo '</div>';
-    echo '<div class = "time" style = "margin-left:25%; margin-top:-15%;">';
+    echo '<div class = "time">';
     echo 'Nome: ' .$row['nomeTime'].'<br />';
     echo 'Técnico: '.$row['nomeTecnico'].'<br />';
     echo '</div></div>';
-    echo '<div class = "jogadores" style = "margin-top:10%;">';
-    echo '<h2 style="margin-left:40%;"> Elenco </h2>';
+    echo '<div class = "jogadores">';
+    echo '<h2> Elenco </h2>';
     echo $tabela;
     echo '</div>';
 
   } else {
 
-  $sqlTimes = "SELECT nomeTime, escudo FROM time ";
+    $sqlTimes = "SELECT nomeTime, escudo FROM time ";
     $resultTimes = $conn->prepare($sqlTimes);
     $resultTimes->execute();
+    
     $tabela2 = '<table border="1" tbody style = "border-color: transparent;"';
     $tabela2 .='<tbody>'; //abre corpo da tabela
 
