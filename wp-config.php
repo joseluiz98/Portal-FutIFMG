@@ -22,16 +22,16 @@
 /** The name of the database for WordPress */
 define('WP_CACHE', true);
 define( 'WPCACHEHOME', 'C:\wamp64\www\wp-content\plugins\wp-super-cache/' );
-define('DB_NAME', 'wordpress');
+define('DB_NAME', 'heroku_2e940690d0a218700');
 
 /** MySQL database username */
-define('DB_USER', 'root');
+define('DB_USER', 'b59d51cd382b83');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'adminifmg');
+define('DB_PASSWORD', '19c4818d');
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'us-cdbr-iron-east-05.cleardb.net');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
