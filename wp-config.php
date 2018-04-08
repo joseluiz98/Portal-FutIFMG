@@ -22,7 +22,7 @@
 /** The name of the database for WordPress */
 define('WP_CACHE', true);
 define( 'WPCACHEHOME', 'C:\wamp64\www\wp-content\plugins\wp-super-cache/' );
-define('DB_NAME', 'heroku_2e940690d0a218700');
+define('DB_NAME', 'heroku_2e940690d0a2187');
 
 /** MySQL database username */
 define('DB_USER', 'b59d51cd382b83');
