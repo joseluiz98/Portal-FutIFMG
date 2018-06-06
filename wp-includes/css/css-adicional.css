@@ -1,9 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageClassificacao.css');
-@import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageJogos.css');
-@import url('http://futifmg.serveblog.net:8080/wp-includes/css/pageTimes.css');
+@import url('http://joseluiz.servehttp.com:8080/futifmg/wp-includes/css/pageClassificacao.css');
+@import url('http://joseluiz.servehttp.com:8080/futifmg/wp-includes/css/pageJogos.css');
+@import url('http://joseluiz.servehttp.com:8080/futifmg/wp-includes/css/pageTimes.css');
 
 /* Estilos gerais */
 html, body {
@@ -147,5 +147,4 @@ html {
 	    height: 21em;
     	top: 0.3em;
     }
-}
 }

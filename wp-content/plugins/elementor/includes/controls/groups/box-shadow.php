@@ -6,33 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Box shadow control.
+ * Elementor box shadow control.
  *
  * A base control for creating box shadow control. Displays input fields to define
- * the box shadow.
- *
- * Creating new control in the editor (inside `Widget_Base::_register_controls()`
- * method):
- *
- *    $this->add_group_control(
- *    	Group_Control_Box_Shadow::get_type(),
- *    	[
- *    		'name' => 'box_shadow',
- *    		'selector' => '{{WRAPPER}} .wrapper',
- *    		'separator' => 'before',
- *    	]
- *    );
+ * the box shadow including the horizontal shadow, vertical shadow, shadow blur,
+ * shadow spread, shadow color and the position.
  *
  * @since 1.2.2
- *
- * @param string $name        The field name.
- * @param string $separator   Optional. Set the position of the control separator.
- *                            Available values are 'default', 'before', 'after'
- *                            and 'none'. 'default' will position the separator
- *                            depending on the control type. 'before' / 'after'
- *                            will position the separator before/after the
- *                            control. 'none' will hide the separator. Default
- *                            is 'default'.
  */
 class Group_Control_Box_Shadow extends Group_Control_Base {
 
@@ -50,11 +30,11 @@ class Group_Control_Box_Shadow extends Group_Control_Base {
 	protected static $fields;
 
 	/**
-	 * Retrieve type.
-	 *
 	 * Get box shadow control type.
 	 *
-	 * @since 1.2.2
+	 * Retrieve the control type, in this case `box-shadow`.
+	 *
+	 * @since 1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -76,14 +56,6 @@ class Group_Control_Box_Shadow extends Group_Control_Base {
 	 */
 	protected function init_fields() {
 		$controls = [];
-
-		$controls['box_shadow_type'] = [
-			'label' => _x( 'Box Shadow', 'Box Shadow Control', 'elementor' ),
-			'type' => Controls_Manager::SWITCHER,
-			'return_value' => 'yes',
-			'separator' => 'before',
-			'render_type' => 'ui',
-		];
 
 		$controls['box_shadow'] = [
 			'label' => _x( 'Box Shadow', 'Box Shadow Control', 'elementor' ),
@@ -111,5 +83,26 @@ class Group_Control_Box_Shadow extends Group_Control_Base {
 		];
 
 		return $controls;
+	}
+
+	/**
+	 * Get default options.
+	 *
+	 * Retrieve the default options of the box shadow control. Used to return the
+	 * default options while initializing the box shadow control.
+	 *
+	 * @since 1.9.0
+	 * @access protected
+	 *
+	 * @return array Default box shadow control options.
+	 */
+	protected function get_default_options() {
+		return [
+			'popover' => [
+				'starter_title' => _x( 'Box Shadow', 'Box Shadow Control', 'elementor' ),
+				'starter_name' => 'box_shadow_type',
+				'starter_value' => 'yes',
+			],
+		];
 	}
 }

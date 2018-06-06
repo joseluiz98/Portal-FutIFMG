@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Heading Widget
+ * Elementor heading widget.
+ *
+ * Elementor widget that displays an eye-catching headlines.
+ *
+ * @since 1.0.0
  */
 class Widget_Heading extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve heading widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Heading extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve heading widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Heading extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve heading widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,6 +54,22 @@ class Widget_Heading extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-type-tool';
+	}
+
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the heading widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
+	public function get_categories() {
+		return [ 'basic' ];
 	}
 
 	/**
@@ -67,8 +93,11 @@ class Widget_Heading extends Widget_Base {
 			[
 				'label' => __( 'Title', 'elementor' ),
 				'type' => Controls_Manager::TEXTAREA,
+				'dynamic' => [
+					'active' => true,
+				],
 				'placeholder' => __( 'Enter your title', 'elementor' ),
-				'default' => __( 'This is heading element', 'elementor' ),
+				'default' => __( 'Add Your Heading Text Here', 'elementor' ),
 			]
 		);
 
@@ -77,7 +106,10 @@ class Widget_Heading extends Widget_Base {
 			[
 				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => 'http://your-link.com',
+				'dynamic' => [
+					'active' => true,
+				],
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'default' => [
 					'url' => '',
 				],
@@ -108,15 +140,15 @@ class Widget_Heading extends Widget_Base {
 				'label' => __( 'HTML Tag', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'h1' => __( 'H1', 'elementor' ),
-					'h2' => __( 'H2', 'elementor' ),
-					'h3' => __( 'H3', 'elementor' ),
-					'h4' => __( 'H4', 'elementor' ),
-					'h5' => __( 'H5', 'elementor' ),
-					'h6' => __( 'H6', 'elementor' ),
-					'div' => __( 'div', 'elementor' ),
-					'span' => __( 'span', 'elementor' ),
-					'p' => __( 'p', 'elementor' ),
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+					'div' => 'div',
+					'span' => 'span',
+					'p' => 'p',
 				],
 				'default' => 'h2',
 			]
@@ -181,7 +213,8 @@ class Widget_Heading extends Widget_Base {
 					'value' => Scheme_Color::COLOR_1,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-heading-title' => 'color: {{VALUE}};',
+					// Stronger selector to avoid section style from overwriting
+					'{{WRAPPER}}.elementor-widget-heading .elementor-heading-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -215,7 +248,7 @@ class Widget_Heading extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		if ( empty( $settings['title'] ) ) {
 			return;
@@ -261,15 +294,19 @@ class Widget_Heading extends Widget_Base {
 	protected function _content_template() {
 		?>
 		<#
-			var title = settings.title;
+		var title = settings.title;
 
-			if ( '' !== settings.link.url ) {
-				title = '<a href="' + settings.link.url + '">' + title + '</a>';
-			}
+		if ( '' !== settings.link.url ) {
+			title = '<a href="' + settings.link.url + '">' + title + '</a>';
+		}
 
-			var title_html = '<' + settings.header_size  + ' class="elementor-heading-title elementor-inline-editing elementor-size-' + settings.size + '" data-elementor-setting-key="title">' + title + '</' + settings.header_size + '>';
+		view.addRenderAttribute( 'title', 'class', [ 'elementor-heading-title', 'elementor-size-' + settings.size ] );
 
-			print( title_html );
+		view.addInlineEditingAttributes( 'title' );
+
+		var title_html = '<' + settings.header_size  + ' ' + view.getRenderAttributeString( 'title' ) + '>' + title + '</' + settings.header_size + '>';
+
+		print( title_html );
 		#>
 		<?php
 	}

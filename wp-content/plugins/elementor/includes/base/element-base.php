@@ -6,12 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Element Base
+ * Elementor element base.
  *
- * Base class extended to register elements.
+ * An abstract class to register new Elementor elements. It extended the
+ * `Controls_Stack` class to inherit its properties.
  *
- * This class must be extended for each element.
+ * This abstract class must be extended in order to register new elements.
  *
+ * @since 1.0.0
  * @abstract
  */
 abstract class Element_Base extends Controls_Stack {
@@ -75,17 +77,69 @@ abstract class Element_Base extends Controls_Stack {
 	private $_is_type_instance = true;
 
 	/**
-	 * Retrieve script dependencies.
+	 * Depended scripts.
 	 *
-	 * Get the list of script dependencies the element requires.
+	 * Holds all the element depended scripts to enqueue.
+	 *
+	 * @since 1.9.0
+	 * @access private
+	 *
+	 * @var array
+	 */
+	private $depended_scripts = [];
+
+	/**
+	 * Depended styles.
+	 *
+	 * Holds all the element depended styles to enqueue.
+	 *
+	 * @since 1.9.0
+	 * @access private
+	 *
+	 * @var array
+	 */
+	private $depended_styles = [];
+
+	/**
+	 * Add script depends.
+	 *
+	 * Register new script to enqueue by the handler.
+	 *
+	 * @since 1.9.0
+	 * @access public
+	 *
+	 * @param string $handler Depend script handler.
+	 */
+	public function add_script_depends( $handler ) {
+		$this->depended_scripts[] = $handler;
+	}
+
+	/**
+	 * Add style depends.
+	 *
+	 * Register new style to enqueue by the handler.
+	 *
+	 * @since 1.9.0
+	 * @access public
+	 *
+	 * @param string $handler Depend style handler.
+	 */
+	public function add_style_depends( $handler ) {
+		$this->depended_styles[] = $handler;
+	}
+
+	/**
+	 * Get script dependencies.
+	 *
+	 * Retrieve the list of script dependencies the element requires.
 	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
-	 * @return array Widget scripts dependencies.
+	 * @return array Element scripts dependencies.
 	 */
 	public function get_script_depends() {
-		return [];
+		return $this->depended_scripts;
 	}
 
 	/**
@@ -104,9 +158,38 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve element edit tools.
+	 * Get style dependencies.
 	 *
-	 * Used to get the element edit tools.
+	 * Retrieve the list of style dependencies the element requires.
+	 *
+	 * @since 1.9.0
+	 * @access public
+	 *
+	 * @return array Element styles dependencies.
+	 */
+	public function get_style_depends() {
+		return $this->depended_styles;
+	}
+
+	/**
+	 * Enqueue styles.
+	 *
+	 * Registers all the styles defined as element dependencies and enqueues
+	 * them. Use `get_style_depends()` method to add custom style dependencies.
+	 *
+	 * @since 1.9.0
+	 * @access public
+	 */
+	final public function enqueue_styles() {
+		foreach ( $this->get_style_depends() as $style ) {
+			wp_enqueue_style( $style );
+		}
+	}
+
+	/**
+	 * Get element edit tools.
+	 *
+	 * Used to retrieve the element edit tools.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -115,8 +198,11 @@ abstract class Element_Base extends Controls_Stack {
 	 * @return array Element edit tools.
 	 */
 	final public static function get_edit_tools() {
+		if ( ! Plugin::instance()->role_manager->user_can( 'design' ) ) {
+			return [];
+		}
 		if ( null === static::$_edit_tools ) {
-			self::_init_edit_tools();
+			self::init_edit_tools();
 		}
 
 		return static::$_edit_tools;
@@ -131,27 +217,22 @@ abstract class Element_Base extends Controls_Stack {
 	 * @access public
 	 * @static
 	 *
-	 * @param string $tool_name Edit tool name.
-	 * @param array  $tool_data {
-	 *     Edit tool data.
-	 *
-	 *     @type string $title  Edit tool title.
-	 *     @type string $icon   Edit tool icon.
-	 * }
-	 * @param string $after     Optional. If tool ID defined, the new edit tool
-	 *                          will be added after it. If null, the new edit
-	 *                          tool will be added at the end. Default is null.
+	 * @param string   $tool_name Edit tool name.
+	 * @param string[] $tool_data Edit tool data.
+	 * @param string   $after     Optional. If tool ID defined, the new edit tool
+	 *                            will be added after it. If null, the new edit
+	 *                            tool will be added at the end. Default is null.
 	 *
 	 */
 	final public static function add_edit_tool( $tool_name, $tool_data, $after = null ) {
 		if ( null === static::$_edit_tools ) {
-			self::_init_edit_tools();
+			self::init_edit_tools();
 		}
 
 		// Adding the tool at specific position
 		// in the tools array if requested
 		if ( $after ) {
-			$after_index = array_search( $after, array_keys( static::$_edit_tools ) ) + 1;
+			$after_index = array_search( $after, array_keys( static::$_edit_tools ), true ) + 1;
 
 			static::$_edit_tools = array_slice( static::$_edit_tools, 0, $after_index, true ) +
 								   [
@@ -164,9 +245,9 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve element type.
+	 * Get element type.
 	 *
-	 * Get the element type, in this case `element`.
+	 * Retrieve the element type, in this case `element`.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -179,9 +260,9 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve default edit tools.
+	 * Get default edit tools.
 	 *
-	 * Get the element default edit tools. Used to set initial tools.
+	 * Retrieve the element default edit tools. Used to set initial tools.
 	 * By default the element has no edit tools.
 	 *
 	 * @since 1.0.0
@@ -195,44 +276,24 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve items.
-	 *
-	 * Utility method that recieves an array with a needle and returns all the
-	 * items that match the needle. If needle is not defined the entire haystack
-	 * will be returened.
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @static
-	 *
-	 * @param array  $haystack An array of items.
-	 * @param string $needle   Optional. Default is null.
-	 *
-	 * @return mixed The whole haystack or the needle from the haystack when requested.
-	 */
-	private static function _get_items( array $haystack, $needle = null ) {
-		if ( $needle ) {
-			return isset( $haystack[ $needle ] ) ? $haystack[ $needle ] : null;
-		}
-
-		return $haystack;
-	}
-
-	/**
 	 * Initialize edit tools.
 	 *
 	 * Register default edit tools.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @access private
 	 * @static
 	 */
-	private static function _init_edit_tools() {
+	private static function init_edit_tools() {
 		static::$_edit_tools = static::get_default_edit_tools();
 	}
 
 	/**
-	 * Retrieve the default child element type.
+	 * Get default child type.
+	 *
+	 * Retrieve the default child type based on element data.
+	 *
+	 * Note that not all elements support children.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -265,7 +326,9 @@ abstract class Element_Base extends Controls_Stack {
 	public function after_render() {}
 
 	/**
-	 * Retrieve element title.
+	 * Get element title.
+	 *
+	 * Retrieve the element title.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -277,7 +340,9 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve element icon.
+	 * Get element icon.
+	 *
+	 * Retrieve the element icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -303,39 +368,26 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Print element template.
+	 * Print element content template.
 	 *
-	 * Used to generate the element template on the editor.
+	 * Used to generate the element content template on the editor, using a
+	 * Backbone JavaScript template.
 	 *
-	 * @since 1.0.0
-	 * @access public
+	 * @access protected
+	 * @since 2.0.0
+	 *
+	 * @param string $template_content Template content.
 	 */
-	public function print_template() {
-		ob_start();
+	protected function print_template_content( $template_content ) {
+		$this->render_edit_tools();
 
-		$this->_content_template();
-
-		$content_template = ob_get_clean();
-
-		$content_template = Utils::apply_filters_deprecated( 'elementor/elements/print_template', [ $content_template, $this ], '1.0.10', 'elementor/element/print_template' );
-
-		$content_template = apply_filters( 'elementor/element/print_template', $content_template, $this );
-
-		if ( empty( $content_template ) ) {
-			return;
-		}
-		?>
-		<script type="text/html" id="tmpl-elementor-<?php echo $this->get_type(); ?>-<?php echo esc_attr( $this->get_name() ); ?>-content">
-			<?php $this->render_edit_tools(); ?>
-			<?php echo $content_template; ?>
-		</script>
-		<?php
+		echo $template_content; // XSS ok.
 	}
 
 	/**
-	 * Retrieve children elements.
+	 * Get child elements.
 	 *
-	 * Get all the child elements of this this element.
+	 * Retrieve all the child elements of this element.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -344,16 +396,16 @@ abstract class Element_Base extends Controls_Stack {
 	 */
 	public function get_children() {
 		if ( null === $this->_children ) {
-			$this->_init_children();
+			$this->init_children();
 		}
 
 		return $this->_children;
 	}
 
 	/**
-	 * Retrieve default arguments.
+	 * Get default arguments.
 	 *
-	 * Get the element default arguments. Used to return all the default
+	 * Retrieve the element default arguments. Used to return all the default
 	 * arguments or a specific default argument, if one is set.
 	 *
 	 * @since 1.0.0
@@ -368,18 +420,19 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve parent element.
+	 * Get parent element.
 	 *
-	 * Get the element parent. Used to check which element it belongs to.
+	 * Retrieve the element parent. Used to check which element it belongs to.
 	 *
 	 * @since 1.0.0
+	 * @deprecated 1.7.6 Use `Element_Base::get_data( 'parent' )` instead.
 	 * @access public
-	 *
-	 * @deprecated
 	 *
 	 * @return Element_Base Parent element.
 	 */
 	public function get_parent() {
+		// Todo: _deprecated_function( __METHOD__, '1.7.6', '$this->get_data( 'parent' )' );
+
 		return $this->get_data( 'parent' );
 	}
 
@@ -397,10 +450,10 @@ abstract class Element_Base extends Controls_Stack {
 	 */
 	public function add_child( array $child_data, array $child_args = [] ) {
 		if ( null === $this->_children ) {
-			$this->_init_children();
+			$this->init_children();
 		}
 
-		$child_type = $this->_get_child_type( $child_data );
+		$child_type = $this->get_child_type( $child_data );
 
 		if ( ! $child_type ) {
 			return false;
@@ -418,20 +471,24 @@ abstract class Element_Base extends Controls_Stack {
 	/**
 	 * Add render attribute.
 	 *
-	 * Used to add render attribute to specific HTML elements.
+	 * Used to add attributes to a specific HTML element.
+	 *
+	 * The HTML tag is represented by the element parameter, then you need to
+	 * define the attribute key and the attribute key. The final result will be:
+	 * `<element attribute_key="attribute_value">`.
 	 *
 	 * Example usage:
 	 *
 	 * `$this->add_render_attribute( 'wrapper', 'class', 'custom-widget-wrapper-class' );`
-	 * `$this->add_render_attribute( 'widget', 'id', 'custom-widget-id' );
-	 * `$this->add_render_attribute( 'button', [ 'class' => 'custom-button-class', 'id' => 'custom-button-id' ] );
+	 * `$this->add_render_attribute( 'widget', 'id', 'custom-widget-id' );`
+	 * `$this->add_render_attribute( 'button', [ 'class' => 'custom-button-class', 'id' => 'custom-button-id' ] );`
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @param array|string $element   The HTML element.
-	 * @param array|string $key       Optional. Attribute key. Dafault is null.
-	 * @param array|string $value     Optional. Attribute value. Dafault is null.
+	 * @param array|string $key       Optional. Attribute key. Default is null.
+	 * @param array|string $value     Optional. Attribute value. Default is null.
 	 * @param bool         $overwrite Optional. Whether to overwrite existing
 	 *                                attribute. Default is false, not to overwrite.
 	 *
@@ -479,8 +536,8 @@ abstract class Element_Base extends Controls_Stack {
 	 * @access public
 	 *
 	 * @param array|string $element The HTML element.
-	 * @param array|string $key     Optional. Attribute key. Dafault is null.
-	 * @param array|string $value   Optional. Attribute value. Dafault is null.
+	 * @param array|string $key     Optional. Attribute key. Default is null.
+	 * @param array|string $value   Optional. Attribute value. Default is null.
 	 *
 	 * @return Element_Base Current instance of the element.
 	 */
@@ -489,9 +546,9 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve render attribute string.
+	 * Get render attribute string.
 	 *
-	 * Used to get the value of the render attribute.
+	 * Used to retrieve the value of the render attribute.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -511,46 +568,82 @@ abstract class Element_Base extends Controls_Stack {
 		$attributes = [];
 
 		foreach ( $render_attributes as $attribute_key => $attribute_values ) {
-			$attributes[] = sprintf( '%s="%s"', $attribute_key, esc_attr( implode( ' ', $attribute_values ) ) );
+			$attributes[] = sprintf( '%1$s="%2$s"', $attribute_key, esc_attr( implode( ' ', $attribute_values ) ) );
 		}
 
 		return implode( ' ', $attributes );
 	}
 
 	/**
+	 * Print render attribute string.
+	 *
+	 * Used to output the rendered attribute.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param array|string $element The element.
+	 */
+	public function print_render_attribute_string( $element ) {
+		echo $this->get_render_attribute_string( $element ); // XSS ok.
+	}
+
+	/**
 	 * Print element.
 	 *
 	 * Used to generate the element final HTML on the frontend and the editor.
- 	 *
+	 *
 	 * @since 1.0.0
 	 * @access public
 	 */
 	public function print_element() {
-		$this->enqueue_scripts();
+		$element_type = static::get_type();
 
-		do_action( 'elementor/frontend/' . static::get_type() . '/before_render', $this );
+		/**
+		 * Before frontend element render.
+		 *
+		 * Fires before Elementor element is rendered in the frontend.
+		 *
+		 * The dynamic portion of the hook name, `$element_type`, refers to the element type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Element_Base $this The element.
+		 */
+		do_action( "elementor/frontend/{$element_type}/before_render", $this );
 
 		$this->_add_render_attributes();
 
 		$this->before_render();
-
 		$this->_print_content();
-
 		$this->after_render();
 
-		do_action( 'elementor/frontend/' . static::get_type() . '/after_render', $this );
+		$this->enqueue_scripts();
+		$this->enqueue_styles();
+		/**
+		 * After frontend element render.
+		 *
+		 * Fires after Elementor element was rendered in the frontend.
+		 *
+		 * The dynamic portion of the hook name, `$element_type`, refers to the element type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Element_Base $this The element.
+		 */
+		do_action( "elementor/frontend/{$element_type}/after_render", $this );
 	}
 
 	/**
-	 * Retrieve the element raw data.
+	 * Get the element raw data.
 	 *
-	 * Get the raw element data, including the id, type, settings, child
+	 * Retrieve the raw element data, including the id, type, settings, child
 	 * elements and whether it is an inner element.
 	 *
 	 * The data with the HTML used always to display the data, but the Elementor
 	 * editor uses the raw data without the HTML in order not to render the data
 	 * again.
- 	 *
+	 *
 	 * @since 1.0.0
 	 * @access public
 	 *
@@ -579,11 +672,11 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve unique selector.
+	 * Get unique selector.
 	 *
-	 * Get the unique selector of the element. Used to set a unique HTML class
-	 * for each HTML element. This way Elementor can set custom styles for each
-	 * element.
+	 * Retrieve the unique selector of the element. Used to set a unique HTML
+	 * class for each HTML element. This way Elementor can set custom styles for
+	 * each element.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -595,26 +688,16 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Render element output in the editor.
-	 *
-	 * Used to generate the live preview, using a Backbone JavaScript template.
-	 *
-	 * @since 1.0.0
-	 * @access protected
-	 */
-	protected function _content_template() {}
-
-	/**
 	 * Render element edit tools.
 	 *
 	 * Used to generate the edit tools HTML.
 	 *
 	 * @since 1.0.0
-	 * @deprecated 1.8.0 use render_edit_tools() instead.
+	 * @deprecated 1.8.0 Use `Element_Base::render_edit_tools()` instead.
 	 * @access protected
 	 */
 	protected function _render_settings() {
-		_deprecated_function( get_called_class() . '::' . __FUNCTION__, '1.8.0', 'render_edit_tools()' );
+		_deprecated_function( sprintf( '%s::%s', get_called_class(), __FUNCTION__ ), '1.8.0', '$this->render_edit_tools()' );
 
 		$this->render_edit_tools();
 	}
@@ -646,7 +729,7 @@ abstract class Element_Base extends Controls_Stack {
 	/**
 	 * Add render attributes.
 	 *
-	 * Used to add render attributes to the element.
+	 * Used to add attributes to the current element wrapper HTML tag.
 	 *
 	 * @since 1.3.0
 	 * @access protected
@@ -690,19 +773,9 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Render element.
+	 * Get default data.
 	 *
-	 * Generates the final HTML on the frontend.
-	 *
-	 * @since 1.0.0
-	 * @access protected
-	 */
-	protected function render() {}
-
-	/**
-	 * Retrieve default data.
-	 *
-	 * Get the default element data. Used to reset the data on initialization.
+	 * Retrieve the default element data. Used to reset the data on initialization.
 	 *
 	 * @since 1.0.0
 	 * @access protected
@@ -735,9 +808,12 @@ abstract class Element_Base extends Controls_Stack {
 	}
 
 	/**
-	 * Retrieve initial config.
+	 * Get initial config.
 	 *
-	 * Get the element initial configuration.
+	 * Retrieve the current element initial configuration.
+	 *
+	 * Adds more configuration on top of the controls list and the tabs assigned
+	 * to the control. This method also adds element name, type, icon and more.
 	 *
 	 * @since 1.0.10
 	 * @access protected
@@ -745,32 +821,30 @@ abstract class Element_Base extends Controls_Stack {
 	 * @return array The initial config.
 	 */
 	protected function _get_initial_config() {
-		$config = parent::_get_initial_config();
+		$config = [
+			'name' => $this->get_name(),
+			'elType' => $this->get_type(),
+			'title' => $this->get_title(),
+			'icon' => $this->get_icon(),
+			'reload_preview' => $this->is_reload_preview_required(),
+		];
 
-		return array_merge(
-			$config, [
-				'name' => $this->get_name(),
-				'elType' => $this->get_type(),
-				'title' => $this->get_title(),
-				'icon' => $this->get_icon(),
-				'reload_preview' => $this->is_reload_preview_required(),
-			]
-		);
+		return array_merge( parent::_get_initial_config(), $config );
 	}
 
 	/**
-	 * Retrieve child type.
+	 * Get child type.
 	 *
-	 * Get the element child type based on element data.
+	 * Retrieve the element child type based on element data.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param array $element_data Element ID.
 	 *
 	 * @return Element_Base|false Child type or false if type not found.
 	 */
-	private function _get_child_type( $element_data ) {
+	private function get_child_type( $element_data ) {
 		$child_type = $this->_get_default_child_type( $element_data );
 
 		// If it's not a valid widget ( like a deactivated plugin )
@@ -778,7 +852,20 @@ abstract class Element_Base extends Controls_Stack {
 			return false;
 		}
 
-		return apply_filters( 'elementor/element/get_child_type', $child_type, $element_data, $this );
+		/**
+		 * Element child type.
+		 *
+		 * Filters the child type of the element.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Element_Base $child_type   The child element.
+		 * @param array        $element_data The original element ID.
+		 * @param Element_Base $this         The original element.
+		 */
+		$child_type = apply_filters( 'elementor/element/get_child_type', $child_type, $element_data, $this );
+
+		return $child_type;
 	}
 
 	/**
@@ -786,10 +873,10 @@ abstract class Element_Base extends Controls_Stack {
 	 *
 	 * Initializing the element child elements.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @access private
 	 */
-	private function _init_children() {
+	private function init_children() {
 		$this->_children = [];
 
 		$children_data = $this->get_data( 'elements' );
@@ -810,12 +897,15 @@ abstract class Element_Base extends Controls_Stack {
 	/**
 	 * Element base constructor.
 	 *
-	 * Initializing the element base class using `$data` and `$args`. The
-	 * `$data` is required for a normal instance.
+	 * Initializing the element base class using `$data` and `$args`.
+	 *
+	 * The `$data` parameter is required for a normal instance because of the
+	 * way Elementor renders data when initializing elements.
 	 *
 	 * @since 1.0.0
 	 * @access public
-	 * @param array      $data Element data. Default is an empty array.
+	 *
+	 * @param array      $data Optional. Element data. Default is an empty array.
 	 * @param array|null $args Optional. Element default arguments. Default is null.
 	 **/
 	public function __construct( array $data = [], array $args = null ) {

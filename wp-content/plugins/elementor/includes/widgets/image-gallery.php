@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Image Gallery Widget
+ * Elementor image gallery widget.
+ *
+ * Elementor widget that displays a set of images in an aligned grid.
+ *
+ * @since 1.0.0
  */
 class Widget_Image_Gallery extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve image gallery widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Image_Gallery extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve image gallery widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Image_Gallery extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve image gallery widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +54,6 @@ class Widget_Image_Gallery extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-gallery-grid';
-	}
-
-	/**
-	 * Retrieve the list of categories the image gallery widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -97,14 +93,19 @@ class Widget_Image_Gallery extends Widget_Base {
 			[
 				'label' => __( 'Add Images', 'elementor' ),
 				'type' => Controls_Manager::GALLERY,
+				'show_label' => false,
+				'dynamic' => [
+					'active' => true,
+				],
 			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail',
+				'name' => 'thumbnail', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
 				'exclude' => [ 'custom' ],
+				'separator' => 'none',
 			]
 		);
 
@@ -229,7 +230,6 @@ class Widget_Image_Gallery extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'image_border',
-				'label' => __( 'Image Border', 'elementor' ),
 				'selector' => '{{WRAPPER}} .gallery-item img',
 				'separator' => 'before',
 			]
@@ -325,7 +325,6 @@ class Widget_Image_Gallery extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'typography',
-				'label' => __( 'Typography', 'elementor' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .gallery-item .gallery-caption',
 				'condition' => [
@@ -346,7 +345,7 @@ class Widget_Image_Gallery extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		if ( ! $settings['wp_gallery'] ) {
 			return;
@@ -372,10 +371,15 @@ class Widget_Image_Gallery extends Widget_Base {
 		<div class="elementor-image-gallery">
 			<?php
 			$this->add_render_attribute( 'link', [
-				'class' => 'elementor-clickable',
 				'data-elementor-open-lightbox' => $settings['open_lightbox'],
 				'data-elementor-lightbox-slideshow' => $this->get_id(),
 			] );
+
+			if ( Plugin::$instance->editor->is_edit_mode() ) {
+				$this->add_render_attribute( 'link', [
+					'class' => 'elementor-clickable',
+				] );
+			}
 
 			add_filter( 'wp_get_attachment_link', [ $this, 'add_lightbox_data_to_image_link' ] );
 

@@ -1,16 +1,24 @@
 <?php
 namespace Elementor;
 
+use Elementor\Modules\DynamicTags\Module as TagsModule;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Google Maps Widget
+ * Elementor google maps widget.
+ *
+ * Elementor widget that displays an embedded google map.
+ *
+ * @since 1.0.0
  */
 class Widget_Google_Maps extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve google maps widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +31,8 @@ class Widget_Google_Maps extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve google maps widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +45,8 @@ class Widget_Google_Maps extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve google maps widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,6 +56,22 @@ class Widget_Google_Maps extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-google-maps';
+	}
+
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the google maps widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
+	public function get_categories() {
+		return [ 'basic' ];
 	}
 
 	/**
@@ -68,6 +96,12 @@ class Widget_Google_Maps extends Widget_Base {
 			[
 				'label' => __( 'Address', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+					'categories' => [
+						TagsModule::POST_META_CATEGORY,
+					],
+				],
 				'placeholder' => $default_address,
 				'default' => $default_address,
 				'label_block' => true,
@@ -91,14 +125,11 @@ class Widget_Google_Maps extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'height',
 			[
 				'label' => __( 'Height', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 300,
-				],
 				'range' => [
 					'px' => [
 						'min' => 40,
@@ -144,7 +175,7 @@ class Widget_Google_Maps extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		if ( empty( $settings['address'] ) ) {
 			return;
@@ -155,9 +186,10 @@ class Widget_Google_Maps extends Widget_Base {
 		}
 
 		printf(
-			'<div class="elementor-custom-embed"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=%s&amp;t=m&amp;z=%d&amp;output=embed&amp;iwloc=near"></iframe></div>',
-			urlencode( $settings['address'] ),
-			absint( $settings['zoom']['size'] )
+			'<div class="elementor-custom-embed"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=%s&amp;t=m&amp;z=%d&amp;output=embed&amp;iwloc=near" aria-label="%s"></iframe></div>',
+			rawurlencode( $settings['address'] ),
+			absint( $settings['zoom']['size'] ),
+			esc_attr( $settings['address'] )
 		);
 	}
 

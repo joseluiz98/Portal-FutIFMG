@@ -103,7 +103,15 @@ class Jetpack_Comment_Likes {
 
 	function enqueue_admin_styles_scripts() {
 		wp_enqueue_style( 'comment-like-count', plugins_url( 'comment-likes/admin-style.css', __FILE__ ), array(), JETPACK__VERSION );
-		wp_enqueue_script( 'comment-like-count', plugins_url( 'comment-likes/comment-like-count.js', __FILE__ ), array( 'jquery' ), JETPACK__VERSION );
+		wp_enqueue_script(
+			'comment-like-count',
+			Jetpack::get_file_url_for_environment(
+				'_inc/build/comment-likes/comment-like-count.min.js',
+				'modules/comment-likes/comment-like-count.js'
+			),
+			array( 'jquery' ),
+			JETPACK__VERSION
+		);
 	}
 
 	public function add_like_count_column( $columns ) {
@@ -117,6 +125,10 @@ class Jetpack_Comment_Likes {
 			return;
 		}
 
+		if ( Jetpack_AMP_Support::is_amp_request() ) {
+			return;
+		}
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_register_scripts' ) );
 		add_filter( 'comment_text', array( $this, 'comment_likes' ), 10, 2 );
 	}
@@ -126,8 +138,23 @@ class Jetpack_Comment_Likes {
 			wp_register_style( 'open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans', array(), JETPACK__VERSION );
 		}
 		wp_enqueue_style( 'jetpack_likes', plugins_url( 'likes/style.css', __FILE__ ), array( 'open-sans' ), JETPACK__VERSION );
-		wp_enqueue_script( 'postmessage', plugins_url( '_inc/postmessage.js', JETPACK__PLUGIN_FILE ), array( 'jquery' ), JETPACK__VERSION, false );
-		wp_enqueue_script( 'jetpack_resize', plugins_url( '_inc/jquery.jetpack-resize.js' , JETPACK__PLUGIN_FILE ), array( 'jquery' ), JETPACK__VERSION, false );
+		wp_enqueue_script(
+			'postmessage',
+			Jetpack::get_file_url_for_environment( '_inc/build/postmessage.min.js', '_inc/postmessage.js' ),
+			array( 'jquery' ),
+			JETPACK__VERSION,
+			false
+		);
+		wp_enqueue_script(
+			'jetpack_resize',
+			Jetpack::get_file_url_for_environment(
+				'_inc/build/jquery.jetpack-resize.min.js',
+				'_inc/jquery.jetpack-resize.js'
+			),
+			array( 'jquery' ),
+			JETPACK__VERSION,
+			false
+		);
 		wp_enqueue_script( 'jetpack_likes_queuehandler', plugins_url( 'likes/queuehandler.js' , __FILE__ ), array( 'jquery', 'postmessage', 'jetpack_resize' ), JETPACK__VERSION, true );
 	}
 

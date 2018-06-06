@@ -6,11 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Text Editor Widget
+ * Elementor text editor widget.
+ *
+ * Elementor widget that displays a WYSIWYG text editor, just like the WordPress
+ * editor.
+ *
+ * @since 1.0.0
  */
 class Widget_Text_Editor extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve text editor widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +30,8 @@ class Widget_Text_Editor extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve text editor widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +44,8 @@ class Widget_Text_Editor extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve text editor widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,6 +55,22 @@ class Widget_Text_Editor extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-align-left';
+	}
+
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the text editor widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
+	public function get_categories() {
+		return [ 'basic' ];
 	}
 
 	/**
@@ -67,6 +94,9 @@ class Widget_Text_Editor extends Widget_Base {
 			[
 				'label' => '',
 				'type' => Controls_Manager::WYSIWYG,
+				'dynamic' => [
+					'active' => true,
+				],
 				'default' => __( 'I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor' ),
 			]
 		);
@@ -311,7 +341,7 @@ class Widget_Text_Editor extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$editor_content = $this->get_settings( 'editor' );
+		$editor_content = $this->get_settings_for_display( 'editor' );
 
 		$editor_content = $this->parse_text_editor( $editor_content );
 
@@ -346,7 +376,12 @@ class Widget_Text_Editor extends Widget_Base {
 	 */
 	protected function _content_template() {
 		?>
-		<div class="elementor-text-editor elementor-clearfix elementor-inline-editing" data-elementor-setting-key="editor" data-elementor-inline-editing-toolbar="advanced">{{{ settings.editor }}}</div>
+		<#
+		view.addRenderAttribute( 'editor', 'class', [ 'elementor-text-editor', 'elementor-clearfix' ] );
+
+		view.addInlineEditingAttributes( 'editor', 'advanced' );
+		#>
+		<div {{{ view.getRenderAttributeString( 'editor' ) }}}>{{{ settings.editor }}}</div>
 		<?php
 	}
 }

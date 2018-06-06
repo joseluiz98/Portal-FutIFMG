@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sidebar Widget
+ * Elementor sidebar widget.
+ *
+ * Elementor widget that insert any sidebar into the page.
+ *
+ * @since 1.0.0
  */
 class Widget_Sidebar extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve sidebar widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Sidebar extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve sidebar widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Sidebar extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve sidebar widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +54,6 @@ class Widget_Sidebar extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-sidebar';
-	}
-
-	/**
-	 * Retrieve the list of categories the sidebar widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -112,7 +108,7 @@ class Widget_Sidebar extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$sidebar = $this->get_settings( 'sidebar' );
+		$sidebar = $this->get_settings_for_display( 'sidebar' );
 
 		if ( empty( $sidebar ) ) {
 			return;

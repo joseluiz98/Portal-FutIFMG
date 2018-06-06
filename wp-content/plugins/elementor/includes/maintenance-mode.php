@@ -3,60 +3,129 @@ namespace Elementor;
 
 use Elementor\TemplateLibrary\Source_Local;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+/**
+ * Elementor maintenance mode.
+ *
+ * Elementor maintenance mode handler class is responsible for the Elementor
+ * "Maintenance Mode" and the "Coming Soon" features.
+ *
+ * @since 1.4.0
+ */
 class Maintenance_Mode {
 
+	/**
+	 * The options prefix.
+	 */
 	const OPTION_PREFIX = 'elementor_maintenance_mode_';
 
+	/**
+	 * The maintenance mode.
+	 */
 	const MODE_MAINTENANCE = 'maintenance';
 
+	/**
+	 * The coming soon mode.
+	 */
 	const MODE_COMING_SOON = 'coming_soon';
 
 	/**
-	 * @static
+	 * Get elementor option.
+	 *
+	 * Retrieve elementor option from the database.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 * @static
+	 *
+	 * @param string $option  Option name. Expected to not be SQL-escaped.
+	 * @param mixed  $default Optional. Default value to return if the option
+	 *                        does not exist. Default is false.
+	 *
+	 * @return bool False if value was not updated and true if value was updated.
+	 */
 	public static function get( $option, $default = false ) {
 		return get_option( self::OPTION_PREFIX . $option, $default );
 	}
 
 	/**
-	 * @static
+	 * Set elementor option.
+	 *
+	 * Update elementor option in the database.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 * @static
+	 *
+	 * @param string $option Option name. Expected to not be SQL-escaped.
+	 * @param mixed  $value  Option value. Must be serializable if non-scalar.
+	 *                       Expected to not be SQL-escaped.
+	 *
+	 * @return bool False if value was not updated and true if value was updated.
+	 */
 	public static function set( $option, $value ) {
 		return update_option( self::OPTION_PREFIX . $option, $value );
 	}
 
 	/**
+	 * Body class.
+	 *
+	 * Add "Maintenance Mode" CSS classes to the body tag.
+	 *
+	 * Fired by `body_class` filter.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 *
+	 * @param array $classes An array of body classes.
+	 *
+	 * @return array An array of body classes.
+	 */
 	public function body_class( $classes ) {
 		$classes[] = 'elementor-maintenance-mode';
 
 		return $classes;
 	}
+
 	/**
+	 * Template redirect.
+	 *
+	 * Redirect to the "Maintenance Mode" template.
+	 *
+	 * Fired by `template_redirect` action.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 */
 	public function template_redirect() {
 		if ( Plugin::$instance->preview->is_preview_mode() ) {
 			return;
 		}
 
 		// Setup global post for Elementor\frontend so `_has_elementor_in_page = true`.
-		$GLOBALS['post'] = get_post( self::get( 'template_id' ) );
+		$GLOBALS['post'] = get_post( self::get( 'template_id' ) ); // WPCS: override ok.
 
 		add_filter( 'template_include', [ $this, 'template_include' ], 1 );
 	}
 
 	/**
+	 * Template include.
+	 *
+	 * Update the path of the current template before including it. Used to
+	 * change the "Maintenance Mode" path and the HTTP header data.
+	 *
+	 * Fired by `template_include` filter.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 *
+	 * @param string $template The path of the template to include.
+	 *
+	 * @return string Updated path of the template to include.
+	 */
 	public function template_include( $template ) {
 		// Set the template as `$wp_query->current_object` for `wp_title` and etc.
 		query_posts( [
@@ -75,11 +144,24 @@ class Maintenance_Mode {
 	}
 
 	/**
+	 * Register settings fields.
+	 *
+	 * Adds new "Maintenance Mode" settings fields to Elementor admin page.
+	 *
+	 * The method need to receive the an instance of the Tools settings page
+	 * to add the new maintenance mode functionality.
+	 *
+	 * Fired by `elementor/admin/after_create_settings/{$page_id}` action.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 *
+	 * @param Tools $tools An instance of the Tools settings page.
+	 */
 	public function register_settings_fields( Tools $tools ) {
-		$templates = Plugin::$instance->templates_manager->get_source( 'local' )->get_items( [ 'type' => 'page' ] );
+		$templates = Plugin::$instance->templates_manager->get_source( 'local' )->get_items( [
+			'type' => 'page',
+		] );
 
 		$templates_options = [];
 
@@ -87,12 +169,21 @@ class Maintenance_Mode {
 			$templates_options[ $template['template_id'] ] = $template['title'];
 		}
 
-		$template_description = sprintf( ' <a target="_blank" class="elementor-edit-template" style="display: none" href="%s">%s</a>', Utils::get_edit_link( self::get( 'template_id' ) ), __( 'Edit Template', 'elementor' ) );
+		$template_id = self::get( 'template_id' );
+		$edit_url = '';
+		if ( $template_id && get_post( $template_id ) ) {
+			$edit_url = Utils::get_edit_link( $template_id );
+		}
+
+		$template_description = sprintf( ' <a target="_blank" class="elementor-edit-template" style="display: none" href="%1$s">%2$s</a>', $edit_url, __( 'Edit Template', 'elementor' ) );
 
 		$template_description .= '<span class="elementor-maintenance-mode-error" style="display: none">' .
 								 __( 'To enable maintenance mode you have to set a template for the maintenance mode page.', 'elementor' ) .
 								 '<br>' .
-								 sprintf( __( 'Select one or go ahead and <a target="_blank" href="%s">create one</a> now.', 'elementor' ), admin_url( 'post-new.php?post_type=' . Source_Local::CPT ) ) .
+								 sprintf(
+									 /* translators: %s: Create page URL */
+									 __( 'Select one or go ahead and <a target="_blank" href="%s">create one</a> now.', 'elementor' ), admin_url( 'post-new.php?post_type=' . Source_Local::CPT )
+								 ) .
 								 '</span>';
 
 		$tools->add_tab(
@@ -114,7 +205,7 @@ class Maintenance_Mode {
 										self::MODE_MAINTENANCE => __( 'Maintenance', 'elementor' ),
 									],
 									'desc' => '<div class="elementor-maintenance-mode-description" data-value="" style="display: none">' .
-											  __( 'Choose between Coming Soon mode (returning HTTP200) or Maintenance Mode (returning HTTP503).', 'elementor' ) .
+											  __( 'Choose between Coming Soon mode (returning HTTP 200 code) or Maintenance Mode (returning HTTP 503 code).', 'elementor' ) .
 											  '</div>' .
 											  '<div class="elementor-maintenance-mode-description" data-value="maintenance" style="display: none">' .
 											  __( 'Maintenance Mode returns HTTP 503 code, so search engines know to come back a short time later. It is not recommended to use this mode for more than a couple of days.', 'elementor' ) .
@@ -162,9 +253,17 @@ class Maintenance_Mode {
 	}
 
 	/**
+	 * Add menu in admin bar.
+	 *
+	 * Adds "Maintenance Mode" items to the WordPress admin bar.
+	 *
+	 * Fired by `admin_bar_menu` filter.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 *
+	 * @param \WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance, passed by reference.
+	 */
 	public function add_menu_in_admin_bar( \WP_Admin_Bar $wp_admin_bar ) {
 		$wp_admin_bar->add_node( [
 			'id' => 'elementor-maintenance-on',
@@ -181,9 +280,16 @@ class Maintenance_Mode {
 	}
 
 	/**
+	 * Print style.
+	 *
+	 * Adds custom CSS to the HEAD html tag. The CSS that emphasise the maintenance
+	 * mode with red colors.
+	 *
+	 * Fired by `admin_head` and `wp_head` filters.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 */
 	public function print_style() {
 		?>
 		<style>#wp-admin-bar-elementor-maintenance-on > a { background-color: #dc3232; }
@@ -192,14 +298,19 @@ class Maintenance_Mode {
 	}
 
 	/**
+	 * Maintenance mode constructor.
+	 *
+	 * Initializing Elementor maintenance mode.
+	 *
 	 * @since 1.4.0
 	 * @access public
-	*/
+	 */
 	public function __construct() {
 		$is_enabled = (bool) self::get( 'mode' ) && (bool) self::get( 'template_id' );
 
 		if ( is_admin() ) {
-			add_action( 'elementor/admin/after_create_settings/' . Tools::PAGE_ID, [ $this, 'register_settings_fields' ] );
+			$page_id = Tools::PAGE_ID;
+			add_action( "elementor/admin/after_create_settings/{$page_id}", [ $this, 'register_settings_fields' ] );
 		}
 
 		if ( ! $is_enabled ) {

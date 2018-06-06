@@ -32,7 +32,7 @@ try
 
     while ( $rowJogadores = $result2->fetch()) {
       $nomeJogador = $rowJogadores['nome'];
-    $caminho = "http://futifmg.serveblog.net:8080/jogador?tmpString=";
+    $caminho = "http://joseluiz.servehttp.com:8080/futifmg/jogador?tmpString=";
     $caminho .= $nomeJogador;
     $tabela .= '<tr>'; // abre uma linha
     $tabela .= '<td>'.$rowJogadores['numero'].'</td>'; //coluna numero
@@ -67,7 +67,7 @@ try
 
     while ( $rowTimes = $resultTimes->fetch()) {
     $imagem = $rowTimes['escudo'];
-    $caminho = "http://futifmg.serveblog.net:8080/times?tmpString=";
+    $caminho = "http://joseluiz.servehttp.com:8080/futifmg/times?tmpString=";
     $caminho .= $rowTimes['nomeTime'];
     $tabela2 .= '<tr>'; // abre uma linha
     $tabela2 .= "<td> <img src='$imagem' style = 'height:200px; width:200px;'/> </td>";

@@ -6,11 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Alert Widget
+ * Elementor alert widget.
+ *
+ * Elementor widget that displays a collapsible display of content in an toggle
+ * style, allowing the user to open multiple items.
+ *
+ * @since 1.0.0
  */
 class Widget_Alert extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve alert widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +30,8 @@ class Widget_Alert extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve alert widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +44,8 @@ class Widget_Alert extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve alert widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +55,6 @@ class Widget_Alert extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-alert';
-	}
-
-	/**
-	 * Retrieve the list of categories the alert widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -96,8 +93,8 @@ class Widget_Alert extends Widget_Base {
 			[
 				'label' => __( 'Title & Description', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
-				'placeholder' => __( 'Your Title', 'elementor' ),
-				'default' => __( 'This is Alert', 'elementor' ),
+				'placeholder' => __( 'Enter your title', 'elementor' ),
+				'default' => __( 'This is an Alert', 'elementor' ),
 				'label_block' => true,
 			]
 		);
@@ -107,8 +104,8 @@ class Widget_Alert extends Widget_Base {
 			[
 				'label' => __( 'Content', 'elementor' ),
 				'type' => Controls_Manager::TEXTAREA,
-				'placeholder' => __( 'Your Description', 'elementor' ),
-				'default' => __( 'I am description. Click edit button to change this text.', 'elementor' ),
+				'placeholder' => __( 'Enter your description', 'elementor' ),
+				'default' => __( 'I am a description. Click the edit button to change this text.', 'elementor' ),
 				'separator' => 'none',
 				'show_label' => false,
 			]
@@ -141,7 +138,7 @@ class Widget_Alert extends Widget_Base {
 		$this->start_controls_section(
 			'section_type',
 			[
-				'label' => __( 'Alert Type', 'elementor' ),
+				'label' => __( 'Alert', 'elementor' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -258,7 +255,7 @@ class Widget_Alert extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		if ( empty( $settings['alert_title'] ) ) {
 			return;
@@ -276,16 +273,20 @@ class Widget_Alert extends Widget_Base {
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<span <?php echo $this->get_render_attribute_string( 'alert_title' ); ?>><?php echo $settings['alert_title']; ?></span>
-			<?php if ( ! empty( $settings['alert_description'] ) ) {
+			<?php
+			if ( ! empty( $settings['alert_description'] ) ) :
 				$this->add_render_attribute( 'alert_description', 'class', 'elementor-alert-description' );
 
 				$this->add_inline_editing_attributes( 'alert_description' );
 				?>
 				<span <?php echo $this->get_render_attribute_string( 'alert_description' ); ?>><?php echo $settings['alert_description']; ?></span>
-			<?php }
-			if ( 'show' === $settings['show_dismiss'] ) { ?>
-				<button type="button" class="elementor-alert-dismiss">X</button>
-			<?php } ?>
+			<?php endif; ?>
+			<?php if ( 'show' === $settings['show_dismiss'] ) : ?>
+				<button type="button" class="elementor-alert-dismiss">
+					<span aria-hidden="true">&times;</span>
+					<span class="elementor-screen-only"><?php echo __( 'Dismiss alert', 'elementor' ); ?></span>
+				</button>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
@@ -300,14 +301,23 @@ class Widget_Alert extends Widget_Base {
 	 */
 	protected function _content_template() {
 		?>
-		<# if ( settings.alert_title ) { #>
+		<# if ( settings.alert_title ) {
+			view.addRenderAttribute( {
+				alert_title: { class: 'elementor-alert-title' },
+				alert_description: { class: 'elementor-alert-description' }
+			} );
+
+			view.addInlineEditingAttributes( 'alert_title', 'none' );
+			view.addInlineEditingAttributes( 'alert_description' );
+			#>
 			<div class="elementor-alert elementor-alert-{{ settings.alert_type }}" role="alert">
-				<span class="elementor-alert-title elementor-inline-editing" data-elementor-setting-key="alert_title" data-elementor-inline-editing-toolbar="none">{{{ settings.alert_title }}}</span>
-				<# if ( settings.alert_title ) { #>
-					<span class="elementor-alert-description elementor-inline-editing" data-elementor-setting-key="alert_description">{{{ settings.alert_description }}}</span>
-				<# } #>
+				<span {{{ view.getRenderAttributeString( 'alert_title' ) }}}>{{{ settings.alert_title }}}</span>
+				<span {{{ view.getRenderAttributeString( 'alert_description' ) }}}>{{{ settings.alert_description }}}</span>
 				<# if ( 'show' === settings.show_dismiss ) { #>
-					<button type="button" class="elementor-alert-dismiss">X</button>
+					<button type="button" class="elementor-alert-dismiss">
+						<span aria-hidden="true">&times;</span>
+						<span class="elementor-screen-only"><?php echo __( 'Dismiss alert', 'elementor' ); ?></span>
+					</button>
 				<# } #>
 			</div>
 		<# } #>

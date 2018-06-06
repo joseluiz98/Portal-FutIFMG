@@ -6,11 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Menu Anchor Widget
+ * Elementor menu anchor widget.
+ *
+ * Elementor widget that allows to link and menu to a specific position on the
+ * page.
+ *
+ * @since 1.0.0
  */
 class Widget_Menu_Anchor extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve menu anchor widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +30,8 @@ class Widget_Menu_Anchor extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve menu anchor widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +44,8 @@ class Widget_Menu_Anchor extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve menu anchor widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +55,6 @@ class Widget_Menu_Anchor extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-anchor';
-	}
-
-	/**
-	 * Retrieve the list of categories the menu anchor widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -107,7 +104,7 @@ class Widget_Menu_Anchor extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$anchor = $this->get_settings( 'anchor' );
+		$anchor = $this->get_settings_for_display( 'anchor' );
 
 		if ( ! empty( $anchor ) ) {
 			$this->add_render_attribute( 'inner', 'id', $anchor );

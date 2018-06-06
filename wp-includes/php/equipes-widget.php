@@ -30,7 +30,7 @@ foreach($resultado AS $equipe)
     {
     	var nome 	= equipes[i][0];
     	var escudo = equipes[i][1];
-        var link   = "http://futifmg.serveblog.net:8080/times?tmpString=";
+        var link   = "http://joseluiz.servehttp.com:8080/futifmg/times?tmpString=";
         link       += nome;
 		html += '<div class="col-xs-12 col-ms-6 col-sm-6"><div class="card card-profile card-plain"><div class="col-md-5"><div class="card-image"><a href="'+ link + '" ><img class="img" src=" ' + escudo + '" alt="" title="Clique para ver mais informações sobre a equipe"></a></div></div><div class="col-md-7"><div class="content"><h4 class="card-title"> ' + nome + '</h4><p class="card-description">Locavore pinterest chambray affogato art party, forage coloring book typewriter. Bitters cold selfies, retro celiac sartorial mustache.</p></div></div></div></div>';
     }

@@ -4,7 +4,7 @@
  * Description: The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design.
  * Plugin URI: https://elementor.com/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash
  * Author: Elementor.com
- * Version: 1.8.8
+ * Version: 2.0.15
  * Author URI: https://elementor.com/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash
  *
  * Text Domain: elementor
@@ -27,8 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'ELEMENTOR_VERSION', '1.8.8' );
-define( 'ELEMENTOR_PREVIOUS_STABLE_VERSION', '1.7.12' );
+define( 'ELEMENTOR_VERSION', '2.0.15' );
+define( 'ELEMENTOR_PREVIOUS_STABLE_VERSION', '1.9.8' );
 
 define( 'ELEMENTOR__FILE__', __FILE__ );
 define( 'ELEMENTOR_PLUGIN_BASE', plugin_basename( ELEMENTOR__FILE__ ) );
@@ -47,30 +47,16 @@ add_action( 'plugins_loaded', 'elementor_load_plugin_textdomain' );
 
 if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 	add_action( 'admin_notices', 'elementor_fail_php_version' );
-} elseif ( ! version_compare( get_bloginfo( 'version' ), '4.5', '>=' ) ) {
+} elseif ( ! version_compare( get_bloginfo( 'version' ), '4.6', '>=' ) ) {
 	add_action( 'admin_notices', 'elementor_fail_wp_version' );
 } else {
-	// Fix language if the `get_user_locale` is difference from the `get_locale
-	if ( isset( $_REQUEST['action'] ) && 0 === strpos( $_REQUEST['action'], 'elementor' ) ) {
-		add_action( 'set_current_user', function() {
-			global $current_user;
-			$current_user->locale = get_locale();
-		} );
-
-		// Fix for Polylang
-		define( 'PLL_AJAX_ON_FRONT', true );
-
-		add_action( 'pll_pre_init', function( $polylang ) {
-			$post_language = $polylang->model->post->get_language( $_REQUEST['post'], 'locale' );
-			$_REQUEST['lang'] = $post_language->locale;
-		} );
-	}
-
 	require( ELEMENTOR_PATH . 'includes/plugin.php' );
 }
 
 /**
- * Load gettext translate for our text domain.
+ * Load Elementor textdomain.
+ *
+ * Load gettext translate for Elementor text domain.
  *
  * @since 1.0.0
  *
@@ -81,7 +67,9 @@ function elementor_load_plugin_textdomain() {
 }
 
 /**
- * Show in WP Dashboard notice about the plugin is not activated (PHP version).
+ * Elementor admin notice for minimum PHP version.
+ *
+ * Warning when the site doesn't have the minimum required PHP version.
  *
  * @since 1.0.0
  *
@@ -89,21 +77,23 @@ function elementor_load_plugin_textdomain() {
  */
 function elementor_fail_php_version() {
 	/* translators: %s: PHP version */
-	$message = sprintf( esc_html__( 'Elementor requires PHP version %s+, plugin is currently NOT ACTIVE.', 'elementor' ), '5.4' );
+	$message = sprintf( esc_html__( 'Elementor requires PHP version %s+, plugin is currently NOT RUNNING.', 'elementor' ), '5.4' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }
 
 /**
- * Show in WP Dashboard notice about the plugin is not activated (WP version).
+ * Elementor admin notice for minimum WordPress version.
+ *
+ * Warning when the site doesn't have the minimum required WordPress version.
  *
  * @since 1.5.0
  *
  * @return void
  */
 function elementor_fail_wp_version() {
-	/* translators: %s: WP version */
-	$message = sprintf( esc_html__( 'Elementor requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT ACTIVE.', 'elementor' ), '4.5' );
+	/* translators: %s: WordPress version */
+	$message = sprintf( esc_html__( 'Elementor requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'elementor' ), '4.6' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }

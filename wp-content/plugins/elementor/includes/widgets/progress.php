@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Progress Widget
+ * Elementor progress widget.
+ *
+ * Elementor widget that displays an escalating progress bar.
+ *
+ * @since 1.0.0
  */
 class Widget_Progress extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve progress widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Progress extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve progress widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Progress extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve progress widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +54,6 @@ class Widget_Progress extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-skill-bar';
-	}
-
-	/**
-	 * Retrieve the list of categories the progress widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -239,9 +235,16 @@ class Widget_Progress extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'wrapper', 'class', 'elementor-progress-wrapper' );
+		$this->add_render_attribute( 'wrapper', [
+			'class' => 'elementor-progress-wrapper',
+			'role' => 'progressbar',
+			'aria-valuemin' => '0',
+			'aria-valuemax' => '100',
+			'aria-valuenow' => $settings['percent']['size'],
+			'aria-valuetext' => $settings['inner_text'],
+		] );
 
 		if ( ! empty( $settings['progress_type'] ) ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'progress-' . $settings['progress_type'] );
@@ -256,7 +259,7 @@ class Widget_Progress extends Widget_Base {
 			<span class="elementor-title"><?php echo $settings['title']; ?></span>
 		<?php } ?>
 
-		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?> role="timer">
+		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<div <?php echo $this->get_render_attribute_string( 'progress-bar' ); ?>>
 				<span class="elementor-progress-text"><?php echo $settings['inner_text']; ?></span>
 				<?php if ( 'hide' !== $settings['display_percentage'] ) { ?>
@@ -277,10 +280,21 @@ class Widget_Progress extends Widget_Base {
 	 */
 	protected function _content_template() {
 		?>
+		<#
+		view.addRenderAttribute( 'progressWrapper', {
+			'class': [ 'elementor-progress-wrapper', 'progress-' + settings.progress_type ],
+			'role': 'progressbar',
+			'aria-valuemin': '0',
+			'aria-valuemax': '100',
+			'aria-valuenow': settings.percent.size,
+			'aria-valuetext': settings.inner_text
+		} );
+		view.addInlineEditingAttributes( 'progressWrapper' );
+		#>
 		<# if ( settings.title ) { #>
 		<span class="elementor-title">{{{ settings.title }}}</span><#
 		} #>
-		<div class="elementor-progress-wrapper progress-{{ settings.progress_type }}" role="timer">
+		<div {{{ view.getRenderAttributeString( 'progressWrapper' ) }}}>
 			<div class="elementor-progress-bar" data-max="{{ settings.percent.size }}">
 				<span class="elementor-progress-text">{{{ settings.inner_text }}}</span>
 			<# if ( 'hide' !== settings.display_percentage ) { #>

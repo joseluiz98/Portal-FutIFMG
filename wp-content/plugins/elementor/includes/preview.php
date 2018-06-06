@@ -6,7 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Preview
+ * Elementor preview.
+ *
+ * Elementor preview handler class is responsible for initializing Elementor in
+ * preview mode.
  *
  * @since 1.0.0
  */
@@ -15,7 +18,7 @@ class Preview {
 	/**
 	 * Post ID.
 	 *
-	 * Holds the ID of the current post being previewed
+	 * Holds the ID of the current post being previewed.
 	 *
 	 * @since 1.0.0
 	 * @access private
@@ -27,7 +30,9 @@ class Preview {
 	/**
 	 * Init.
 	 *
-	 * Initialize Elementor preview mode. Fired by `init` action.
+	 * Initialize Elementor preview mode.
+	 *
+	 * Fired by `template_redirect` action.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -55,9 +60,21 @@ class Preview {
 
 		add_filter( 'the_content', [ $this, 'builder_wrapper' ], 999999 );
 
+		add_action( 'wp_footer', [ $this, 'wp_footer' ] );
+
 		// Tell to WP Cache plugins do not cache this request.
 		Utils::do_not_cache();
 
+		/**
+		 * Preview init.
+		 *
+		 * Fires on Elementor preview init, after Elementor preview has finished
+		 * loading but before any headers are sent.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Preview $this The current preview.
+		 */
 		do_action( 'elementor/preview/init', $this );
 	}
 
@@ -68,7 +85,7 @@ class Preview {
 	 *
 	 * @since 1.8.0
 	 * @access public
-	 * 
+	 *
 	 * @return int Post ID.
 	 */
 	public function get_post_id() {
@@ -83,14 +100,20 @@ class Preview {
 	 * @since 1.0.0
 	 * @access public
 	 *
+	 * @param int $post_id Optional. Post ID. Default is `0`.
+	 *
 	 * @return bool Whether preview mode is active.
 	 */
-	public function is_preview_mode() {
-		if ( ! User::is_current_user_can_edit() ) {
+	public function is_preview_mode( $post_id = 0 ) {
+		if ( empty( $post_id ) ) {
+			$post_id = get_the_ID();
+		}
+
+		if ( ! User::is_current_user_can_edit( $post_id ) ) {
 			return false;
 		}
 
-		if ( ! isset( $_GET['elementor-preview'] ) ) {
+		if ( ! isset( $_GET['elementor-preview'] ) || $post_id !== (int) $_GET['elementor-preview'] ) {
 			return false;
 		}
 
@@ -106,14 +129,32 @@ class Preview {
 	 * @since 1.0.0
 	 * @access public
 	 *
+	 * @param string $content The content of the builder.
+	 *
 	 * @return string HTML wrapper for the builder.
 	 */
-	public function builder_wrapper() {
-		return '<div id="elementor" class="elementor elementor-edit-mode"></div>';
+	public function builder_wrapper( $content ) {
+		if ( get_the_ID() === $this->post_id ) {
+			$classes = 'elementor-edit-mode';
+
+			$document = Plugin::$instance->documents->get( $this->post_id );
+
+			if ( $document ) {
+				$classes .= ' ' . $document->get_container_classes();
+			}
+
+			$content = '<div id="elementor" class="' . $classes . '"></div>';
+		}
+
+		return $content;
 	}
 
 	/**
 	 * Enqueue preview styles.
+	 *
+	 * Registers all the preview styles and enqueues them.
+	 *
+	 * Fired by `wp_enqueue_scripts` action.
 	 *
 	 * @since 1.0.0
 	 * @access private
@@ -129,26 +170,45 @@ class Preview {
 		$direction_suffix = is_rtl() ? '-rtl' : '';
 
 		wp_register_style(
+			'elementor-select2',
+			ELEMENTOR_ASSETS_URL . 'lib/e-select2/css/e-select2' . $suffix . '.css',
+			[],
+			'4.0.6-rc.1'
+		);
+
+		wp_register_style(
 			'editor-preview',
 			ELEMENTOR_ASSETS_URL . 'css/editor-preview' . $direction_suffix . $suffix . '.css',
-			[],
+			[
+				'elementor-select2',
+			],
 			ELEMENTOR_VERSION
 		);
 
 		wp_enqueue_style( 'editor-preview' );
 
+		/**
+		 * Preview enqueue styles.
+		 *
+		 * Fires after Elementor preview styles are enqueued.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'elementor/preview/enqueue_styles' );
 	}
 
 	/**
 	 * Enqueue preview scripts.
 	 *
+	 * Registers all the preview scripts and enqueues them.
+	 *
+	 * Fired by `wp_enqueue_scripts` action.
+	 *
 	 * @since 1.5.4
 	 * @access private
 	 */
 	private function enqueue_scripts() {
 		Plugin::$instance->frontend->register_scripts();
-		Plugin::$instance->frontend->enqueue_scripts();
 
 		Plugin::$instance->widgets_manager->enqueue_widgets_scripts();
 
@@ -162,11 +222,41 @@ class Preview {
 			true
 		);
 
+		/**
+		 * Preview enqueue scripts.
+		 *
+		 * Fires after Elementor preview scripts are enqueued.
+		 *
+		 * @since 1.5.4
+		 */
 		do_action( 'elementor/preview/enqueue_scripts' );
 	}
 
 	/**
+	 * Elementor Preview footer scripts and styles.
+	 *
+	 * Handle styles and scripts from frontend.
+	 *
+	 * Fired by `wp_footer` action.
+	 *
+	 * @since 2.0.9
+	 * @access public
+	 */
+	public function wp_footer() {
+		$frontend = Plugin::$instance->frontend;
+		if ( $frontend->has_elementor_in_page() ) {
+			// Has header/footer/widget-template - enqueue all style/scripts/fonts.
+			$frontend->wp_footer();
+		} else {
+			// Enqueue only scripts.
+			$frontend->enqueue_scripts();
+		}
+	}
+
+	/**
 	 * Preview constructor.
+	 *
+	 * Initializing Elementor preview.
 	 *
 	 * @since 1.0.0
 	 * @access public

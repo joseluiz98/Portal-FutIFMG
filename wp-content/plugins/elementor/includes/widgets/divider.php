@@ -6,11 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Divider Widget
+ * Elementor divider widget.
+ *
+ * Elementor widget that displays a line that divides different elements in the
+ * page.
+ *
+ * @since 1.0.0
  */
 class Widget_Divider extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve divider widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +30,8 @@ class Widget_Divider extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve divider widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +44,8 @@ class Widget_Divider extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve divider widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,6 +55,22 @@ class Widget_Divider extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-divider';
+	}
+
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the divider widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
+	public function get_categories() {
+		return [ 'basic' ];
 	}
 
 	/**

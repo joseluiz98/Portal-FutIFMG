@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Shortcode Widget
+ * Elementor shortcode widget.
+ *
+ * Elementor widget that insert any shortcodes into the page.
+ *
+ * @since 1.0.0
  */
 class Widget_Shortcode extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve shortcode widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Shortcode extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve shortcode widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Shortcode extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve shortcode widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +54,6 @@ class Widget_Shortcode extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-shortcode';
-	}
-
-	/**
-	 * Retrieve the list of categories the shortcode widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -93,7 +89,7 @@ class Widget_Shortcode extends Widget_Base {
 		$this->add_control(
 			'shortcode',
 			[
-				'label' => __( 'Insert your shortcode here', 'elementor' ),
+				'label' => __( 'Enter your shortcode', 'elementor' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'placeholder' => '[gallery id="123" size="medium"]',
 				'default' => '',
@@ -123,7 +119,7 @@ class Widget_Shortcode extends Widget_Base {
 	/**
 	 * Render shortcode widget as plain content.
 	 *
-	 * Override the default behavior by printing the shortcode insted of rendering it.
+	 * Override the default behavior by printing the shortcode instead of rendering it.
 	 *
 	 * @since 1.0.0
 	 * @access public

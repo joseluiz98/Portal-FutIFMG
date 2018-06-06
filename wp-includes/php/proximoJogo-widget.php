@@ -22,7 +22,7 @@ try
 	$sql = include 'wp-includes/mysql/queries/recuperaDadosTime.sql';
 	$resultado = $conn->query($sql);
 	$dadosTimeCasa = $resultado->fetch(PDO::FETCH_ASSOC);
-	$linkTimeCasa = "http://futifmg.serveblog.net:8080/times?tmpString=";
+	$linkTimeCasa = "http://joseluiz.servehttp.com:8080/futifmg/times?tmpString=";
 	$linkTimeCasa .= $dadosTimeCasa["nomeTime"];
 
 	//Recupera dados do time de fora
@@ -31,7 +31,7 @@ try
 	$resultado = $conn->prepare($sql);
 	$resultado->execute();
 	$dadosTimeVisitante = $resultado->fetch(PDO::FETCH_ASSOC);
-	$linkTimeVisitante= "http://futifmg.serveblog.net:8080/times?tmpString=";
+	$linkTimeVisitante= "http://joseluiz.servehttp.com:8080/futifmg/times?tmpString=";
 	$linkTimeVisitante .= $dadosTimeCasa["nomeTime"];
 
 	echo '<h2 style="text-align: center;">Próximo Jogo:</h2>

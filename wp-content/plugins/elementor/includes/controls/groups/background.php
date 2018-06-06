@@ -6,39 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Background control.
+ * Elementor background control.
  *
  * A base control for creating background control. Displays input fields to define
- * the background color, background image, background gradiant or background video.
- *
- * Creating new control in the editor (inside `Widget_Base::_register_controls()`
- * method):
- *
- *    $this->add_group_control(
- *    	Group_Control_Background::get_type(),
- *    	[
- *    		'name' => 'background',
- *    		'types' => [ 'classic', 'gradient', 'video' ],
- *    		'selector' => '{{WRAPPER}} .wrapper',
- *    		'separator' => 'before',
- *    	]
- *    );
+ * the background color, background image, background gradient or background video.
  *
  * @since 1.2.2
- *
- * @param string $name           The field name.
- * @param array  $types          Optional. Define spesific types to use. Available
- *                               types are `classic`, `gradient` and `video`. Default
- *                               is an empty array, including all the types.
- * @param array  $fields_options Optional. An array of arays contaning data that
- *                               overrides control settings. Default is an empty array.
- * @param string $separator      Optional. Set the position of the control separator.
- *                               Available values are 'default', 'before', 'after'
- *                               and 'none'. 'default' will position the separator
- *                               depending on the control type. 'before' / 'after'
- *                               will position the separator before/after the
- *                               control. 'none' will hide the separator. Default
- *                               is 'default'.
  */
 class Group_Control_Background extends Group_Control_Base {
 
@@ -69,11 +42,11 @@ class Group_Control_Background extends Group_Control_Base {
 	private static $background_types;
 
 	/**
-	 * Retrieve type.
-	 *
 	 * Get background control type.
 	 *
-	 * @since 1.2.2
+	 * Retrieve the control type, in this case `background`.
+	 *
+	 * @since 1.0.0
 	 * @access public
 	 * @static
 	 *
@@ -84,10 +57,10 @@ class Group_Control_Background extends Group_Control_Base {
 	}
 
 	/**
-	 * Retrieve background types.
-	 * 
-	 * Gat available background types.
-	 * 
+	 * Get background control types.
+	 *
+	 * Retrieve available background types.
+	 *
 	 * @since 1.2.2
 	 * @access public
 	 * @static
@@ -96,25 +69,24 @@ class Group_Control_Background extends Group_Control_Base {
 	 */
 	public static function get_background_types() {
 		if ( null === self::$background_types ) {
-			self::$background_types = self::init_background_types();
+			self::$background_types = self::get_default_background_types();
 		}
 
 		return self::$background_types;
 	}
 
-	/* TODO: rename to `default_background_types()` */
 	/**
-	 * Default background types.
+	 * Get Default background types.
 	 *
 	 * Retrieve background control initial types.
 	 *
-	 * @since 1.2.2
+	 * @since 2.0.0
 	 * @access private
 	 * @static
 	 *
 	 * @return array Default background types.
 	 */
-	private static function init_background_types() {
+	private static function get_default_background_types() {
 		return [
 			'classic' => [
 				'title' => _x( 'Classic', 'Background Control', 'elementor' ),
@@ -271,6 +243,9 @@ class Group_Control_Background extends Group_Control_Base {
 		$fields['image'] = [
 			'label' => _x( 'Image', 'Background Control', 'elementor' ),
 			'type' => Controls_Manager::MEDIA,
+			'dynamic' => [
+				'active' => true,
+			],
 			'title' => _x( 'Background Image', 'Background Control', 'elementor' ),
 			'selectors' => [
 				'{{SELECTOR}}' => 'background-image: url("{{URL}}");',
@@ -315,11 +290,23 @@ class Group_Control_Background extends Group_Control_Base {
 				'fixed' => _x( 'Fixed', 'Background Control', 'elementor' ),
 			],
 			'selectors' => [
-				'(tablet+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
+				'(desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
 			],
 			'condition' => [
 				'background' => [ 'classic' ],
 				'image[url]!' => '',
+			],
+		];
+
+		$fields['attachment_alert'] = [
+			'type' => Controls_Manager::RAW_HTML,
+			'content_classes' => 'elementor-control-field-description',
+			'raw' => __( 'Note: Attachment Fixed works only on desktop.', 'elementor' ),
+			'separator' => 'none',
+			'condition' => [
+				'background' => [ 'classic' ],
+				'image[url]!' => '',
+				'attachment' => 'fixed',
 			],
 		];
 
@@ -366,7 +353,7 @@ class Group_Control_Background extends Group_Control_Base {
 			'label' => _x( 'Video Link', 'Background Control', 'elementor' ),
 			'type' => Controls_Manager::TEXT,
 			'placeholder' => 'https://www.youtube.com/watch?v=9uOETcuFjbE',
-			'description' => __( 'Insert YouTube link or video file (mp4 is recommended)', 'elementor' ),
+			'description' => __( 'YouTube link or video file (mp4 is recommended).', 'elementor' ),
 			'label_block' => true,
 			'default' => '',
 			'condition' => [
@@ -377,7 +364,7 @@ class Group_Control_Background extends Group_Control_Base {
 
 		$fields['video_fallback'] = [
 			'label' => _x( 'Background Fallback', 'Background Control', 'elementor' ),
-			'description' => __( 'This cover image will replace the background video on mobile or tablet.', 'elementor' ),
+			'description' => __( 'This cover image will replace the background video on mobile and tablet devices.', 'elementor' ),
 			'type' => Controls_Manager::MEDIA,
 			'label_block' => true,
 			'condition' => [
@@ -393,9 +380,9 @@ class Group_Control_Background extends Group_Control_Base {
 	}
 
 	/**
-	 * Retrieve child default args.
-	 * 
-	 * Get the default arguments for all the child controls for a specific group
+	 * Get child default args.
+	 *
+	 * Retrieve the default arguments for all the child controls for a specific group
 	 * control.
 	 *
 	 * @since 1.2.2
@@ -462,5 +449,22 @@ class Group_Control_Background extends Group_Control_Base {
 		$fields['background']['options'] = $choose_types;
 
 		return parent::prepare_fields( $fields );
+	}
+
+	/**
+	 * Get default options.
+	 *
+	 * Retrieve the default options of the background control. Used to return the
+	 * default options while initializing the background control.
+	 *
+	 * @since 1.9.0
+	 * @access protected
+	 *
+	 * @return array Default background control options.
+	 */
+	protected function get_default_options() {
+		return [
+			'popover' => false,
+		];
 	}
 }

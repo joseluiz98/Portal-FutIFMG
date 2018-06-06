@@ -1,5 +1,5 @@
-/*! elementor - v1.8.8 - 30-11-2017 */
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! elementor - v2.0.15 - 05-06-2018 */
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 var ElementsHandler;
 
 ElementsHandler = function( $ ) {
@@ -129,6 +129,8 @@ module.exports = ElementsHandler;
 			elements.$body = $( 'body' );
 
 			elements.$elementor = elements.$document.find( '.elementor' );
+
+			elements.$wpAdminBar = elements.$document.find( '#wpadminbar' );
 		};
 
 		var bindEvents = function() {
@@ -143,7 +145,8 @@ module.exports = ElementsHandler;
 			};
 
 			self.modules = {
-				StretchElement: require( 'elementor-frontend/modules/stretch-element' )
+				StretchElement: require( 'elementor-frontend/modules/stretch-element' ),
+				Masonry: require( 'elementor-utils/masonry' )
 			};
 
 			self.elementsHandler = new ElementsHandler( $ );
@@ -281,10 +284,23 @@ module.exports = ElementsHandler;
 		};
 
 		this.waypoint = function( $element, callback, options ) {
-			var correctCallback = function() {
-				var element = this.element || this;
+			var defaultOptions = {
+				offset: '100%',
+				triggerOnce: true
+			};
 
-				return callback.apply( element, arguments );
+			options = $.extend( defaultOptions, options );
+
+			var correctCallback = function() {
+				var element = this.element || this,
+					result = callback.apply( element, arguments );
+
+				// If is Waypoint new API and is frontend
+				if ( options.triggerOnce && this.destroy ) {
+					this.destroy();
+				}
+
+				return result;
 			};
 
 			return $element.elementorWaypoint( correctCallback, options );
@@ -298,7 +314,7 @@ if ( ! elementorFrontend.isEditMode() ) {
 	jQuery( elementorFrontend.init );
 }
 
-},{"../utils/hooks":21,"./handler-module":3,"elementor-frontend/elements-handler":1,"elementor-frontend/modules/stretch-element":17,"elementor-frontend/utils/anchors":18,"elementor-frontend/utils/lightbox":19,"elementor-frontend/utils/youtube":20,"elementor-utils/hot-keys":22}],3:[function(require,module,exports){
+},{"../utils/hooks":21,"./handler-module":3,"elementor-frontend/elements-handler":1,"elementor-frontend/modules/stretch-element":17,"elementor-frontend/utils/anchors":18,"elementor-frontend/utils/lightbox":19,"elementor-frontend/utils/youtube":20,"elementor-utils/hot-keys":22,"elementor-utils/masonry":23}],3:[function(require,module,exports){
 var ViewModule = require( '../utils/view-module' ),
 	HandlerModule;
 
@@ -434,7 +450,7 @@ HandlerModule = ViewModule.extend( {
 
 module.exports = HandlerModule;
 
-},{"../utils/view-module":24}],4:[function(require,module,exports){
+},{"../utils/view-module":25}],4:[function(require,module,exports){
 var TabsModule = require( 'elementor-frontend/handlers/base-tabs' );
 
 module.exports = function( $scope ) {
@@ -595,7 +611,7 @@ module.exports = function( $scope, $ ) {
 		}
 
 		$number.numerator( data );
-	}, { offset: '90%' } );
+	} );
 };
 
 },{}],8:[function(require,module,exports){
@@ -624,21 +640,17 @@ GlobalHandler = HandlerModule.extend( {
 		return elementSettings.animation || elementSettings._animation;
 	},
 	onInit: function() {
-		var self = this;
+		HandlerModule.prototype.onInit.apply( this, arguments );
 
-		HandlerModule.prototype.onInit.apply( self, arguments );
+		var animation = this.getAnimation();
 
-		if ( ! self.getAnimation() ) {
+		if ( ! animation ) {
 			return;
 		}
 
-		var waypoint = elementorFrontend.waypoint( self.$element, function() {
-			self.animate();
+		this.$element.removeClass( animation );
 
-			if ( waypoint && waypoint[0] && waypoint[0].destroy ) { // If it's Waypoint new API and is frontend
-				waypoint[0].destroy();
-			}
-		}, { offset: '90%' } );
+		elementorFrontend.waypoint( this.$element, this.animate.bind( this ) );
 	},
 	onElementChange: function( propertyName ) {
 		if ( /^_?animation/.test( propertyName ) ) {
@@ -727,7 +739,7 @@ module.exports = function( $scope, $ ) {
 		var $progressbar = $( this );
 
 		$progressbar.css( 'width', $progressbar.data( 'max' ) + '%' );
-	}, { offset: '90%' } );
+	} );
 };
 
 },{}],11:[function(require,module,exports){
@@ -786,7 +798,13 @@ var BackgroundVideo = HandlerModule.extend( {
 
 	prepareYTVideo: function( YT, videoID ) {
 		var self = this,
-			$backgroundVideoContainer = self.elements.$backgroundVideoContainer;
+			$backgroundVideoContainer = self.elements.$backgroundVideoContainer,
+			startStateCode = YT.PlayerState.PLAYING;
+
+		// Since version 67, Chrome doesn't fire the `PLAYING` state at start time
+		if ( window.chrome ) {
+			startStateCode = YT.PlayerState.UNSTARTED;
+		}
 
 		$backgroundVideoContainer.addClass( 'elementor-loading elementor-invisible' );
 
@@ -802,7 +820,7 @@ var BackgroundVideo = HandlerModule.extend( {
 				},
 				onStateChange: function( event ) {
 					switch ( event.data ) {
-						case YT.PlayerState.PLAYING:
+						case startStateCode:
 							$backgroundVideoContainer.removeClass( 'elementor-invisible elementor-loading' );
 
 							break;
@@ -875,25 +893,23 @@ var StretchedSection = HandlerModule.extend( {
 	stretchElement: null,
 
 	bindEvents: function() {
-		elementorFrontend.addListenerOnce( this.$element.data( 'model-cid' ), 'resize', this.stretchSection );
+		elementorFrontend.addListenerOnce( this.$element.data( 'model-cid' ), 'resize', this.stretch );
 	},
 
 	initStretch: function() {
 		this.stretchElement = new elementorFrontend.modules.StretchElement( { element: this.$element } );
 	},
 
-	stretchSection: function() {
+	stretch: function() {
 		var isStretched = this.$element.hasClass( 'elementor-section-stretched' );
 
-		if ( elementorFrontend.isEditMode() || isStretched ) {
-			this.stretchElement.reset();
+		if ( ! isStretched ) {
+			return;
 		}
 
-		if ( isStretched ) {
-			this.stretchElement.setSettings( 'selectors.container', elementorFrontend.getGeneralSettings( 'elementor_stretched_section_container' ) || window );
+		this.stretchElement.setSettings( 'selectors.container', elementorFrontend.getGeneralSettings( 'elementor_stretched_section_container' ) || window );
 
-			this.stretchElement.stretch();
-		}
+		this.stretchElement.stretch();
 	},
 
 	onInit: function() {
@@ -901,12 +917,18 @@ var StretchedSection = HandlerModule.extend( {
 
 		this.initStretch();
 
-		this.stretchSection();
+		var isStretched = this.$element.hasClass( 'elementor-section-stretched' );
+
+		if ( elementorFrontend.isEditMode() || isStretched ) {
+			this.stretchElement.reset();
+		}
+
+		this.stretch();
 	},
 
 	onGeneralSettingsChange: function( changed ) {
 		if ( 'elementor_stretched_section_container' in changed ) {
-			this.stretchSection();
+			this.stretch();
 		}
 	}
 } );
@@ -1001,7 +1023,7 @@ module.exports = function( $scope ) {
 	}
 
 	if ( elementorFrontend.isEditMode() ) {
-		new Shapes( { $element:  $scope } );
+		new Shapes( { $element: $scope } );
 	}
 
 	new BackgroundVideo( { $element: $scope } );
@@ -1254,8 +1276,17 @@ module.exports = ViewModule.extend( {
 
 	stretch: function() {
 		var containerSelector = this.getSettings( 'selectors.container' ),
-			$element = this.elements.$element,
-			$container = jQuery( containerSelector ),
+			$container;
+
+		try {
+			$container = jQuery( containerSelector );
+		} catch ( e ) {}
+
+		if ( ! $container || ! $container.length ) {
+			$container = jQuery( this.getDefaultSettings().selectors.container );
+		}
+
+		var $element = this.elements.$element,
 			isSpecialContainer = window !== $container[0];
 
 		this.reset();
@@ -1291,15 +1322,15 @@ module.exports = ViewModule.extend( {
 	reset: function() {
 		var css = {};
 
-		css.width = 'auto';
+		css.width = '';
 
-		css[ this.getSettings( 'direction' ) ] = 0;
+		css[ this.getSettings( 'direction' ) ] = '';
 
 		this.elements.$element.css( css );
 	}
 } );
 
-},{"../../utils/view-module":24}],18:[function(require,module,exports){
+},{"../../utils/view-module":25}],18:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' );
 
 module.exports = ViewModule.extend( {
@@ -1310,8 +1341,7 @@ module.exports = ViewModule.extend( {
 			selectors: {
 				links: 'a[href*="#"]',
 				targets: '.elementor-element, .elementor-menu-anchor',
-				scrollable: 'html, body',
-				wpAdminBar: '#wpadminbar'
+				scrollable: 'html, body'
 			}
 		};
 	},
@@ -1321,8 +1351,7 @@ module.exports = ViewModule.extend( {
 			selectors = this.getSettings( 'selectors' );
 
 		return {
-			$scrollable: $( selectors.scrollable ),
-			$wpAdminBar: $( selectors.wpAdminBar )
+			$scrollable: $( selectors.scrollable )
 		};
 	},
 
@@ -1345,11 +1374,22 @@ module.exports = ViewModule.extend( {
 			return;
 		}
 
-		var hasAdminBar = ( 1 <= this.elements.$wpAdminBar.length ),
-			scrollTop = $anchor.offset().top;
+		var scrollTop = $anchor.offset().top,
+			$wpAdminBar = elementorFrontend.getElements( '$wpAdminBar' ),
+			$activeStickys = jQuery( '.elementor-sticky--active' ),
+			maxStickyHeight = 0;
 
-		if ( hasAdminBar ) {
-			scrollTop -= this.elements.$wpAdminBar.height();
+		if ( $wpAdminBar.length > 0 ) {
+			scrollTop -= $wpAdminBar.height();
+		}
+
+		// Offset height of tallest sticky
+		if ( $activeStickys.length > 0 ) {
+			 maxStickyHeight = Math.max.apply( null, $activeStickys.map( function() {
+				return jQuery( this ).height();
+			} ).get() );
+
+			scrollTop -= maxStickyHeight;
 		}
 
 		event.preventDefault();
@@ -1368,7 +1408,7 @@ module.exports = ViewModule.extend( {
 	}
 } );
 
-},{"../../utils/view-module":24}],19:[function(require,module,exports){
+},{"../../utils/view-module":25}],19:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' ),
 	LightboxModule;
 
@@ -1821,7 +1861,7 @@ LightboxModule = ViewModule.extend( {
 
 module.exports = LightboxModule;
 
-},{"../../utils/view-module":24}],20:[function(require,module,exports){
+},{"../../utils/view-module":25}],20:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' );
 
 module.exports = ViewModule.extend( {
@@ -1871,7 +1911,7 @@ module.exports = ViewModule.extend( {
 	}
 } );
 
-},{"../../utils/view-module":24}],21:[function(require,module,exports){
+},{"../../utils/view-module":25}],21:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2132,7 +2172,7 @@ module.exports = EventManager;
 
 },{}],22:[function(require,module,exports){
 var HotKeys = function() {
-	var hotKeysHandlers = this.hotKeysHandlers = {};
+	var hotKeysHandlers = {};
 
 	var isMac = function() {
 		return -1 !== navigator.userAgent.indexOf( 'Mac OS X' );
@@ -2183,6 +2223,59 @@ var HotKeys = function() {
 module.exports = new HotKeys();
 
 },{}],23:[function(require,module,exports){
+var ViewModule = require( './view-module' );
+
+module.exports = ViewModule.extend( {
+
+	getDefaultSettings: function() {
+		return {
+			container: null,
+			items: null,
+			columnsCount: 3,
+			verticalSpaceBetween: 30
+		};
+	},
+
+	getDefaultElements: function() {
+		return {
+			$container: jQuery( this.getSettings( 'container' ) ),
+			$items: jQuery( this.getSettings( 'items' ) )
+		};
+	},
+
+	run: function() {
+		var heights = [],
+			distanceFromTop = this.elements.$container.position().top,
+			settings = this.getSettings(),
+			columnsCount = settings.columnsCount;
+
+		distanceFromTop += parseInt( this.elements.$container.css( 'margin-top' ), 10 );
+
+		this.elements.$items.each( function( index ) {
+			var row = Math.floor( index / columnsCount ),
+				$item = jQuery( this ),
+				itemHeight = $item[0].getBoundingClientRect().height + settings.verticalSpaceBetween;
+
+			if ( row ) {
+				var itemPosition = $item.position(),
+                    indexAtRow = index % columnsCount,
+                    pullHeight = itemPosition.top - distanceFromTop - heights[ indexAtRow ];
+
+				pullHeight -= parseInt( $item.css( 'margin-top' ), 10 );
+
+				pullHeight *= -1;
+
+				$item.css( 'margin-top', pullHeight + 'px' );
+
+                heights[ indexAtRow ] += itemHeight;
+			} else {
+				heights.push( itemHeight );
+			}
+		} );
+	}
+} );
+
+},{"./view-module":25}],24:[function(require,module,exports){
 var Module = function() {
 	var $ = jQuery,
 		instanceParams = arguments,
@@ -2281,11 +2374,23 @@ var Module = function() {
 	};
 
 	this.on = function( eventName, callback ) {
-		if ( ! events[ eventName ] ) {
-			events[ eventName ] = [];
+		if ( 'object' === typeof eventName ) {
+			$.each( eventName, function( singleEventName ) {
+				self.on( singleEventName, this );
+			} );
+
+			return self;
 		}
 
-		events[ eventName ].push( callback );
+		var eventNames = eventName.split( ' ' );
+
+		eventNames.forEach( function( singleEventName ) {
+			if ( ! events[ singleEventName ] ) {
+				events[ singleEventName ] = [];
+			}
+
+			events[ singleEventName ].push( callback );
+		} );
 
 		return self;
 	};
@@ -2321,12 +2426,14 @@ var Module = function() {
 		var callbacks = events[ eventName ];
 
 		if ( ! callbacks ) {
-			return;
+			return self;
 		}
 
 		$.each( callbacks, function( index, callback ) {
 			callback.apply( self, params );
 		} );
+
+		return self;
 	};
 
 	init();
@@ -2374,7 +2481,7 @@ Module.extend = function( properties ) {
 
 module.exports = Module;
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 var Module = require( './module' ),
 	ViewModule;
 
@@ -2400,5 +2507,5 @@ ViewModule = Module.extend( {
 
 module.exports = ViewModule;
 
-},{"./module":23}]},{},[2])
+},{"./module":24}]},{},[2])
 //# sourceMappingURL=frontend.js.map

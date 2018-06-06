@@ -3,7 +3,7 @@
  * $Id$
  *
  * Copyright (c) 2011, Donovan Schönknecht.  All rights reserved.
- * Portions copyright (c) 2012-3, David Anderson (http://www.simbahosting.co.uk).  All rights reserved.
+ * Portions copyright (c) 2012-2018, David Anderson (https://david.dw-perspective.org.uk).  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -47,8 +47,11 @@ class UpdraftPlus_S3 {
 	private $__accessKey = null; // AWS Access key
 	private $__secretKey = null; // AWS Secret key
 	private $__sslKey = null;
+	private $__session_token = null; //For Vault temporary users
+	private $_serverSideEncryption = false;
 
 	public $endpoint = 's3.amazonaws.com';
+	public $region = 'us-east-1';
 	public $proxy = null;
 
 	// Added to cope with a particular situation where the user had no permission to check the bucket location, which necessitated using DNS-based endpoints.
@@ -68,6 +71,8 @@ class UpdraftPlus_S3 {
 
 	private $__signingKeyPairId = null; // AWS Key Pair ID
 	private $__signingKeyResource = false; // Key resource, freeSigningKey() must be called to clear it from memory
+
+	public $signVer = 'v2';
 	
 	/**
 	 * Constructor - if you're not using the class statically
@@ -75,19 +80,26 @@ class UpdraftPlus_S3 {
 	 * @param string $accessKey Access key
 	 * @param string $secretKey Secret key
 	 * @param boolean $useSSL Enable SSL
-	 * @throws Exception
+	 * @param boolean $sslCACert SSL Certificate
+	 * @param string|null $endpoint Endpoint
+	 * @param string $session_token The session token returned by AWS for temporary credentials access
+	 * @param string $region Region
+
+	 * @throws Exception If cURL extension is not present
 	 *
 	 * @return self
 	 */
-	public function __construct($accessKey = null, $secretKey = null, $useSSL = true, $sslCACert = true, $endpoint = null) {
+	public function __construct($accessKey = null, $secretKey = null, $useSSL = true, $sslCACert = true, $endpoint = null, $session_token = null, $region = 'us-east-1') {
 		if (null !== $accessKey && null !== $secretKey) {
-			$this->setAuth($accessKey, $secretKey);
+			$this->setAuth($accessKey, $secretKey, $session_token);
 		}
 		$this->useSSL = $useSSL;
 		$this->sslCACert = $sslCACert;
 		if (!empty($endpoint)) {
 			$this->endpoint = $endpoint;
 		}
+
+		$this->region = $region;
 
 		if (!function_exists('curl_init')) {
 			global $updraftplus;
@@ -108,6 +120,37 @@ class UpdraftPlus_S3 {
 	}
 	
 	/**
+	 * Set Server Side Encryption
+	 * Example value: 'AES256'. See: https://docs.aws.amazon.com/AmazonS3/latest/dev/SSEUsingPHPSDK.html
+	 *
+	 * @param string|boolean $sse Server side encryption standard; or false for none
+	 * @return void
+	 */
+	public function setServerSideEncryption($value) {
+		$this->_serverSideEncryption = $value;
+	}
+	
+	/**
+	 * Set the service region
+	 *
+	 * @param string $region Region
+	 * @return void
+	 */
+	public function setRegion($region) {
+		$this->region = $region;
+	}
+
+	/**
+	 * Get the service region
+	 * Note: Region calculation will be done in methods/s3.php file
+	 *
+	 * @return string Region
+	 */
+	public function getRegion() {
+		return $this->region;
+	}
+
+	/**
 	 * Set the service port
 	 *
 	 * @param Integer $port Port number
@@ -126,9 +169,10 @@ class UpdraftPlus_S3 {
 	 *
 	 * @return void
 	 */
-	public function setAuth($accessKey, $secretKey) {
+	public function setAuth($accessKey, $secretKey, $session_token = null) {
 		$this->__accessKey = $accessKey;
 		$this->__secretKey = $secretKey;
+		$this->__session_token = $session_token;
 	}
 
 	/**
@@ -235,6 +279,15 @@ class UpdraftPlus_S3 {
 		}
 	}
 
+	/**
+	 * Set Signature Version
+	 *
+	 * @param string $version
+	 * @return void
+	 */
+	public function setSignatureVersion($version = 'v2') {
+		$this->signVer = $version;
+	}
 
 	/**
 	 * Internal error handler
@@ -405,7 +458,9 @@ class UpdraftPlus_S3 {
 		$rest = new UpdraftPlus_S3Request('PUT', $bucket, '', $this->endpoint, $this->use_dns_bucket_name, $this);
 		$rest->setAmzHeader('x-amz-acl', $acl);
 
-		if (false !== $location) {
+		if (false === $location) $location = $this->getRegion();
+
+		if (false !== $location && 'us-east-1' !== $location) {
 			$dom = new DOMDocument;
 			$createBucketConfiguration = $dom->createElement('CreateBucketConfiguration');
 			$locationConstraint = $dom->createElement('LocationConstraint', $location);
@@ -466,7 +521,7 @@ class UpdraftPlus_S3 {
 			return false;
 		}
 		return array('file' => $file, 'size' => filesize($file), 'md5sum' => $md5sum !== false ?
-		(is_string($md5sum) ? $md5sum : base64_encode(md5_file($file, true))) : '');
+		(is_string($md5sum) ? $md5sum : base64_encode(md5_file($file, true))) : '', 'sha256sum' => hash_file('sha256', $file));
 	}
 
 
@@ -631,6 +686,10 @@ class UpdraftPlus_S3 {
 		}
 
 		if (false !== $rest->error) {
+			// Special case: when the error means "you've already done that". Turn it into success. See in: https://trello.com/c/6jJoiCG5
+			if ('InternalError' == $rest->error['code'] && 'This multipart completion is already in progress' == $rest->error['message']) {
+				return true;
+			}
 			$this->__triggerError(sprintf("UpdraftPlus_S3::completeMultipartUpload(): [%s] %s",
 			$rest->error['code'], $rest->error['message']), __FILE__, __LINE__);
 			return false;
@@ -683,7 +742,8 @@ class UpdraftPlus_S3 {
 
 		if (!is_array($input)) $input = array(
 			'data' => $input, 'size' => strlen($input),
-			'md5sum' => base64_encode(md5($input, true))
+			'md5sum' => base64_encode(md5($input, true)),
+			'sha256sum' => hash('sha256', $input)
 		);
 
 		// Data
@@ -722,11 +782,16 @@ class UpdraftPlus_S3 {
 
 		if ($storageClass !== self::STORAGE_CLASS_STANDARD) // Storage class
 			$rest->setAmzHeader('x-amz-storage-class', $storageClass);
-
+			
+		if (!empty($this->_serverSideEncryption)) {
+			$rest->setAmzHeader('x-amz-server-side-encryption', $this->_serverSideEncryption);
+		}
 		// We need to post with Content-Length and Content-Type, MD5 is optional
 		if ($rest->size >= 0 && (false !== $rest->fp || false !== $rest->data)) {
 			$rest->setHeader('Content-Type', $input['type']);
 			if (isset($input['md5sum'])) $rest->setHeader('Content-MD5', $input['md5sum']);
+
+			if (isset($input['sha256sum'])) $rest->setAmzHeader('x-amz-content-sha256', $input['sha256sum']);
 
 			$rest->setAmzHeader('x-amz-acl', $acl);
 			foreach ($metaHeaders as $h => $v) $rest->setAmzHeader('x-amz-meta-'.$h, $v);
@@ -1010,12 +1075,12 @@ class UpdraftPlus_S3 {
 		if (false === $rest->error && 200 !== $rest->code) {
 			$rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
 		}
-
 		if (false !== $rest->error) {
 			$this->__triggerError(sprintf("UpdraftPlus_S3::getBucketLocation({$bucket}): [%s] %s",
 			$rest->error['code'], $rest->error['message']), __FILE__, __LINE__);
 			return false;
 		}
+		
 		return (isset($rest->body[0]) && (string)$rest->body[0] !== '') ? (string)$rest->body[0] : 'US';
 	}
 
@@ -1699,10 +1764,13 @@ class UpdraftPlus_S3 {
 		if ('' !== $comment) $distributionConfig->appendChild($dom->createElement('Comment', $comment));
 		$distributionConfig->appendChild($dom->createElement('Enabled', $enabled ? 'true' : 'false'));
 
-		$trusted = $dom->createElement('TrustedSigners');
-		foreach ($trustedSigners as $id => $type)
-			$trusted->appendChild(('' !== $id) ? $dom->createElement($type, $id) : $dom->createElement($type));
-		$distributionConfig->appendChild($trusted);
+		if (!empty($trustedSigners)) {
+			$trusted = $dom->createElement('TrustedSigners');
+			foreach ($trustedSigners as $id => $type) {
+				$trusted->appendChild(('' !== $id) ? $dom->createElement($type, $id) : $dom->createElement($type));
+			}
+			$distributionConfig->appendChild($trusted);
+		}
 
 		$dom->appendChild($distributionConfig);
 		//var_dump($dom->saveXML());
@@ -1882,6 +1950,118 @@ class UpdraftPlus_S3 {
 		(str_repeat(chr(0x36), 64))) . $string)))));
 	}
 
+	/**
+	 * Generate the headers for AWS Signature V4
+	 *
+	 * @internal Used by UpdraftPlus_S3Request::getResponse()
+	 * @param array $aHeaders amzHeaders
+	 * @param array $headers
+	 * @param string $method
+	 * @param string $uri
+	 * @param string $data
+	 *
+	 * @return array $headers
+	 */
+	public function __getSignatureV4($aHeaders, $headers, $method = 'GET', $uri = '', $data = '') {
+		$service = 's3';
+		$region = $this->getRegion();
+
+		$algorithm   = 'AWS4-HMAC-SHA256';
+		$amzHeaders  = array();
+		$amzRequests = array();
+
+		$amzDate = gmdate('Ymd\THis\Z');
+		$amzDateStamp = gmdate('Ymd');
+
+		// amz-date ISO8601 format? for aws request
+		$amzHeaders['x-amz-date'] = $amzDate;
+
+		// CanonicalHeaders
+		foreach ($headers as $k => $v) {
+			$amzHeaders[strtolower($k)] = trim($v);
+		}
+
+		foreach ($aHeaders as $k => $v) {
+			$amzHeaders[strtolower($k)] = trim($v);
+		}
+		uksort($amzHeaders, 'strcmp');
+
+		// payload
+		$payloadHash = isset($amzHeaders['x-amz-content-sha256']) ? $amzHeaders['x-amz-content-sha256'] : hash('sha256', $data);
+
+		// parameters
+		$parameters = array();
+		if (strpos($uri, '?')) {
+			list($uri, $query_str) = @explode('?', $uri);
+			parse_str($query_str, $parameters);
+		}
+
+		// Canonical Requests
+		$amzRequests[] = $method;
+		$uriQmPos = strpos($uri, '?');
+		$amzRequests[] = (false === $uriQmPos ? $uri : substr($uri, 0, $uriQmPos));
+		$amzRequests[] = http_build_query($parameters);
+
+		// add headers as string to requests
+		foreach ($amzHeaders as $k => $v) {
+			$amzRequests[] = $k . ':' . $v;
+		}
+
+		// add a blank entry so we end up with an extra line break
+		$amzRequests[] = '';
+
+		// SignedHeaders
+		$amzRequests[] = implode(';', array_keys($amzHeaders));
+
+		// payload hash
+		$amzRequests[] = $payloadHash;
+
+		// request as string
+		$amzRequestStr = implode("\n", $amzRequests);
+
+		// CredentialScope
+		$credentialScope = array();
+		$credentialScope[] = $amzDateStamp;
+		$credentialScope[] = $region;
+		$credentialScope[] = $service;
+		$credentialScope[] = 'aws4_request';
+
+		// stringToSign
+		$stringToSign = array();
+		$stringToSign[] = $algorithm;
+		$stringToSign[] = $amzDate;
+		$stringToSign[] = implode('/', $credentialScope);
+		$stringToSign[] = hash('sha256', $amzRequestStr);
+
+		// as string
+		$stringToSignStr = implode("\n", $stringToSign);
+
+		// Make Signature
+		$kSecret = 'AWS4' . $this->__secretKey;
+		$kDate = hash_hmac('sha256', $amzDateStamp, $kSecret, true);
+		$kRegion = hash_hmac('sha256', $region, $kDate, true);
+		$kService = hash_hmac('sha256', $service, $kRegion, true);
+		$kSigning = hash_hmac('sha256', 'aws4_request', $kService, true);
+		$signature = hash_hmac('sha256', $stringToSignStr, $kSigning);
+
+		$authorization = array(
+			'Credential=' . $this->__accessKey . '/' . implode('/', $credentialScope),
+			'SignedHeaders=' . implode(';', array_keys($amzHeaders)),
+			'Signature=' . $signature,
+		);
+		$authorizationStr = $algorithm . ' ' . implode(',', $authorization);
+
+		$resultHeaders = array(
+			'X-AMZ-DATE' => $amzDate,
+			'Authorization' => $authorizationStr
+		);
+		if (!isset($aHeaders['x-amz-content-sha256'])) {
+			$resultHeaders['x-amz-content-sha256'] = $payloadHash;
+		}
+
+		return $resultHeaders;
+	}
+
 }
 
 final class UpdraftPlus_S3Request {
@@ -1977,7 +2157,7 @@ final class UpdraftPlus_S3Request {
 	public function setAmzHeader($key, $value) {
 		$this->amzHeaders[$key] = $value;
 	}
-
+	
 	/**
 	 * Get the S3 response
 	 *
@@ -2058,13 +2238,26 @@ final class UpdraftPlus_S3Request {
 			if ('cloudfront.amazonaws.com' == $this->headers['Host']) {
 				$headers[] = 'Authorization: ' . $this->s3->__getSignature($this->headers['Date']);
 			} else {
-				$headers[] = 'Authorization: ' . $this->s3->__getSignature(
-					$this->verb."\n".
-					$this->headers['Content-MD5']."\n".
-					$this->headers['Content-Type']."\n".
-					$this->headers['Date'].$amz."\n".
-					$this->resource
-				);
+				if ('v2' === $this->s3->signVer) {
+					$headers[] = 'Authorization: ' . $this->s3->__getSignature(
+							$this->verb."\n".
+							$this->headers['Content-MD5']."\n".
+							$this->headers['Content-Type']."\n".
+							$this->headers['Date'].$amz."\n".
+							$this->resource
+						);
+				} else {
+					$amzHeaders = $this->s3->__getSignatureV4(
+						$this->amzHeaders,
+						$this->headers,
+						$this->verb,
+						$this->uri,
+						$this->data
+					);
+					foreach ($amzHeaders as $k => $v) {
+						$headers[] = $k . ': ' . $v;
+					}
+				}
 			}
 		}
 
@@ -2117,23 +2310,23 @@ final class UpdraftPlus_S3Request {
 		@curl_close($curl);
 
 		// Parse body into XML
-		if (false === $this->response->error && isset($this->response->headers['type']) &&
-		'application/xml' == $this->response->headers['type'] && isset($this->response->body)) {
+		// The case in which there is not application/xml content-type header is to support a DreamObjects case seen, April 2018
+		if (false === $this->response->error && isset($this->response->body) && ((isset($this->response->headers['type']) && 'application/xml' == $this->response->headers['type']) || (!isset($this->response->headers['type']) && 0 === strpos($this->response->body, '<?xml')))) {
 			$this->response->body = simplexml_load_string($this->response->body);
 
 			// Grab S3 errors
 			if (!in_array($this->response->code, array(200, 204, 206)) &&
-			isset($this->response->body->Code, $this->response->body->Message)) {
+			isset($this->response->body->Code)) {
 				$this->response->error = array(
 					'code' => (string)$this->response->body->Code,
-					'message' => (string)$this->response->body->Message
 				);
+				$this->response->error['message'] = isset($this->response->body->Message) ? $this->response->body->Message : '';
 				if (isset($this->response->body->Resource))
 					$this->response->error['resource'] = (string)$this->response->body->Resource;
 				unset($this->response->body);
 			}
 		}
-
+		
 		// Clean up file resources
 		if (false !== $this->fp && is_resource($this->fp)) fclose($this->fp);
 

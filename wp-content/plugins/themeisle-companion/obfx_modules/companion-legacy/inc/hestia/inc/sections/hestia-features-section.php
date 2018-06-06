@@ -47,20 +47,28 @@ if ( ! function_exists( 'hestia_features' ) ) :
 		hestia_before_features_section_trigger();
 		?>
 		<section class="hestia-features <?php echo esc_attr( $wrapper_class ); ?>" id="features" data-sorder="hestia_features">
-			<?php hestia_before_features_section_content_trigger(); ?>
+			<?php
+            hestia_before_features_section_content_trigger();
+			if ( $is_shortcode === false && function_exists('hestia_display_customizer_shortcut') ) {
+				hestia_display_customizer_shortcut( 'hestia_features_hide', true );
+			}
+			?>
 			<div class="<?php echo esc_attr( $container_class ); ?>">
 				<?php
 				hestia_top_features_section_content_trigger();
 				if ( $is_shortcode === false ) {
 				?>
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
+						<div class="col-md-8 col-md-offset-2 hestia-features-title-area">
 							<?php
+							if ( function_exists('hestia_display_customizer_shortcut') && ! empty( $hestia_features_title ) && ! empty( $hestia_features_subtitle ) ) {
+								hestia_display_customizer_shortcut( 'hestia_features_title' );
+							}
 							if ( ! empty( $hestia_features_title ) || is_customize_preview() ) {
-								echo '<h2 class="hestia-title">' . esc_html( $hestia_features_title ) . '</h2>';
+								echo '<h2 class="hestia-title">' . wp_kses_post( $hestia_features_title ) . '</h2>';
 							}
 							if ( ! empty( $hestia_features_subtitle ) || is_customize_preview() ) {
-								echo '<h5 class="description">' . esc_html( $hestia_features_subtitle ) . '</h5>';
+								echo '<h5 class="description">' . wp_kses_post( $hestia_features_subtitle ) . '</h5>';
 							}
 							?>
 						</div>

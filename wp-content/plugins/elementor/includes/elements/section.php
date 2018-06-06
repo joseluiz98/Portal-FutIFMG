@@ -5,34 +5,81 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor section element.
+ *
+ * Elementor section handler class is responsible for initializing the section
+ * element.
+ *
+ * @since 1.0.0
+ */
 class Element_Section extends Element_Base {
 
+	/**
+	 * Section edit tools.
+	 *
+	 * Holds the section edit tools.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 * @static
+	 *
+	 * @var array Section edit tools.
+	 */
 	protected static $_edit_tools;
 
+	/**
+	 * Section predefined columns presets.
+	 *
+	 * Holds the predefined columns width for each columns count available by
+	 * default by Elementor. Default is an empty array.
+	 *
+	 * Note that when the user creates a section he can define custom sizes for
+	 * the columns. But Elementor sets default values for predefined columns.
+	 *
+	 * For example two columns 50% width each one, or three columns 33.33% each
+	 * one. This property hold the data for those preset values.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @static
+	 *
+	 * @var array Section presets.
+	 */
 	private static $presets = [];
 
 	/**
-	 * @static
+	 * Get default edit tools.
+	 *
+	 * Retrieve the section default edit tools. Used to set initial tools.
+	 *
 	 * @since 1.0.0
 	 * @access protected
-	*/
+	 * @static
+	 *
+	 * @return array Default section edit tools.
+	 */
 	protected static function get_default_edit_tools() {
 		$section_label = __( 'Section', 'elementor' );
 
 		return [
 			'duplicate' => [
+				/* translators: %s: Section label */
 				'title' => sprintf( __( 'Duplicate %s', 'elementor' ), $section_label ),
 				'icon' => 'clone',
 			],
 			'add' => [
+				/* translators: %s: Section label */
 				'title' => sprintf( __( 'Add %s', 'elementor' ), $section_label ),
 				'icon' => 'plus',
 			],
 			'save' => [
+				/* translators: %s: Section label */
 				'title' => sprintf( __( 'Save %s', 'elementor' ), $section_label ),
 				'icon' => 'save',
 			],
 			'remove' => [
+				/* translators: %s: Section label */
 				'title' => sprintf( __( 'Remove %s', 'elementor' ), $section_label ),
 				'icon' => 'close',
 			],
@@ -40,34 +87,62 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Get section name.
+	 *
+	 * Retrieve the section name.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 *
+	 * @return string Section name.
+	 */
 	public function get_name() {
 		return 'section';
 	}
 
 	/**
+	 * Get section title.
+	 *
+	 * Retrieve the section title.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 *
+	 * @return string Section title.
+	 */
 	public function get_title() {
 		return __( 'Section', 'elementor' );
 	}
 
 	/**
+	 * Get section icon.
+	 *
+	 * Retrieve the section icon.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 *
+	 * @return string Section icon.
+	 */
 	public function get_icon() {
 		return 'eicon-columns';
 	}
 
 	/**
-	 * @static
+	 * Get presets.
+	 *
+	 * Retrieve a specific preset columns for a given columns count, or a list
+	 * of all the preset if no parameters passed.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 * @static
+	 *
+	 * @param int $columns_count Optional. Columns count. Default is null.
+	 * @param int $preset_index  Optional. Preset index. Default is null.
+	 *
+	 * @return array Section presets.
+	 */
 	public static function get_presets( $columns_count = null, $preset_index = null ) {
 		if ( ! self::$presets ) {
 			self::init_presets();
@@ -87,10 +162,19 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
-	 * @static
+	 * Initialize presets.
+	 *
+	 * Initializing the section presets and set the number of columns the
+	 * section can have by default. For example a column can have two columns
+	 * 50% width each one, or three columns 33.33% each one.
+	 *
+	 * Note that Elementor sections have default section presets but the user
+	 * can set custom number of columns and define custom sizes for each column.
+
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 * @static
+	 */
 	public static function init_presets() {
 		$additional_presets = [
 			2 => [
@@ -141,9 +225,19 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Get initial config.
+	 *
+	 * Retrieve the current section initial configuration.
+	 *
+	 * Adds more configuration on top of the controls list, the tabs assigned to
+	 * the control, element name, type, icon and more. This method also adds
+	 * section presets.
+	 *
 	 * @since 1.0.10
 	 * @access protected
-	*/
+	 *
+	 * @return array The initial config.
+	 */
 	protected function _get_initial_config() {
 		$config = parent::_get_initial_config();
 
@@ -153,9 +247,13 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Register section controls.
+	 *
+	 * Used to add new controls to the section element.
+	 *
 	 * @since 1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _register_controls() {
 
 		$this->start_controls_section(
@@ -176,7 +274,7 @@ class Element_Section extends Element_Base {
 				'prefix_class' => 'elementor-',
 				'render_type' => 'template',
 				'hide_in_inner' => true,
-				'description' => __( 'Stretch the section to the full width of the page using JS.', 'elementor' ) . sprintf( ' <a href="%s" target="_blank">%s</a>', 'https://go.elementor.com/stretch-section/', __( 'Learn more.', 'elementor' ) ),
+				'description' => __( 'Stretch the section to the full width of the page using JS.', 'elementor' ) . sprintf( ' <a href="%1$s" target="_blank">%2$s</a>', 'https://go.elementor.com/stretch-section/', __( 'Learn more.', 'elementor' ) ),
 			]
 		);
 
@@ -353,13 +451,13 @@ class Element_Section extends Element_Base {
 		);
 
 		$possible_tags = [
-			'section',
+			'div',
 			'header',
 			'footer',
-			'aside',
 			'article',
+			'section',
+			'aside',
 			'nav',
-			'div',
 		];
 
 		$options = [
@@ -494,7 +592,7 @@ class Element_Section extends Element_Base {
 		$this->add_control(
 			'background_overlay_opacity',
 			[
-				'label' => __( 'Opacity (%)', 'elementor' ),
+				'label' => __( 'Opacity', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,
@@ -534,7 +632,7 @@ class Element_Section extends Element_Base {
 		$this->add_control(
 			'background_overlay_hover_opacity',
 			[
-				'label' => __( 'Opacity (%)', 'elementor' ),
+				'label' => __( 'Opacity', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,
@@ -671,6 +769,20 @@ class Element_Section extends Element_Base {
 					'px' => [
 						'max' => 3,
 						'step' => 0.1,
+					],
+				],
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'name' => 'background_background',
+							'operator' => '!==',
+							'value' => '',
+						], [
+							'name' => 'border_border',
+							'operator' => '!==',
+							'value' => '',
+						],
 					],
 				],
 				'selectors' => [
@@ -849,7 +961,7 @@ class Element_Section extends Element_Base {
 			]
 		);
 
-		if ( in_array( Scheme_Color::get_type(), Schemes_Manager::get_enabled_schemes() ) ) {
+		if ( in_array( Scheme_Color::get_type(), Schemes_Manager::get_enabled_schemes(), true ) ) {
 			$this->add_control(
 				'colors_warning',
 				[
@@ -940,7 +1052,7 @@ class Element_Section extends Element_Base {
 		$this->start_controls_section(
 			'section_advanced',
 			[
-				'label' => __( 'Element Style', 'elementor' ),
+				'label' => __( 'Advanced', 'elementor' ),
 				'tab' => Controls_Manager::TAB_ADVANCED,
 			]
 		);
@@ -986,6 +1098,7 @@ class Element_Section extends Element_Base {
 				'selectors' => [
 					'{{WRAPPER}}' => 'z-index: {{VALUE}};',
 				],
+				'label_block' => false,
 			]
 		);
 
@@ -996,7 +1109,7 @@ class Element_Section extends Element_Base {
 				'type' => Controls_Manager::ANIMATION,
 				'default' => '',
 				'prefix_class' => 'animated ',
-				'label_block' => true,
+				'label_block' => false,
 				'frontend_available' => true,
 			]
 		);
@@ -1041,8 +1154,8 @@ class Element_Section extends Element_Base {
 				'label' => __( 'CSS ID', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'label_block' => true,
 				'title' => __( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'elementor' ),
+				'label_block' => false,
 			]
 		);
 
@@ -1053,8 +1166,8 @@ class Element_Section extends Element_Base {
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
 				'prefix_class' => '',
-				'label_block' => true,
 				'title' => __( 'Add your custom class WITHOUT the dot. e.g: my-class', 'elementor' ),
+				'label_block' => false,
 			]
 		);
 
@@ -1144,21 +1257,30 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Render section edit tools.
+	 *
+	 * Used to generate the edit tools HTML.
+	 *
 	 * @since 1.8.0
 	 * @access protected
-	*/
+	 */
 	protected function render_edit_tools() {
+		/* translators: %s: Section label */
+		$edit_title = sprintf( __( 'Edit %s', 'elementor' ), __( 'Section', 'elementor' ) );
 		?>
 		<div class="elementor-element-overlay">
 			<ul class="elementor-editor-element-settings elementor-editor-section-settings">
-				<li class="elementor-editor-element-setting elementor-editor-element-trigger elementor-active" title="<?php printf( __( 'Edit %s', 'elementor' ),  __( 'Section', 'elementor' ) ); ?>"><i class="eicon-section"></i></li>
-				<?php foreach ( Element_Section::get_edit_tools() as $edit_tool_name => $edit_tool ) : ?>
+				<li class="elementor-editor-element-setting elementor-editor-element-trigger elementor-active" title="<?php echo esc_attr( $edit_title ); ?>">
+					<i class="eicon-section" aria-hidden="true"></i>
+					<span class="elementor-screen-only"><?php echo esc_html( $edit_title ); ?></span>
+				</li>
+				<?php foreach ( self::get_edit_tools() as $edit_tool_name => $edit_tool ) : ?>
 					<?php if ( 'add' === $edit_tool_name ) : ?>
 						<# if ( ! isInner ) { #>
 					<?php endif; ?>
-					<li class="elementor-editor-element-setting elementor-editor-element-<?php echo $edit_tool_name; ?>" title="<?php echo $edit_tool['title']; ?>">
-						<span class="elementor-screen-only"><?php echo $edit_tool['title']; ?></span>
-						<i class="eicon-<?php echo $edit_tool['icon']; ?>"></i>
+					<li class="elementor-editor-element-setting elementor-editor-element-<?php echo esc_attr( $edit_tool_name ); ?>" title="<?php echo esc_attr( $edit_tool['title'] ); ?>">
+						<i class="eicon-<?php echo esc_attr( $edit_tool['icon'] ); ?>" aria-hidden="true"></i>
+						<span class="elementor-screen-only"><?php echo esc_html( $edit_tool['title'] ); ?></span>
 					</li>
 					<?php if ( 'add' === $edit_tool_name ) : ?>
 						<# } #>
@@ -1170,16 +1292,21 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Render section output in the editor.
+	 *
+	 * Used to generate the live preview, using a Backbone JavaScript template.
+	 *
 	 * @since 1.0.0
 	 * @access protected
-	*/
+	 */
 	protected function _content_template() {
 		?>
-		<div class="elementor-background-video-container elementor-hidden-phone">
-			<div class="elementor-background-video-embed"></div>
-			<video class="elementor-background-video-hosted" autoplay loop muted></video>
-		</div>
-		<div class="elementor-background-video-fallback"></div>
+		<# if ( settings.background_video_link ) { #>
+			<div class="elementor-background-video-container elementor-hidden-phone">
+				<div class="elementor-background-video-embed"></div>
+				<video class="elementor-background-video-hosted" autoplay loop muted></video>
+			</div>
+		<# } #>
 		<div class="elementor-background-overlay"></div>
 		<div class="elementor-shape elementor-shape-top"></div>
 		<div class="elementor-shape elementor-shape-bottom"></div>
@@ -1190,13 +1317,18 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Before section rendering.
+	 *
+	 * Used to add stuff before the section element.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 */
 	public function before_render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
+
 		?>
-		<<?php echo $this->get_html_tag() . ' ' . $this->get_render_attribute_string( '_wrapper' ); ?>>
+		<<?php echo esc_html( $this->get_html_tag() ); ?> <?php $this->print_render_attribute_string( '_wrapper' ); ?>>
 			<?php
 			if ( 'video' === $settings['background_background'] ) :
 				if ( $settings['background_video_link'] ) :
@@ -1213,8 +1345,8 @@ class Element_Section extends Element_Base {
 				endif;
 			endif;
 
-			$has_background_overlay = in_array( $settings['background_overlay_background'], [ 'classic', 'gradient' ] ) ||
-									  in_array( $settings['background_overlay_hover_background'], [ 'classic', 'gradient' ] );
+			$has_background_overlay = in_array( $settings['background_overlay_background'], [ 'classic', 'gradient' ], true ) ||
+									  in_array( $settings['background_overlay_hover_background'], [ 'classic', 'gradient' ], true );
 
 			if ( $has_background_overlay ) :
 			?>
@@ -1236,21 +1368,29 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * After section rendering.
+	 *
+	 * Used to add stuff after the section element.
+	 *
 	 * @since 1.0.0
 	 * @access public
-	*/
+	 */
 	public function after_render() {
 		?>
 				</div>
 			</div>
-		</<?php echo $this->get_html_tag(); ?>>
+		</<?php echo esc_html( $this->get_html_tag() ); ?>>
 		<?php
 	}
 
 	/**
+	 * Add section render attributes.
+	 *
+	 * Used to add attributes to the current section wrapper HTML tag.
+	 *
 	 * @since 1.3.0
 	 * @access protected
-	*/
+	 */
 	protected function _add_render_attributes() {
 		parent::_add_render_attributes();
 
@@ -1267,17 +1407,31 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Get default child type.
+	 *
+	 * Retrieve the section child type based on element data.
+	 *
 	 * @since 1.0.0
 	 * @access protected
-	*/
+	 *
+	 * @param array $element_data Element ID.
+	 *
+	 * @return Element_Base Section default child type.
+	 */
 	protected function _get_default_child_type( array $element_data ) {
 		return Plugin::$instance->elements_manager->get_element_types( 'column' );
 	}
 
 	/**
+	 * Get HTML tag.
+	 *
+	 * Retrieve the section element HTML tag.
+	 *
 	 * @since 1.5.3
 	 * @access private
-	*/
+	 *
+	 * @return string Section HTML tag.
+	 */
 	private function get_html_tag() {
 		$html_tag = $this->get_settings( 'html_tag' );
 
@@ -1289,15 +1443,21 @@ class Element_Section extends Element_Base {
 	}
 
 	/**
+	 * Print section shape divider.
+	 *
+	 * Used to generate the shape dividers HTML.
+	 *
 	 * @since 1.3.0
 	 * @access private
-	*/
+	 *
+	 * @param string $side Shape divider side, used to set the shape key.
+	 */
 	private function print_shape_divider( $side ) {
 		$settings = $this->get_active_settings();
 		$base_setting_key = "shape_divider_$side";
 		$negative = ! empty( $settings[ $base_setting_key . '_negative' ] );
 		?>
-		<div class="elementor-shape elementor-shape-<?php echo $side; ?>" data-negative="<?php echo var_export( $negative ); ?>">
+		<div class="elementor-shape elementor-shape-<?php echo esc_attr( $side ); ?>" data-negative="<?php echo var_export( $negative ); ?>">
 			<?php include Shapes::get_shape_path( $settings[ $base_setting_key ], ! empty( $settings[ $base_setting_key . '_negative' ] ) ); ?>
 		</div>
 		<?php

@@ -6,7 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WordPress Widget
+ * Elementor WordPress widget.
+ *
+ * Elementor widget that displays all the WordPress widgets.
+ *
+ * @since 1.0.0
  */
 class Widget_WordPress extends Widget_Base {
 
@@ -31,16 +35,18 @@ class Widget_WordPress extends Widget_Base {
 	/**
 	 * Whether the widget is a Pojo widget or not.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @return bool
 	 */
-	private function _is_pojo_widget() {
+	private function is_pojo_widget() {
 		return $this->get_widget_instance() instanceof \Pojo_Widget_Base;
 	}
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve WordPress/Pojo widget name.
 	 *
 	 * @since 1.0.0
@@ -53,6 +59,8 @@ class Widget_WordPress extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve WordPress/Pojo widget title.
 	 *
 	 * @since 1.0.0
@@ -65,6 +73,8 @@ class Widget_WordPress extends Widget_Base {
 	}
 
 	/**
+	 * Get widget categories.
+	 *
 	 * Retrieve the list of categories the WordPress/Pojo widget belongs to.
 	 *
 	 * Used to determine where to display the widget in the editor.
@@ -75,7 +85,7 @@ class Widget_WordPress extends Widget_Base {
 	 * @return array Widget categories. Returns either a WordPress category or Pojo category.
 	 */
 	public function get_categories() {
-		if ( $this->_is_pojo_widget() ) {
+		if ( $this->is_pojo_widget() ) {
 			$category = 'pojo';
 		} else {
 			$category = 'wordpress'; // WPCS: spelling ok.
@@ -84,6 +94,8 @@ class Widget_WordPress extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve WordPress/Pojo widget icon.
 	 *
 	 * @since 1.0.0
@@ -92,7 +104,7 @@ class Widget_WordPress extends Widget_Base {
 	 * @return string Widget icon. Returns either a WordPress icon or Pojo icon.
 	 */
 	public function get_icon() {
-		if ( $this->_is_pojo_widget() ) {
+		if ( $this->is_pojo_widget() ) {
 			return 'eicon-pojome';
 		}
 		return 'eicon-wordpress';
@@ -168,7 +180,7 @@ class Widget_WordPress extends Widget_Base {
 	 * @access protected
 	 * @since 1.0.0
 	 *
-	 * @return \WP_Widget
+	 * @return array Parsed settings.
 	 */
 	protected function _get_parsed_settings() {
 		$settings = parent::_get_parsed_settings();
@@ -209,7 +221,7 @@ class Widget_WordPress extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$empty_widget_args = [
+		$default_widget_args = [
 			'widget_id' => $this->get_name(),
 			'before_widget' => '',
 			'after_widget' => '',
@@ -217,9 +229,19 @@ class Widget_WordPress extends Widget_Base {
 			'after_title' => '</h5>',
 		];
 
-		$empty_widget_args = apply_filters( 'elementor/widgets/wordpress/widget_args', $empty_widget_args, $this ); // WPCS: spelling ok.
+		/**
+		 * WordPress widget args.
+		 *
+		 * Filters the WordPress widget arguments when they are rendered in Elementor panel.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array            $default_widget_args Default widget arguments.
+		 * @param Widget_WordPress $this                The WordPress widget.
+		 */
+		$default_widget_args = apply_filters( 'elementor/widgets/wordpress/widget_args', $default_widget_args, $this ); // WPCS: spelling ok.
 
-		$this->get_widget_instance()->widget( $empty_widget_args, $this->get_settings( 'wp' ) );
+		$this->get_widget_instance()->widget( $default_widget_args, $this->get_settings( 'wp' ) );
 	}
 
 	/**

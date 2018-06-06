@@ -6,6 +6,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $wp_version;
+
+$document = Plugin::$instance->documents->get( $this->_post_id );
+
+$body_classes = [
+	'elementor-editor-active',
+	'wp-version-' . str_replace( '.', '-', $wp_version ),
+];
+
+if ( is_rtl() ) {
+	$body_classes[] = 'rtl';
+}
+if ( ! Plugin::$instance->role_manager->user_can( 'design' ) ) {
+	$body_classes[] = 'elementor-editor-content-only';
+}
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -18,7 +32,7 @@ global $wp_version;
 		var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>';
 	</script>
 </head>
-<body class="elementor-editor-active wp-version-<?php echo str_replace( '.', '-', $wp_version ); ?>">
+<body class="<?php echo implode( ' ', $body_classes ); ?>">
 <div id="elementor-editor-wrapper">
 	<div id="elementor-preview">
 		<div id="elementor-loading">
@@ -29,12 +43,12 @@ global $wp_version;
 					<div class="elementor-loader-box"></div>
 					<div class="elementor-loader-box"></div>
 				</div>
-				<div class="elementor-loading-title"><?php _e( 'Loading', 'elementor' ); ?></div>
+				<div class="elementor-loading-title"><?php echo __( 'Loading', 'elementor' ); ?></div>
 			</div>
 		</div>
 		<div id="elementor-preview-responsive-wrapper" class="elementor-device-desktop elementor-device-rotate-portrait">
 			<div id="elementor-preview-loading">
-				<i class="fa fa-spin fa-circle-o-notch"></i>
+				<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i>
 			</div>
 			<?php
 			// IFrame will be create here by the Javascript later.
@@ -45,6 +59,7 @@ global $wp_version;
 </div>
 <?php
 	wp_footer();
+	/** This action is documented in wp-admin/admin-footer.php */
 	do_action( 'admin_print_footer_scripts' );
 ?>
 </body>

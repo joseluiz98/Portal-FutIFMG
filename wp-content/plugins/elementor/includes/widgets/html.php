@@ -6,11 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * HTML Widget
+ * Elementor HTML widget.
+ *
+ * Elementor widget that insert a custom HTML code into the page.
+ *
+ * @since 1.0.0
  */
 class Widget_Html extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve HTML widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +29,8 @@ class Widget_Html extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve HTML widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +43,8 @@ class Widget_Html extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve HTML widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,20 +54,6 @@ class Widget_Html extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-coding';
-	}
-
-	/**
-	 * Retrieve the list of categories the HTML widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
 	}
 
 	/**
@@ -82,7 +78,7 @@ class Widget_Html extends Widget_Base {
 				'label' => '',
 				'type' => Controls_Manager::CODE,
 				'default' => '',
-				'placeholder' => __( 'Enter your embed code here', 'elementor' ),
+				'placeholder' => __( 'Enter your code', 'elementor' ),
 				'show_label' => false,
 			]
 		);
@@ -99,7 +95,7 @@ class Widget_Html extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		 echo $this->get_settings( 'html' );
+		 echo $this->get_settings_for_display( 'html' );
 	}
 
 	/**

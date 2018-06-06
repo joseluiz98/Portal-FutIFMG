@@ -1,7 +1,7 @@
 === PHP Everywhere ===
 Contributors: alexander_fuchs 
 Donate link:http://www.alexander-fuchs.net/donate/
-Tags: code,html,php,post,page,widget
+Tags: code,html,php,post,page,widget,insert PHP,custom code,insert PHP page,insert PHP post,run PHP,use PHP,execphp
 Requires at least: 3.0
 Tested up to: 4.9.1
 Stable tag: trunk
@@ -38,6 +38,22 @@ Using this plugin you can use PHP in widgets, pages and posts
 <p style="margin: 0px 0px 22px; padding: 0px; clear: left; font-size: 13px; color: #444444; font-family: sans-serif; line-height: 22px;">
   The plugin also supports different user restrictions and multiple PHP instances.
 </p>
+<p style="margin: 0px 0px 22px; padding: 0px; clear: left; font-size: 13px; color: #444444; font-family: sans-serif; line-height: 22px;">
+  So feel free to just insert PHP in every part of your WordPress site.</p>
+<p style="margin: 0px 0px 22px; padding: 0px; clear: left; font-size: 13px; color: #444444; font-family: sans-serif; line-height: 22px;">
+  Examples of use:
+<ul>
+    <li>
+      Create custom contact forms and process any kind of data or upload.
+    </li>
+    <li>
+      Generate user optimized content.
+    </li>
+    <li>
+      Customize every little detail of your WordPress installation.
+    </li>
+  </ul>
+</p>
 
 == Installation ==
 
@@ -58,6 +74,10 @@ A: Yes, but you need to check for a position parameter using an if statements in
 2. This is the plugins multiple PHP instance functionality
 
 == Changelog ==
+
+= 1.4.2 - May 13, 2018 =
+
+* New: Added italien translation
 
 = 1.4.1 - December 01, 2017 =
 
@@ -108,3 +128,4 @@ A: Yes, but you need to check for a position parameter using an if statements in
 English and German : [Alexander Fuchs](https://www.alexander-fuchs.net)
 Portuguese : [Luis Reis](http://inforarte.com/)
 Serbian : [Borisa Djuraskovic](http://www.webhostinghub.com)
+Italian : Andrea Rosenthal Manetti

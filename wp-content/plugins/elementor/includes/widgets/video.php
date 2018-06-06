@@ -1,16 +1,24 @@
 <?php
 namespace Elementor;
 
+use Elementor\Modules\DynamicTags\Module as TagsModule;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Video Widget
+ * Elementor video widget.
+ *
+ * Elementor widget that displays a video player.
+ *
+ * @since 1.0.0
  */
 class Widget_Video extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve video widget name.
 	 *
 	 * @since 1.0.0
@@ -23,6 +31,8 @@ class Widget_Video extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve video widget title.
 	 *
 	 * @since 1.0.0
@@ -35,6 +45,8 @@ class Widget_Video extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve video widget icon.
 	 *
 	 * @since 1.0.0
@@ -44,6 +56,22 @@ class Widget_Video extends Widget_Base {
 	 */
 	public function get_icon() {
 		return 'eicon-youtube';
+	}
+
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the video widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
+	public function get_categories() {
+		return [ 'basic' ];
 	}
 
 	/**
@@ -80,6 +108,12 @@ class Widget_Video extends Widget_Base {
 			[
 				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+					'categories' => [
+						TagsModule::POST_META_CATEGORY,
+					],
+				],
 				'placeholder' => __( 'Enter your YouTube link', 'elementor' ),
 				'default' => 'https://www.youtube.com/watch?v=9uOETcuFjbE',
 				'label_block' => true,
@@ -92,8 +126,14 @@ class Widget_Video extends Widget_Base {
 		$this->add_control(
 			'vimeo_link',
 			[
-				'label' => __( 'Vimeo Link', 'elementor' ),
+				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+					'categories' => [
+						TagsModule::POST_META_CATEGORY,
+					],
+				],
 				'placeholder' => __( 'Enter your Vimeo link', 'elementor' ),
 				'default' => 'https://vimeo.com/235215203',
 				'label_block' => true,
@@ -108,6 +148,12 @@ class Widget_Video extends Widget_Base {
 			[
 				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+					'categories' => [
+						TagsModule::POST_META_CATEGORY,
+					],
+				],
 				'placeholder' => __( 'Enter your video link', 'elementor' ),
 				'default' => '',
 				'label_block' => true,
@@ -184,6 +230,18 @@ class Widget_Video extends Widget_Base {
 			[
 				'label' => __( 'Mute', 'elementor' ),
 				'type' => Controls_Manager::SWITCHER,
+				'condition' => [
+					'video_type' => 'youtube',
+				],
+			]
+		);
+
+		$this->add_control(
+			'yt_privacy',
+			[
+				'label' => __( 'Privacy Mode', 'elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'description' => __( 'When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.', 'elementor' ),
 				'condition' => [
 					'video_type' => 'youtube',
 				],
@@ -309,16 +367,27 @@ class Widget_Video extends Widget_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			[
+				'name' => 'image_overlay', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_overlay_size` and `image_overlay_custom_dimension`.
+				'default' => 'full',
+				'separator' => 'none',
+				'condition' => [
+					'show_image_overlay' => 'yes',
+				],
+			]
+		);
+
 		$this->add_control(
 			'show_play_icon',
 			[
 				'label' => __( 'Play Icon', 'elementor' ),
-				'type' => Controls_Manager::SELECT,
+				'type' => Controls_Manager::SWITCHER,
 				'default' => 'yes',
-				'options' => [
-					'yes' => __( 'Yes', 'elementor' ),
-					'no' => __( 'No', 'elementor' ),
-				],
+				'label_off' => __( 'No', 'elementor' ),
+				'label_on' => __( 'Yes', 'elementor' ),
+				'return_value' => 'yes',
 				'condition' => [
 					'show_image_overlay' => 'yes',
 					'image_overlay[url]!' => '',
@@ -375,6 +444,7 @@ class Widget_Video extends Widget_Base {
 				'type' => Controls_Manager::HEADING,
 				'condition' => [
 					'show_image_overlay' => 'yes',
+					'show_play_icon' => 'yes',
 				],
 			]
 		);
@@ -390,6 +460,7 @@ class Widget_Video extends Widget_Base {
 				'separator' => 'before',
 				'condition' => [
 					'show_image_overlay' => 'yes',
+					'show_play_icon' => 'yes',
 				],
 			]
 		);
@@ -410,6 +481,7 @@ class Widget_Video extends Widget_Base {
 				],
 				'condition' => [
 					'show_image_overlay' => 'yes',
+					'show_play_icon' => 'yes',
 				],
 			]
 		);
@@ -426,6 +498,7 @@ class Widget_Video extends Widget_Base {
 				],
 				'condition' => [
 					'show_image_overlay' => 'yes',
+					'show_play_icon' => 'yes',
 				],
 			]
 		);
@@ -541,7 +614,7 @@ class Widget_Video extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_active_settings();
+		$settings = $this->get_settings_for_display();
 
 		$video_link = 'youtube' === $settings['video_type'] ? $settings['link'] : $settings['vimeo_link'];
 
@@ -551,7 +624,11 @@ class Widget_Video extends Widget_Base {
 
 		$embed_params = $this->get_embed_params();
 
-		$video_html = Embed::get_embed_html( $video_link, $embed_params );
+		$embed_options = [
+			'privacy' => $settings['yt_privacy'],
+		];
+
+		$video_html = Embed::get_embed_html( $video_link, $embed_params, $embed_options );
 
 		if ( empty( $video_html ) ) {
 			echo esc_url( $video_link );
@@ -579,7 +656,7 @@ class Widget_Video extends Widget_Base {
 				if ( $settings['lightbox'] ) {
 					$lightbox_options = [
 						'type' => 'video',
-						'url' => Embed::get_embed_url( $video_link, $embed_params ),
+						'url' => Embed::get_embed_url( $video_link, $embed_params, $embed_options ),
 						'modalOptions' => [
 							'id' => 'elementor-lightbox-' . $this->get_id(),
 							'entranceAnimation' => $settings['lightbox_content_animation'],
@@ -588,22 +665,27 @@ class Widget_Video extends Widget_Base {
 					];
 
 					$this->add_render_attribute( 'image-overlay', [
-						'class' => 'elementor-clickable',
 						'data-elementor-open-lightbox' => 'yes',
 						'data-elementor-lightbox' => wp_json_encode( $lightbox_options ),
 					] );
+
+					if ( Plugin::$instance->editor->is_edit_mode() ) {
+						$this->add_render_attribute( 'image-overlay', [
+							'class' => 'elementor-clickable',
+						] );
+					}
 				} else {
-					$this->add_render_attribute( 'image-overlay', 'style', 'background-image: url(' . $settings['image_overlay']['url'] . ');' );
+					$this->add_render_attribute( 'image-overlay', 'style', 'background-image: url(' . Group_Control_Image_Size::get_attachment_image_src( $settings['image_overlay']['id'], 'image_overlay', $settings ) . ');' );
 				}
 				?>
 				<div <?php echo $this->get_render_attribute_string( 'image-overlay' ); ?>>
-					<?php
-					if ( $settings['lightbox'] ) : ?>
-						<img src="<?php echo $settings['image_overlay']['url']; ?>">
+					<?php if ( $settings['lightbox'] ) : ?>
+						<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_overlay' ); ?>
 					<?php endif; ?>
 					<?php if ( 'yes' === $settings['show_play_icon'] ) : ?>
-						<div class="elementor-custom-embed-play">
-							<i class="eicon-play"></i>
+						<div class="elementor-custom-embed-play" role="button">
+							<i class="eicon-play" aria-hidden="true"></i>
+							<span class="elementor-screen-only"><?php echo __( 'Play Video', 'elementor' ); ?></span>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -621,13 +703,15 @@ class Widget_Video extends Widget_Base {
 	 * @access public
 	 */
 	public function render_plain_content() {
-		$settings = $this->get_active_settings();
+		$settings = $this->get_settings_for_display();
 		$url = 'youtube' === $settings['video_type'] ? $settings['link'] : $settings['vimeo_link'];
 
 		echo esc_url( $url );
 	}
 
 	/**
+	 * Get embed params.
+	 *
 	 * Retrieve video widget embed parameters.
 	 *
 	 * @since 1.5.0
@@ -636,7 +720,7 @@ class Widget_Video extends Widget_Base {
 	 * @return array Video embed parameters.
 	 */
 	public function get_embed_params() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		$params = [];
 
@@ -668,40 +752,10 @@ class Widget_Video extends Widget_Base {
 			}
 
 			$params['color'] = str_replace( '#', '', $settings['vimeo_color'] );
+
+			$params['autopause'] = '0';
 		}
 
-		return $params;
-	}
-
-	/**
-	 * Retrieve video widget hosted parameters.
-	 *
-	 * @since 1.0.0
-	 * @access protected
-	 *
-	 * @return array Video hosted parameters.
-	 */
-	protected function get_hosted_params() {
-		$settings = $this->get_settings();
-
-		$params = [];
-
-		$params['src'] = $settings['hosted_link'];
-
-		$hosted_options = [ 'autoplay', 'loop' ];
-
-		foreach ( $hosted_options as $key => $option ) {
-			$value = ( 'yes' === $settings[ 'hosted_' . $option ] ) ? '1' : '0';
-			$params[ $option ] = $value;
-		}
-
-		if ( ! empty( $settings['hosted_width'] ) ) {
-			$params['width'] = $settings['hosted_width'];
-		}
-
-		if ( ! empty( $settings['hosted_height'] ) ) {
-			$params['height'] = $settings['hosted_height'];
-		}
 		return $params;
 	}
 
@@ -716,7 +770,7 @@ class Widget_Video extends Widget_Base {
 	 * @return bool Whether an image overlay was set for the video.
 	 */
 	protected function has_image_overlay() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		return ! empty( $settings['image_overlay']['url'] ) && 'yes' === $settings['show_image_overlay'];
 	}
