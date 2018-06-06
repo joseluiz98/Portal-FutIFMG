@@ -21,17 +21,17 @@
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('WP_CACHE', true);
-define( 'WPCACHEHOME', 'C:\wamp64\www\wp-content\plugins\wp-super-cache/' );
-define('DB_NAME', 'heroku_2e940690d0a2187');
+define( 'WPCACHEHOME', 'C:\xampp\htdocs\FutIFMG\wp-content\plugins\wp-super-cache/' );
+define('DB_NAME', 'wordpressFutifmg');
 
 /** MySQL database username */
-define('DB_USER', 'b59d51cd382b83');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', '19c4818d');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
-define('DB_HOST', 'us-cdbr-iron-east-05.cleardb.net');
+define('DB_HOST', 'localhost');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
@@ -79,7 +79,7 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy blogging. */
 

@@ -3,7 +3,7 @@ setlocale(LC_ALL,'');
 
 try
 {
-	require('C:\wamp64\www\wp-includes\mysql\credentials.php');
+	require('C:\xampp\htdocs\FutIFMG\wp-includes\mysql\credentials.php');
 	//Recupera IDs dos times que participarão do próximo jogo
 	$sql = file_get_contents('wp-includes/mysql/queries/recuperaIDsProximoJogo.sql');
 	$resultado = $conn->prepare($sql);

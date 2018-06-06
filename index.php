@@ -1,9 +1,3 @@
-<html>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-</html>
-
 <?php
 /**
  * Front to the WordPress application. This file doesn't do anything, but loads

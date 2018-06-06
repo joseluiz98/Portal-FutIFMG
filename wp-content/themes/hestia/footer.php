@@ -7,7 +7,7 @@
  * @package Hestia
  * @since Hestia 1.0
  */
-include_once("C:/wamp64/www/wp-includes/php/equipes-widget.php");
+include_once("C:/xampp/htdocs/FutIFMG/wp-includes/php/equipes-widget.php");
 ?>
 			<?php do_action( 'hestia_do_footer' ); ?>
 		</div>

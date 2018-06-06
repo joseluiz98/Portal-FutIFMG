@@ -42,7 +42,7 @@
 0098.167 () restore_backup(backup_file=backup_2017-11-13-2127_Portal_do_Torneio_de_Futsal_cf0c4f202b3c-others.zip, type=others, info=a:2:{s:4:"path";s:24:"C:\wamp64\www/wp-content";s:11:"description";s:6:"Outros";}, last_one=1)
 0098.168 () Desempacotando o backup... (backup_2017-11-13-2127_Portal_do_Torneio_de_Futsal_cf0c4f202b3c-others.zip, 1.2 Mb)
 0099.168 () Limpando a sujeira...
-0099.169 () Error: Falhou ao deletar o diretório de trabalho após a restauração. (C:/wamp64/www/wp-content/upgrade/3bedbb39)
+0099.169 () Error: Falhou ao deletar o diretório de trabalho após a restauração. (C:/xampp/htdocs/FutIFMG/wp-content/upgrade/3bedbb39)
 0099.308 () Clearing cached pages (WP Super Cache)...
 0099.331 () Restore successful!
 0099.331 () Restore successful

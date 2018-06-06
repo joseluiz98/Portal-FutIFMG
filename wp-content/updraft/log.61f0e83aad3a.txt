@@ -4,7 +4,7 @@
 0000.115 () Restore job started. Entities to restore: plugins, themes, uploads, others. Restore options: {"updraft_restorer_replacesiteurl":false,"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false}
 0000.156 () Requested file from remote service: googledrive: backup_2017-11-13-2127_Portal_do_Torneio_de_Futsal_cf0c4f202b3c-plugins.zip
 0001.502 () Google Drive download: was already downloaded (14608141/14608141 bytes)
-0001.511 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/wamp64/www/wp-content/plugins-old
+0001.511 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/xampp/htdocs/FutIFMG/wp-content/plugins-old
 0001.548 () Restore failed...
-0001.549 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/wamp64/www/wp-content/plugins-old
+0001.549 () Error message: Pastas não-removidas que existiam de um restore anterior foram encontradas (por favor utilize o botão "Deletar Antigos Diretórios" para deletá-las antes de tentar novamente): C:/xampp/htdocs/FutIFMG/wp-content/plugins-old
 0001.549 () Restore failed

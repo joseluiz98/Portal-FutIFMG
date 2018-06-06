@@ -1,5 +1,5 @@
 <?php
-    require_once("C:\wamp64\www\wp-includes\mysql\credentials.php");
+    require_once("C:\xampp\htdocs\FutIFMG\wp-includes\mysql\credentials.php");
  ?>
 
 <!DOCTYPE html>

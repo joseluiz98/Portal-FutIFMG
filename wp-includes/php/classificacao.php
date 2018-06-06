@@ -1,5 +1,5 @@
 <?php
-set_include_path('C:/wamp64/www/wp-includes/');
+set_include_path('C:/xampp/htdocs/FutIFMG/wp-includes/');
 require_once('mysql/credentials.php');
 
 try

@@ -1,5 +1,5 @@
 <?php
-require("C:\wamp64\www\wp-includes\mysql\credentials.php");
+require("C:/xampp/htdocs/FutIFMG/wp-includes/mysql/credentials.php");
 
 $sql = "SELECT nomeTime, escudo from time";
 $consulta = $conn->prepare($sql);
