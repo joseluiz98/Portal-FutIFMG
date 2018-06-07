@@ -78,6 +78,10 @@ html {
 	.page-header{
 		height: 110vh !important;
 	}
+
+	.boxed-layout-header {
+		height: auto !important;
+	}
 }
 @media screen and (max-width: 768px){
 	
