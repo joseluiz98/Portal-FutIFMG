@@ -1,5 +1,5 @@
 <?php
-    require_once("C:\xampp\htdocs\FutIFMG\wp-includes\mysql\credentials.php");
+    require_once('C:\xampp\htdocs\FutIFMG\wp-includes\mysql\credentials.php');
  ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/wp-includes/js/pageJogos.js"></script>
+	<script src="/FutIFMG/wp-includes/js/pageJogos.js"></script>
 </head>
 <body>
 	<div class="carousel-jogos">
@@ -25,7 +25,7 @@
             	<div class="fourth-finals">
 	              <?php
 	                $sqlCasa = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (13,14,15,16) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sqlVisitante = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (13,14,15,16) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sqlVisitante = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE JT.fk_idJogo in (13,14,15,16) and T.idTime = JT.idVisitante and JT.fk_idJogo = J.idJogo ORDER BY idJogo;";
 	                
 	                $resultCasa = $conn->prepare($sqlCasa);
 	                $resultCasa->execute();
@@ -55,7 +55,7 @@
             	<div class="semiFinals">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (17,18) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (17,18) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE fk_idJogo in (17,18) and T.idTime = JT.idVisitante and JT.fk_idJogo = J.idJogo ORDER BY idJogo";
 	                
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
@@ -85,7 +85,7 @@
             	<div class="finals">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (20) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE fk_idJogo in (20) and T.idTime = JT.idVisitante and JT.fk_idJogo = J.idJogo ORDER BY idJogo";
 	                
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
@@ -115,7 +115,7 @@
             	<div class="thirdPlace">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (19) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE fk_idJogo in (19) and T.idTime = JT.idVisitante and JT.fk_idJogo = J.idJogo ORDER BY idJogo;";
 	                
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
