@@ -103,7 +103,7 @@ function preencheTabela($conn,$grupo)
 		</nav>
 
 		<div class="carousel-content">
-			<div id="item" style="display: none;">
+			<div id="item active" style="display: none;">
 				<span id="currentcarousel-contentTitle"><h2>Grupo A</h2></span>
             	<div class="grupo-a">
 	              <?php
@@ -133,7 +133,7 @@ function preencheTabela($conn,$grupo)
 				</div>
 			</div>
 
-			<div id="item active" style="display: none;">
+			<div id="item" style="display: none;">
 				<span id="currentcarousel-contentTitle"><h2>Grupo B</h2></span>
             	<div class="grupo-b">
 	              <?php
