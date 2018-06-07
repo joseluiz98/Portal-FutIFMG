@@ -35,8 +35,10 @@ foreach($resultado AS $equipe)
 		html += '<div class="col-xs-12 col-ms-6 col-sm-6"><div class="card card-profile card-plain"><div class="col-md-5"><div class="card-image"><a href="'+ link + '" ><img class="img" src=" ' + escudo + '" alt="" title="Clique para ver mais informações sobre a equipe"></a></div></div><div class="col-md-7"><div class="content"><h4 class="card-title"> ' + nome + '</h4><p class="card-description">Locavore pinterest chambray affogato art party, forage coloring book typewriter. Bitters cold selfies, retro celiac sartorial mustache.</p></div></div></div></div>';
     }
     html += '</div>';
-
+    
+    jQuery(document).ready(function($) {
     $(".hestia-team-content").html(html);
+    })
 </script>
 </body>
 </html>
