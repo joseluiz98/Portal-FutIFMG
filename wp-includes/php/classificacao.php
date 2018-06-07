@@ -108,7 +108,7 @@ function preencheTabela($conn,$grupo)
             	<div class="grupo-a">
 	              <?php
 	                $sqlCasa = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (1,2,5,6,9,10) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sqlVisitante = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (1,2,5,6,9,10) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sqlVisitante = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE J.idJogo in (1,2,5,6,9,10) and T.idTime = JT.idVisitante and J.idJogo = JT.fk_idJogo ORDER BY J.idJogo";
 
 	                $resultCasa = $conn->prepare($sqlCasa);
 	                $resultCasa->execute();
@@ -138,7 +138,7 @@ function preencheTabela($conn,$grupo)
             	<div class="grupo-b">
 	              <?php
 	                $sql = "SELECT nomeTime, escudo, placarCasa, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (3,4,7,8,11,12) and idTime = fk_idTime and fk_idJogo = idJogo ORDER BY idJogo";
-	                $sql2 = "SELECT nomeTime, escudo, placarVisitante, idJogo FROM time, jogo_tem_times, jogo WHERE fk_idJogo in (3,4,7,8,11,12) and idTime = fk_idVisitante and fk_idJogo = idJogo ORDER BY idJogo";
+	                $sql2 = "SELECT T.nomeTime, T.escudo, J.placarVisitante, J.idJogo FROM time T, jogo_tem_times JT, jogo J WHERE J.idJogo in (3,4,7,8,11,12) and T.idTime = JT.idVisitante and JT.fk_idJogo = J.idJogo ORDER BY J.idJogo;";
 
 	                $resultCasa = $conn->prepare($sql);
 	                $resultCasa->execute();
