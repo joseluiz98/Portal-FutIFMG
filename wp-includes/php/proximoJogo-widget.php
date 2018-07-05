@@ -10,7 +10,7 @@ try
 	$resultado->execute();
 	$dadosJogo = $resultado->fetch(PDO::FETCH_ASSOC);
 	$phpdate = strtotime($dadosJogo["dataJogo"]);
-	$mysqldate = strftime('%d de %B de %Y, às %R', $phpdate);
+	$mysqldate = strftime('%d de %B de %Y, às %Rh', $phpdate);
 	$mysqldate{6} = strtoupper($mysqldate{6});;
 
 	//Atribui IDs recuperados
